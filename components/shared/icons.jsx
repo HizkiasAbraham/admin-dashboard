@@ -5,6 +5,7 @@ import UserAcconutIcon from '@heroicons/react/24/outline/UserIcon';
 import ArrowRightIcon from '@heroicons/react/24/outline/ArrowRightIcon';
 import UploadIcon from '@heroicons/react/24/outline/ArrowUpTrayIcon';
 import SearchIcon from '@heroicons/react/24/outline/MagnifyingGlassIcon';
+import CalendarIcon from '@heroicons/react/24/outline/CalendarIcon';
 
 export const Icon = {
   Home: (props) => <HomeIcon {...props} />,
@@ -14,4 +15,5 @@ export const Icon = {
   ArrowRight: (props) => <ArrowRightIcon {...props} />,
   Upload: (props) => <UploadIcon {...props} />,
   Search: (props) => <SearchIcon {...props} />,
+  Calendar: (props) => <CalendarIcon {...props} />,
 };
