@@ -3,7 +3,7 @@ import { HeaderNavItem } from './header-nav-item';
 
 export default function Header() {
   return (
-    <div className="invisible md:visible border-x-0 border-inactive border-b-2">
+    <div className="invisible md:visible border-x-0 border-light-grey border-b-2">
       <div className="m-4 flex">
         <div className="flex flex-auto justify-start gap-4">
           <HeaderNavItem icon="Home" isActive={false} text="Dashboard" />
