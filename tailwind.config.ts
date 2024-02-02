@@ -22,6 +22,7 @@ const config: Config = {
       yellow: '#FAD02C',
 
       white: '#FFFFFF',
+      'white-opaque': '#FCFBFA',
 
       grey: '#8F979F',
       'light-grey': '#F8F8F8',
