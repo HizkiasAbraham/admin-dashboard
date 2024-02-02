@@ -32,5 +32,5 @@ export function CardHeading(props: CardHeadingInput) {
 
 export function CardContent(props: CardInput) {
   const { children } = props;
-  return <div className="mt-1 mt-1">{children}</div>;
+  return <div className="mt-1 mt-b">{children}</div>;
 }
