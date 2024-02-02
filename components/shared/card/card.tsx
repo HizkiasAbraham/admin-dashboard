@@ -17,7 +17,7 @@ export function CardHeading(props: CardHeadingInput) {
 
   return (
     <div className="mt-1 mt-1 flex">
-      <div className="flex-auto flex justify-start">
+      <div className="flex-auto flex justify-start gap-1">
         {title && (
           <div className="flex gap-1 items-center">
             <p className="uppercase font-semibold text-sm text-grey">{title}</p>
@@ -25,7 +25,7 @@ export function CardHeading(props: CardHeadingInput) {
           </div>
         )}
       </div>
-      <div className="flex-auto flex justify-end">{children}</div>
+      <div className="flex-auto flex justify-end gap-2">{children}</div>
     </div>
   );
 }
