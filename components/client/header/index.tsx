@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import HomeIcon from '@heroicons/react/24/outline/HomeIcon';
 import { HeaderNavItem } from './header-nav-item';
 
 export default function Header() {

@@ -1,4 +1,4 @@
-import { NavItemProp } from '@/components/client/types';
+import { NavItemProp } from '@/components/client/header/types';
 import { Icon } from '@/components/shared/icons';
 
 export function HeaderNavItem(prop: NavItemProp) {
