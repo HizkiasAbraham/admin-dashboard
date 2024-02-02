@@ -1,8 +1,11 @@
 import { Icon } from '../icons';
+import { DatePickerInput } from './types';
 
-export function DatePicker() {
+export function DatePicker(props: DatePickerInput) {
+  const { width } = props;
+
   return (
-    <div className="relative">
+    <div className={`relative ${width || ''}`}>
       <input
         className="border border-inactive rounded-xl px-4 py-2 pl-4 pr-4 w-full cursor-pointer"
         placeholder="Last 30 days"
