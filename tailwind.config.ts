@@ -1,5 +1,6 @@
+import formsPlugin from '@tailwindcss/forms';
 import type { Config } from 'tailwindcss';
-
+formsPlugin;
 const config: Config = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -35,6 +36,6 @@ const config: Config = {
       black: '#081020',
     },
   },
-  plugins: [],
+  plugins: [formsPlugin({ strategy: 'base' })],
 };
 export default config;
