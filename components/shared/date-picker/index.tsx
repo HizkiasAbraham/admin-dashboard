@@ -1,4 +1,4 @@
-import { Icon } from '../icons';
+import { Icon } from '../icon';
 import { DatePickerInput } from './types';
 
 export function DatePicker(props: DatePickerInput) {

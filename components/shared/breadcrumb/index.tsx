@@ -1,4 +1,4 @@
-import { Icon } from '../icons';
+import { Icon } from '../icon';
 import { BreadcrumbInput } from './types';
 export function BreadCrumb(props: BreadcrumbInput) {
   const { paths } = props;

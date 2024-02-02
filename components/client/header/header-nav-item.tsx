@@ -1,5 +1,5 @@
 import { NavItemProp } from '@/components/client/header/types';
-import { Icon } from '@/components/shared/icons';
+import { Icon } from '@/components/shared/icon';
 
 export function HeaderNavItem(prop: NavItemProp) {
   const { icon, text, isActive } = prop;

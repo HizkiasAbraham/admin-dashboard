@@ -1,7 +1,7 @@
 import Header from '@/components/client/header';
 import { BreadCrumb } from '@/components/shared/breadcrumb';
 import { OutlinedButton } from '@/components/shared/buttons/outlined-button';
-import { Icon } from '@/components/shared/icons';
+import { Icon } from '@/components/shared/icon';
 
 export default function ClientLayout({
   children,

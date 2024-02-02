@@ -8,12 +8,12 @@ import SearchIcon from '@heroicons/react/24/outline/MagnifyingGlassIcon';
 import CalendarIcon from '@heroicons/react/24/outline/CalendarIcon';
 
 export const Icon = {
-  Home: (props) => <HomeIcon {...props} />,
-  Location: (props) => <LocationIcon {...props} />,
-  Notification: (props) => <NotificationIcon {...props} />,
-  Account: (props) => <UserAcconutIcon {...props} />,
-  ArrowRight: (props) => <ArrowRightIcon {...props} />,
-  Upload: (props) => <UploadIcon {...props} />,
-  Search: (props) => <SearchIcon {...props} />,
-  Calendar: (props) => <CalendarIcon {...props} />,
+  Home: (props: any) => <HomeIcon {...props} />,
+  Location: (props: any) => <LocationIcon {...props} />,
+  Notification: (props: any) => <NotificationIcon {...props} />,
+  Account: (props: any) => <UserAcconutIcon {...props} />,
+  ArrowRight: (props: any) => <ArrowRightIcon {...props} />,
+  Upload: (props: any) => <UploadIcon {...props} />,
+  Search: (props: any) => <SearchIcon {...props} />,
+  Calendar: (props: any) => <CalendarIcon {...props} />,
 };
