@@ -5,7 +5,7 @@ export function Select(props: SelectInput) {
 
   return (
     <select className={`border border-inactive rounded-xl ${width || ''}`}>
-      <option disabled value="">
+      <option disabled value="" selected>
         <p className="text-grey">{placeHolder}</p>
       </option>
       {options.map((opt) => (

@@ -24,6 +24,7 @@ const config: Config = {
 
       white: '#FFFFFF',
       'white-opaque': '#FCFBFA',
+      'white-smoke': '#F8F8F8',
 
       grey: '#8F979F',
       'light-grey': '#F8F8F8',
