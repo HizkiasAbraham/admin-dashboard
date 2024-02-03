@@ -6,17 +6,16 @@ import { SearchInput } from '@/components/shared/inputs/searchInput';
 import { ProjectsTable } from '@/components/client/tables/projects-table';
 import { projects } from '@/mockups/projects';
 import { PortifoliosTable } from '@/components/client/tables/portifolios-table';
+import { portifiolios } from '@/mockups/protfolios';
 
 export default function Client() {
   return (
     <div>
       <div className="flex gap-2">
         <div className="flex-auto">
-          <PortifoliosTable />
+          <PortifoliosTable data={portifiolios as []} />
         </div>
-        <div className="flex-auto">
-          <PortifoliosTable />
-        </div>
+        <div className="flex-auto">{/* <PortifoliosTable /> */}</div>
         <div className="flex-auto"></div>
       </div>
       <ProjectsTable data={projects as []} />
