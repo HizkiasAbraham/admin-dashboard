@@ -9,7 +9,9 @@ export function Select(props: SelectInput) {
         <p className="text-grey">{placeHolder}</p>
       </option>
       {options.map((opt) => (
-        <option value={opt.value}>{opt.label}</option>
+        <option key={opt.value} value={opt.value}>
+          {opt.label}
+        </option>
       ))}
     </select>
   );

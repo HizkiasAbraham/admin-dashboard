@@ -32,8 +32,8 @@ export function ProjectsTable(props: ProjectsTableInput) {
         </div>
         <div className="mt-2 mb-2">
           <TableHeader />
-          {data.map((row) => (
-            <TableRow row={row} />
+          {data.map((row, index) => (
+            <TableRow key={index} row={row} />
           ))}
         </div>
       </CardContent>

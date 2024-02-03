@@ -5,12 +5,21 @@ import { Select } from '@/components/shared/inputs/select';
 import { SearchInput } from '@/components/shared/inputs/searchInput';
 import { ProjectsTable } from '@/components/client/tables/projects-table';
 import { projects } from '@/mockups/projects';
+import { PortifoliosTable } from '@/components/client/tables/portifolios-table';
 
 export default function Client() {
   return (
     <div>
+      <div className="flex gap-2">
+        <div className="flex-auto">
+          <PortifoliosTable />
+        </div>
+        <div className="flex-auto">
+          <PortifoliosTable />
+        </div>
+        <div className="flex-auto"></div>
+      </div>
       <ProjectsTable data={projects as []} />
-
       <Card>
         <CardHeading title="Projects">
           <Select
