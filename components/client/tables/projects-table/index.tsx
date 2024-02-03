@@ -3,6 +3,7 @@ import { Icon } from '@/components/shared/icon';
 import { DatePicker } from '@/components/shared/inputs/date-picker';
 import { SearchInput } from '@/components/shared/inputs/searchInput';
 import { Select } from '@/components/shared/inputs/select';
+import { usd } from '@/utils/format-numbers';
 import { ProjectsTableInput, TableRowInput } from './types';
 
 export function ProjectsTable(props: ProjectsTableInput) {
@@ -86,10 +87,6 @@ function TableHeader() {
 
 function TableRow(props: TableRowInput) {
   const { row } = props;
-  const usd = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-  });
 
   return (
     <div className="rounded-xl bg-white-smoke flex mt-2 mb-4 gap-2 cursor-pointer">
