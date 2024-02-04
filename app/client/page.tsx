@@ -9,10 +9,14 @@ import { PortifoliosTable } from '@/components/client/tables/portifolios-table';
 import { portifiolios } from '@/mockups/protfolios';
 import { BankedCredits } from '@/components/client/tables/banked-credits';
 import { bankedCredits } from '@/mockups/bank-credits';
+import { Paginator } from '@/components/shared/paginator';
+import { CustomersTable } from '@/components/client/tables/customers';
+import { customers } from '@/mockups/customers';
 
 export default function Client() {
   return (
     <div>
+      <CustomersTable data={customers as []} />
       <div className="flex gap-2">
         <div className="flex-auto">
           <PortifoliosTable data={portifiolios as []} />
