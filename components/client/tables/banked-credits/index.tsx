@@ -1,4 +1,5 @@
 import { Card, CardContent, CardHeading } from '@/components/shared/card';
+import { DatePicker } from '@/components/shared/inputs/date-picker';
 import {
   BankedCreditRowInput,
   BankedCreditsInput,
@@ -9,21 +10,30 @@ export function BankedCredits(props: BankedCreditsInput) {
   const { hostBankCredits, customerBankCredits } = props;
   return (
     <Card>
-      <CardHeading title="Banked Credits" />
+      <CardHeading title="Banked Credits">
+        <DatePicker />
+      </CardHeading>
       <CardContent>
-        {/* Host bank */}
-        <div className="mt-4 border-b-2 pb-4 border-inactive">
-          <TableHeader label="Host Bank Credits" />
-          {hostBankCredits.map((row, index) => (
-            <TableRow key={index} row={row} />
-          ))}
+        <div className="flex">
+          <div className="flex-auto">
+            {/* Host bank */}
+            <div className="mt-4 border-b-2 pb-4 border-inactive">
+              <TableHeader label="Host Bank Credits" />
+              {hostBankCredits.map((row, index) => (
+                <TableRow key={index} row={row} />
+              ))}
+            </div>
+            <div className="mt-6">
+              <TableHeader label="Customer Bank Credits" />
+              {customerBankCredits.map((row, index) => (
+                <TableRow key={index} row={row} />
+              ))}
+            </div>
+          </div>
+          <div className="flex-auto"></div>
+          <div className="flex-auto"></div>
         </div>
-        <div className="mt-6">
-          <TableHeader label="Customer Bank Credits" />
-          {customerBankCredits.map((row, index) => (
-            <TableRow key={index} row={row} />
-          ))}
-        </div>
+
         {/* <TableHeader label="Customer Bank Credits" /> */}
       </CardContent>
     </Card>
