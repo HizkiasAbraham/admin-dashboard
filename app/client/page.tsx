@@ -7,6 +7,8 @@ import { ProjectsTable } from '@/components/client/tables/projects-table';
 import { projects } from '@/mockups/projects';
 import { PortifoliosTable } from '@/components/client/tables/portifolios-table';
 import { portifiolios } from '@/mockups/protfolios';
+import { BankedCredits } from '@/components/client/tables/banked-credits';
+import { bankedCredits } from '@/mockups/bank-credits';
 
 export default function Client() {
   return (
@@ -15,8 +17,12 @@ export default function Client() {
         <div className="flex-auto">
           <PortifoliosTable data={portifiolios as []} />
         </div>
-        <div className="flex-auto">{/* <PortifoliosTable /> */}</div>
-        <div className="flex-auto"></div>
+        <div className="flex-auto">
+          <BankedCredits
+            customerBankCredits={bankedCredits.customerBankCredits}
+            hostBankCredits={bankedCredits.hostBankCredits}
+          />
+        </div>
       </div>
       <ProjectsTable data={projects as []} />
       <Card>
