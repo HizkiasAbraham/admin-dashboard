@@ -65,14 +65,14 @@ function TableBody(props: TableRowInput) {
         <div className="w-full flex justify-center items-center border-r-2 border-inactive">
           <div className="flex flex-col gap-1">
             <p className="font-medium text-black text-sm">
-              {usd.format(row?.revenue)}
+              {usd().format(row?.revenue)}
             </p>
           </div>
         </div>
         <div className="w-full flex justify-center items-center">
           <div className="flex flex-col gap-1">
             <p className="font-medium text-black text-sm">
-              {usd.format(row?.ar)}
+              {usd().format(row?.ar)}
             </p>
           </div>
         </div>

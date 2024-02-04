@@ -154,7 +154,7 @@ function TableRow(props: TableRowInput) {
       <div className="w-full flex justify-start items-center">
         <div className="flex flex-col gap-1">
           <p className="font-bold text-black text-sm">
-            {usd.format(row?.revenue?.current)}
+            {usd().format(row?.revenue?.current)}
           </p>
           <div className="flex gap-1 items-center">
             {row?.revenue?.diff > 0 ? (
@@ -163,7 +163,7 @@ function TableRow(props: TableRowInput) {
               <Icon.ArrowDownLeft />
             )}
             <p className="font-medium text-black text-xs">
-              {usd.format(row?.revenue?.diffAmount)}({row?.revenue?.diff})%
+              {usd().format(row?.revenue?.diffAmount)}({row?.revenue?.diff})%
             </p>
           </div>
         </div>
@@ -171,12 +171,12 @@ function TableRow(props: TableRowInput) {
       <div className="w-full flex justify-start items-center">
         <div className="flex flex-col gap-1">
           <p className="font-bold text-black text-sm">
-            {usd.format(row?.ar?.current)}
+            {usd().format(row?.ar?.current)}
           </p>
           <div className="flex gap-1 items-center">
             {row?.ar?.diff > 0 ? <Icon.ArrowUpRight /> : <Icon.ArrowDownLeft />}
             <p className="font-medium text-black text-xs">
-              {usd.format(row?.ar?.diffAmount)}({row?.ar?.diff})%
+              {usd().format(row?.ar?.diffAmount)}({row?.ar?.diff})%
             </p>
           </div>
         </div>
