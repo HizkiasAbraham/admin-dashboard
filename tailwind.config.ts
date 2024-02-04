@@ -28,6 +28,7 @@ const config: Config = {
 
       grey: '#8F979F',
       'light-grey': '#F8F8F8',
+      'dark-grey': '#D7D2E2',
       inactive: '#E8E8E8',
 
       red: '#FF4040',

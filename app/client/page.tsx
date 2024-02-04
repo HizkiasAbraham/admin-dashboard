@@ -12,10 +12,13 @@ import { bankedCredits } from '@/mockups/bank-credits';
 import { Paginator } from '@/components/shared/paginator';
 import { CustomersTable } from '@/components/client/tables/customers';
 import { customers } from '@/mockups/customers';
+import { BillingAndAging } from '@/components/client/tables/billing-and-aging';
+import { billingAndAging } from '@/mockups/billingAndAging';
 
 export default function Client() {
   return (
     <div>
+      <BillingAndAging data={billingAndAging as []} />
       <CustomersTable data={customers as []} />
       <div className="flex gap-2">
         <div className="flex-auto">
