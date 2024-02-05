@@ -14,10 +14,12 @@ import { CustomersTable } from '@/components/client/tables/customers';
 import { customers } from '@/mockups/customers';
 import { BillingAndAging } from '@/components/client/tables/billing-and-aging';
 import { billingAndAging } from '@/mockups/billingAndAging';
+import { ProjectDetails } from '@/components/client/tables/project-details';
 
 export default function Client() {
   return (
     <div>
+      <ProjectDetails />
       <BillingAndAging data={billingAndAging as []} />
       <CustomersTable data={customers as []} />
       <div className="flex gap-2">
