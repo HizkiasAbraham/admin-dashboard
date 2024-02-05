@@ -15,10 +15,13 @@ import { customers } from '@/mockups/customers';
 import { BillingAndAging } from '@/components/client/tables/billing-and-aging';
 import { billingAndAging } from '@/mockups/billingAndAging';
 import { ProjectDetails } from '@/components/client/tables/project-details';
+import { RateTable } from '@/components/client/tables/rate-table';
+import { rateTable } from '@/mockups/rate-table';
 
 export default function Client() {
   return (
     <div>
+      <RateTable data={rateTable as []} />
       <ProjectDetails />
       <BillingAndAging data={billingAndAging as []} />
       <CustomersTable data={customers as []} />
