@@ -1,3 +1,4 @@
+'use client';
 import { Card, CardContent, CardHeading } from '@/components/shared/card';
 import { DatePicker } from '@/components/shared/inputs/date-picker';
 import { Icon } from '@/components/shared/icon';
@@ -17,10 +18,30 @@ import { billingAndAging } from '@/mockups/billingAndAging';
 import { ProjectDetails } from '@/components/client/tables/project-details';
 import { RateTable } from '@/components/client/tables/rate-table';
 import { rateTable } from '@/mockups/rate-table';
+import { Revenue } from '@/components/client/dashboard-items/revenue';
+
+import { BarChart } from '@/components/shared/charts/bar-chart';
+import { barChartData } from '@/mockups/chart';
 
 export default function Client() {
   return (
     <div>
+      <div className="w-1/2">
+        <Card>
+          <CardHeading title="Bar chart" />
+          <CardContent>
+            <BarChart data={barChartData as []} dataKeys={['pv', 'uv']} />
+          </CardContent>
+        </Card>
+      </div>
+      <div className="flex">
+        <div className="flex-1">
+          <Revenue />
+        </div>
+
+        <div className="flex-1"></div>
+      </div>
+
       <RateTable data={rateTable as []} />
       <ProjectDetails />
       <BillingAndAging data={billingAndAging as []} />
