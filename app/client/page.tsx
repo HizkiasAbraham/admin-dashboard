@@ -21,18 +21,29 @@ import { rateTable } from '@/mockups/rate-table';
 import { Revenue } from '@/components/client/dashboard-items/revenue';
 
 import { BarChart } from '@/components/shared/charts/bar-chart';
-import { barChartData } from '@/mockups/chart';
+import { barChartData, lineChartData } from '@/mockups/chart';
+import { LineChart } from '@/components/shared/charts/line-chart';
 
 export default function Client() {
   return (
     <div>
-      <div className="w-1/2">
-        <Card>
-          <CardHeading title="Bar chart" />
-          <CardContent>
-            <BarChart data={barChartData as []} dataKeys={['pv', 'uv']} />
-          </CardContent>
-        </Card>
+      <div className="flex gap-4">
+        <div className="w-1/2">
+          <Card>
+            <CardHeading title="Bar chart" />
+            <CardContent>
+              <BarChart data={barChartData as []} dataKeys={['pv', 'uv']} />
+            </CardContent>
+          </Card>
+        </div>
+        <div className="w-1/2">
+          <Card>
+            <CardHeading title="Line Chart" />
+            <CardContent>
+              <LineChart data={lineChartData as []} dataKeys={['pv', 'uv']} />
+            </CardContent>
+          </Card>
+        </div>
       </div>
       <div className="flex">
         <div className="flex-1">
