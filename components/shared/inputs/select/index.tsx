@@ -5,11 +5,11 @@ export function Select(props: SelectInput) {
 
   return (
     <select className={`border border-inactive rounded-xl ${width || ''}`}>
-      <option disabled value="" selected>
-        <p className="text-grey">{placeHolder}</p>
+      <option disabled value="" className="text-grey">
+        {placeHolder}
       </option>
-      {options.map((opt) => (
-        <option key={opt.value} value={opt.value}>
+      {options.map((opt, index) => (
+        <option key={index} value={opt.value}>
           {opt.label}
         </option>
       ))}
