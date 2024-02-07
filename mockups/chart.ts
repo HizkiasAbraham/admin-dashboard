@@ -87,3 +87,9 @@ export const lineChartData = [
     amt: 2100,
   },
 ];
+
+export const piechartData = [
+  { group: 'Residential', value: 86 },
+  { group: 'Small Commercial', value: 44 },
+  { group: 'Large Commercial', value: 52 },
+];

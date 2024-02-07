@@ -21,9 +21,10 @@ import { rateTable } from '@/mockups/rate-table';
 import { Revenue } from '@/components/client/dashboard-items/revenue';
 
 import { BarChart } from '@/components/shared/charts/bar-chart';
-import { barChartData, lineChartData } from '@/mockups/chart';
+import { barChartData, lineChartData, piechartData } from '@/mockups/chart';
 import { LineChart } from '@/components/shared/charts/line-chart';
 import { StackedBarChart } from '@/components/shared/charts/stacked-bar-chart';
+import { PieChart } from '@/components/shared/charts/pie-chart';
 
 export default function Client() {
   return (
@@ -60,9 +61,15 @@ export default function Client() {
         </div>
 
         <div className="w-1/2">
-          <Revenue />
+          <Card>
+            <CardHeading title="Pie Chart" />
+            <CardContent>
+              <PieChart data={piechartData as []} />
+            </CardContent>
+          </Card>
         </div>
       </div>
+      <Revenue />
 
       <RateTable data={rateTable as []} />
       <ProjectDetails />
