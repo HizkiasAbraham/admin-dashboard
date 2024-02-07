@@ -23,6 +23,7 @@ import { Revenue } from '@/components/client/dashboard-items/revenue';
 import { BarChart } from '@/components/shared/charts/bar-chart';
 import { barChartData, lineChartData } from '@/mockups/chart';
 import { LineChart } from '@/components/shared/charts/line-chart';
+import { StackedBarChart } from '@/components/shared/charts/stacked-bar-chart';
 
 export default function Client() {
   return (
@@ -45,12 +46,22 @@ export default function Client() {
           </Card>
         </div>
       </div>
-      <div className="flex">
-        <div className="flex-1">
-          <Revenue />
+      <div className="flex gap-4">
+        <div className="w-1/2">
+          <Card>
+            <CardHeading title="Stacked Bar chart" />
+            <CardContent>
+              <StackedBarChart
+                data={lineChartData as []}
+                dataKeys={['pv', 'uv', 'amt']}
+              />
+            </CardContent>
+          </Card>
         </div>
 
-        <div className="flex-1"></div>
+        <div className="w-1/2">
+          <Revenue />
+        </div>
       </div>
 
       <RateTable data={rateTable as []} />
