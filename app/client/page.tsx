@@ -30,6 +30,7 @@ import { useState } from 'react';
 import { Carousel } from '@/components/shared/crousel';
 import { crouselItems } from '@/mockups/crousel-items';
 import { SubscribedAllocated } from '@/components/client/dashboard-items/subscribed-allocated';
+import { ARDashboardItem } from '@/components/client/dashboard-items/ar';
 
 export default function Client() {
   const [selectedTabItem, setSelectedTabItem] = useState('on');
@@ -42,7 +43,9 @@ export default function Client() {
         <div className="flex-1">
           <Revenue />
         </div>
-        <div className="flex-1"></div>
+        <div className="flex-1">
+          <ARDashboardItem />
+        </div>
       </div>
       <div className="flex w-1/2 h-80">
         <Carousel autoSlide={false} items={crouselItems} />
