@@ -29,11 +29,21 @@ import { TabSelector } from '@/components/shared/tab-selector';
 import { useState } from 'react';
 import { Carousel } from '@/components/shared/crousel';
 import { crouselItems } from '@/mockups/crousel-items';
+import { SubscribedAllocated } from '@/components/client/dashboard-items/subscribed-allocated';
 
 export default function Client() {
   const [selectedTabItem, setSelectedTabItem] = useState('on');
   return (
     <div>
+      <div className="flex gap-4">
+        <div className="flex-1">
+          <SubscribedAllocated />
+        </div>
+        <div className="flex-1">
+          <Revenue />
+        </div>
+        <div className="flex-1"></div>
+      </div>
       <div className="flex w-1/2 h-80">
         <Carousel autoSlide={false} items={crouselItems} />
       </div>
