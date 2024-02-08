@@ -27,11 +27,16 @@ import { StackedBarChart } from '@/components/shared/charts/stacked-bar-chart';
 import { PieChart } from '@/components/shared/charts/pie-chart';
 import { TabSelector } from '@/components/shared/tab-selector';
 import { useState } from 'react';
+import { Carousel } from '@/components/shared/crousel';
+import { crouselItems } from '@/mockups/crousel-items';
 
 export default function Client() {
   const [selectedTabItem, setSelectedTabItem] = useState('on');
   return (
     <div>
+      <div className="flex w-1/2 h-80">
+        <Carousel autoSlide={false} items={crouselItems} />
+      </div>
       <div className="w-1/2 h-24">
         <Card>
           <CardContent>
