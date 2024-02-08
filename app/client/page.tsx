@@ -31,6 +31,7 @@ import { Carousel } from '@/components/shared/crousel';
 import { crouselItems } from '@/mockups/crousel-items';
 import { SubscribedAllocated } from '@/components/client/dashboard-items/subscribed-allocated';
 import { ARDashboardItem } from '@/components/client/dashboard-items/ar';
+import { Churn } from '@/components/client/dashboard-items/churn';
 
 export default function Client() {
   const [selectedTabItem, setSelectedTabItem] = useState('on');
@@ -46,6 +47,13 @@ export default function Client() {
         <div className="flex-1">
           <ARDashboardItem />
         </div>
+      </div>
+      <div className="flex mt-2 gap-4">
+        <div className="flex-1">
+          <Churn />
+        </div>
+        <div className="flex-1"></div>
+        <div className="flex-1"></div>
       </div>
       <div className="flex w-1/2 h-80">
         <Carousel autoSlide={false} items={crouselItems} />
