@@ -25,10 +25,27 @@ import { barChartData, lineChartData, piechartData } from '@/mockups/chart';
 import { LineChart } from '@/components/shared/charts/line-chart';
 import { StackedBarChart } from '@/components/shared/charts/stacked-bar-chart';
 import { PieChart } from '@/components/shared/charts/pie-chart';
+import { TabSelector } from '@/components/shared/tab-selector';
+import { useState } from 'react';
 
 export default function Client() {
+  const [selectedTabItem, setSelectedTabItem] = useState('on');
   return (
     <div>
+      <div className="w-1/2 h-24">
+        <Card>
+          <CardContent>
+            <TabSelector
+              items={[
+                { label: 'One', id: 'on' },
+                { label: 'Two', id: 'th' },
+              ]}
+              selectedItem={selectedTabItem}
+              onTabItemChanged={setSelectedTabItem}
+            />
+          </CardContent>
+        </Card>
+      </div>
       <div className="flex gap-4">
         <div className="w-1/2">
           <Card>
