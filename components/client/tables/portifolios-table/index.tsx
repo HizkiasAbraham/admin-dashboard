@@ -6,25 +6,27 @@ import { PortfoliosTableInput, TableRowInput } from './types';
 export function PortifoliosTable(props: PortfoliosTableInput) {
   const { data } = props;
   return (
-    <Card>
-      <CardHeading title="Protifolios">
-        <DatePicker width="w-40" />
-      </CardHeading>
-      <CardContent>
-        <div className="mt-4 mb-2">
-          <TableHeader />
-          {data?.map((row, index) => (
-            <TableBody key={index} row={row} />
-          ))}
-        </div>
-      </CardContent>
-    </Card>
+    <div className="w-max md:w-full">
+      <Card>
+        <CardHeading title="Protifolios">
+          <DatePicker width="w-40" />
+        </CardHeading>
+        <CardContent>
+          <div className="mt-4 mb-2">
+            <TableHeader />
+            {data?.map((row, index) => (
+              <TableBody key={index} row={row} />
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+    </div>
   );
 }
 
 function TableHeader() {
   return (
-    <div className="flex w-full gap-1">
+    <div className="flex w-full gap-1 w-full">
       <div className="w-full flex justify-start pl-4">
         <p className="text-xs text-grey">Name </p>
       </div>
@@ -47,7 +49,7 @@ function TableHeader() {
 function TableBody(props: TableRowInput) {
   const { row } = props;
   return (
-    <div className="rounded-xl bg-white-smoke mt-2 mb-2 gap-2 cursor-pointer">
+    <div className="rounded-xl bg-white-smoke mt-2 mb-2 gap-2 cursor-pointer w-full">
       <div className="flex p-4">
         <div className="w-full flex justify-start items-center">
           <p className="font-bold text-black text-sm">{row?.name}</p>

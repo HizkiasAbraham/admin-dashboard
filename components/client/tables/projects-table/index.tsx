@@ -9,36 +9,38 @@ import { ProjectsTableInput, TableRowInput } from './types';
 export function ProjectsTable(props: ProjectsTableInput) {
   const { data } = props;
   return (
-    <Card>
-      <CardHeading title="Projects">
-        <DatePicker width="w-48" />
-      </CardHeading>
-      <CardContent>
-        <div className="flex pt-2 pb-2">
-          <div className="flex-auto flex">
-            <SearchInput placeHolder="Search..." />
+    <div className="w-max md:w-full">
+      <Card>
+        <CardHeading title="Projects">
+          <DatePicker width="w-48" />
+        </CardHeading>
+        <CardContent>
+          <div className="flex pt-2 pb-2">
+            <div className="flex-auto flex">
+              <SearchInput placeHolder="Search..." />
+            </div>
+            <div className="flex-auto flex justify-end gap-2">
+              <Select
+                options={[
+                  { label: 'Portiffolio 1', value: 'er' },
+                  { label: 'Portiffolio 2', value: 'er' },
+                ]}
+                placeHolder="Portifolio"
+              />
+              <Select options={[]} placeHolder="State" />
+              <Select options={[]} placeHolder="Type" />
+              <Select options={[]} placeHolder="Utility" />
+            </div>
           </div>
-          <div className="flex-auto flex justify-end gap-2">
-            <Select
-              options={[
-                { label: 'Portiffolio 1', value: 'er' },
-                { label: 'Portiffolio 2', value: 'er' },
-              ]}
-              placeHolder="Portifolio"
-            />
-            <Select options={[]} placeHolder="State" />
-            <Select options={[]} placeHolder="Type" />
-            <Select options={[]} placeHolder="Utility" />
+          <div className="mt-2 mb-2">
+            <TableHeader />
+            {data.map((row, index) => (
+              <TableRow key={index} row={row} />
+            ))}
           </div>
-        </div>
-        <div className="mt-2 mb-2">
-          <TableHeader />
-          {data.map((row, index) => (
-            <TableRow key={index} row={row} />
-          ))}
-        </div>
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
+    </div>
   );
 }
 
