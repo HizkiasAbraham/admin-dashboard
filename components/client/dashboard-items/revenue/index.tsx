@@ -7,7 +7,7 @@ export function Revenue() {
   return (
     <Card>
       <CardHeading title="Revenue">
-        <DatePicker width="w-64" />
+        <DatePicker width="w-40 md:w-64" />
       </CardHeading>
       <CardContent>
         <div className="mt-4 mb-4">
