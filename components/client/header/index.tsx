@@ -30,7 +30,10 @@ export default function Header() {
             onClick={() => navigate('projects')}
           />
         </div>
-        <div className="flex flex-auto justify-center">
+        <div
+          className="flex flex-auto justify-center cursor-pointer"
+          onClick={() => navigate('dashboard')}
+        >
           <Image alt="" width={120} height={20} src={'/images/logo.png'} />
         </div>
         <div className="flex flex-auto justify-end gap-4 invisible md:visible">
