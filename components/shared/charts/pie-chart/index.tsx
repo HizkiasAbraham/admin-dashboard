@@ -1,6 +1,6 @@
 'use client';
 import { getPercentage } from '@/utils/calculate-percentage';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Cell,
   Pie,
@@ -66,7 +66,31 @@ const renderActiveShape = (props: any) => {
 export function PieChart(props: ChartInput) {
   const [activeIndex, setActiveState] = useState<number>(0);
 
+  const [pieRadius, setPieRadius] = useState({
+    innerRadius: 55,
+    outerRadius: 63,
+  });
+
   const color = [...chartColorVariants].reverse();
+
+  const handleResize = () => {
+    const windowWidth = window.innerWidth;
+
+    if (windowWidth > 768) {
+      setPieRadius({
+        innerRadius: 110,
+        outerRadius: 126,
+      });
+    } else {
+      setPieRadius({ innerRadius: 55, outerRadius: 63 });
+    }
+  };
+
+  useEffect(() => {
+    handleResize();
+    window.addEventListener('reset', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const onPieEnter = (_: any, index: number) => {
     setActiveState(index);
@@ -74,8 +98,8 @@ export function PieChart(props: ChartInput) {
 
   const { data } = props;
   return (
-    <div className="w-full flex gap-4">
-      <div className="w-1/2 h-80" onMouseLeave={() => setActiveState(0)}>
+    <div className="w-full flex flex-col md:flex-row gap-4">
+      <div className="flex-1 h-80" onMouseLeave={() => setActiveState(0)}>
         <ResponsiveContainer width="100%" height="100%">
           <PiChart width={600} height={600}>
             <Pie
@@ -84,8 +108,8 @@ export function PieChart(props: ChartInput) {
               data={data}
               cx="50%"
               cy="50%"
-              innerRadius={110}
-              outerRadius={126}
+              innerRadius={pieRadius.innerRadius}
+              outerRadius={pieRadius.outerRadius}
               dataKey="value"
               onMouseEnter={onPieEnter}
             >
@@ -97,7 +121,7 @@ export function PieChart(props: ChartInput) {
         </ResponsiveContainer>
       </div>
       <div
-        className="flex w-1/2 items-center flex-col items-center justify-center gap-2"
+        className="flex-1 flex items-center flex-col items-center justify-center gap-2"
         onMouseLeave={() => setActiveState(0)}
       >
         {data.map((d: any, index) => {
