@@ -6,4 +6,5 @@ export type PortfoliosTableInput = {
 
 export type TableRowInput = {
   row: (typeof portifiolios)[0];
+  navigate: Function;
 };

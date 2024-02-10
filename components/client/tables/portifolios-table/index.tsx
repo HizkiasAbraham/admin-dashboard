@@ -1,10 +1,17 @@
+'use client';
+
 import { Card, CardContent, CardHeading } from '@/components/shared/card';
 import { DatePicker } from '@/components/shared/inputs/date-picker';
 import { usd } from '@/utils/format-numbers';
+import { useRouter } from 'next/navigation';
 import { PortfoliosTableInput, TableRowInput } from './types';
 
 export function PortifoliosTable(props: PortfoliosTableInput) {
   const { data } = props;
+  const router = useRouter();
+
+  const navigate = (id: string) => router.push('/client/portifolios/' + id);
+
   return (
     <div className="w-max md:w-full">
       <Card>
@@ -15,7 +22,7 @@ export function PortifoliosTable(props: PortfoliosTableInput) {
           <div className="mt-4 mb-2">
             <TableHeader />
             {data?.map((row, index) => (
-              <TableBody key={index} row={row} />
+              <TableBody key={index} row={row} navigate={navigate} />
             ))}
           </div>
         </CardContent>
@@ -47,9 +54,12 @@ function TableHeader() {
 }
 
 function TableBody(props: TableRowInput) {
-  const { row } = props;
+  const { row, navigate } = props;
   return (
-    <div className="rounded-xl bg-white-smoke mt-2 mb-2 gap-2 cursor-pointer w-full">
+    <div
+      className="rounded-xl bg-white-smoke mt-2 mb-2 gap-2 cursor-pointer w-full"
+      onClick={() => navigate('portifolioId')}
+    >
       <div className="flex p-4">
         <div className="w-full flex justify-start items-center">
           <p className="font-bold text-black text-sm">{row?.name}</p>
