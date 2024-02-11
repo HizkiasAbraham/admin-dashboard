@@ -35,31 +35,33 @@ export function VarianceAnalysis() {
   );
 
   return (
-    <Card>
-      <CardHeading title="Variance Analysis">
-        <DatePicker />
-        <div className="w-64">
-          <TabSelector
-            items={tabItemsUnitPercent}
-            selectedItem={selectedUnitTab}
-            onTabItemChanged={setSelectedUnitTab}
+    <div className="w-max md:w-full">
+      <Card>
+        <CardHeading title="Variance Analysis">
+          <DatePicker />
+          <div className="w-64">
+            <TabSelector
+              items={tabItemsUnitPercent}
+              selectedItem={selectedUnitTab}
+              onTabItemChanged={setSelectedUnitTab}
+            />
+          </div>
+        </CardHeading>
+        <CardContent>
+          <div className="mt-4">
+            <TabSelector
+              items={tabItemsForChart}
+              selectedItem={selectedItemForchartTab}
+              onTabItemChanged={setSelectedItemForChartTab}
+            />
+          </div>
+          <TabContent
+            tabId={selectedItemForchartTab}
+            parentTabId={selectedItemForchartTab}
           />
-        </div>
-      </CardHeading>
-      <CardContent>
-        <div className="mt-4">
-          <TabSelector
-            items={tabItemsForChart}
-            selectedItem={selectedItemForchartTab}
-            onTabItemChanged={setSelectedItemForChartTab}
-          />
-        </div>
-        <TabContent
-          tabId={selectedItemForchartTab}
-          parentTabId={selectedItemForchartTab}
-        />
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
+    </div>
   );
 }
 
