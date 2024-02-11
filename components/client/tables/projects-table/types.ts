@@ -6,4 +6,5 @@ export type ProjectsTableInput = {
 
 export type TableRowInput = {
   row: (typeof projects)[0];
+  navigate: any;
 };

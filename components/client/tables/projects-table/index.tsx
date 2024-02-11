@@ -1,12 +1,20 @@
+'use client';
+
 import { Card, CardContent, CardHeading } from '@/components/shared/card';
 import { Icon } from '@/components/shared/icon';
 import { DatePicker } from '@/components/shared/inputs/date-picker';
 import { SearchInput } from '@/components/shared/inputs/searchInput';
 import { Select } from '@/components/shared/inputs/select';
 import { usd } from '@/utils/format-numbers';
+import { useRouter } from 'next/navigation';
 import { ProjectsTableInput, TableRowInput } from './types';
 
 export function ProjectsTable(props: ProjectsTableInput) {
+  const router = useRouter();
+
+  const navigate = (projectId: string) =>
+    router.push('/client/projects/' + projectId);
+
   const { data } = props;
   return (
     <div className="w-max md:w-full">
@@ -35,7 +43,7 @@ export function ProjectsTable(props: ProjectsTableInput) {
           <div className="mt-2 mb-2">
             <TableHeader />
             {data.map((row, index) => (
-              <TableRow key={index} row={row} />
+              <TableRow key={index} row={row} navigate={navigate} />
             ))}
           </div>
         </CardContent>
@@ -88,10 +96,13 @@ function TableHeader() {
 }
 
 function TableRow(props: TableRowInput) {
-  const { row } = props;
+  const { row, navigate } = props;
 
   return (
-    <div className="rounded-xl bg-white-smoke flex mt-2 mb-4 gap-2 cursor-pointer">
+    <div
+      className="rounded-xl bg-white-smoke flex mt-2 mb-4 gap-2 cursor-pointer"
+      onClick={() => navigate('projectId')}
+    >
       <div className="w-full">
         <div className="flex flex-col gap-1 p-4">
           <p className="font-bold text-black text-sm">{row?.name}</p>
