@@ -52,7 +52,11 @@ function TabContent(props: TabContentInput) {
   return (
     <div>
       <div className="mt-2">
-        <BarChart data={barChartData as []} dataKeys={['pv', 'uv']} />
+        <BarChart
+          data={barChartData as []}
+          height="64"
+          dataKeys={['pv', 'uv']}
+        />
       </div>
     </div>
   );
