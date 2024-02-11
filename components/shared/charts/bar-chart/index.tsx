@@ -8,9 +8,9 @@ import {
 import { chartColorVariants, ChartInput } from '../types';
 
 export function BarChart(props: ChartInput) {
-  const { data, dataKeys } = props;
+  const { data, dataKeys, height } = props;
   return (
-    <div className="w-full h-80">
+    <div className={`w-full h-${height || '80'}`}>
       <ResponsiveContainer width="100%" height="100%">
         <Bchart
           width={500}

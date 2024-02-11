@@ -1,3 +1,4 @@
+'use client';
 import { usd } from '@/utils/format-numbers';
 import {
   ResponsiveContainer,
@@ -10,9 +11,9 @@ import {
 import { chartColorVariants, ChartInput } from '../types';
 
 export function LineChart(props: ChartInput) {
-  const { data, dataKeys } = props;
+  const { data, dataKeys, height } = props;
   return (
-    <div className="w-full h-80">
+    <div className={`w-full h-${height || '80'}`}>
       <ResponsiveContainer width="100%" height="100%">
         <LChart
           width={500}

@@ -1,6 +1,7 @@
 export type ChartInput = {
   data: [];
   dataKeys?: string[];
+  height?: string;
 };
 
 export const chartColorVariants = [
