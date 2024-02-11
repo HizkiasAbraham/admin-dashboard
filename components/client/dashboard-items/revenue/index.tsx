@@ -13,7 +13,7 @@ export function Revenue() {
         <div className="mt-4 mb-4">
           <p className="text-2xl font-bold">{usd().format(1230500)}</p>
         </div>
-        <div className="mt-4 mb-4 flex items-center gap-2">
+        <div className="mt-4 flex items-center gap-2">
           <Icon.ArrowUpRight />
           <p className="font-bold text-sm text-black">
             {usd(2).format(50450)}(5.45%)

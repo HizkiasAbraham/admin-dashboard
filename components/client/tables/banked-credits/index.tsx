@@ -1,5 +1,7 @@
 import { Card, CardContent, CardHeading } from '@/components/shared/card';
+import { LineChart } from '@/components/shared/charts/line-chart';
 import { DatePicker } from '@/components/shared/inputs/date-picker';
+import { lineChartData } from '@/mockups/chart';
 import {
   BankedCreditRowInput,
   BankedCreditsInput,
@@ -14,8 +16,8 @@ export function BankedCredits(props: BankedCreditsInput) {
         <DatePicker />
       </CardHeading>
       <CardContent>
-        <div className="flex">
-          <div className="flex-auto">
+        <div className="flex flex-col md:flex-row gap-3">
+          <div className="md:w-1/3">
             {/* Host bank */}
             <div className="mt-4 border-b-2 pb-4 border-inactive">
               <TableHeader label="Host Bank Credits" />
@@ -30,8 +32,13 @@ export function BankedCredits(props: BankedCreditsInput) {
               ))}
             </div>
           </div>
-          <div className="flex-auto"></div>
-          <div className="flex-auto"></div>
+          <div className=" md:w-2/3">
+            <LineChart
+              data={lineChartData as []}
+              height="full"
+              dataKeys={['pv', 'uv']}
+            />
+          </div>
         </div>
 
         {/* <TableHeader label="Customer Bank Credits" /> */}
