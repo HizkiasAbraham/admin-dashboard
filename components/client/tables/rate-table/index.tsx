@@ -1,7 +1,9 @@
 import { Card, CardContent, CardHeading } from '@/components/shared/card';
+import { LineChart } from '@/components/shared/charts/line-chart';
 import { DatePicker } from '@/components/shared/inputs/date-picker';
 import { SearchInput } from '@/components/shared/inputs/searchInput';
 import { Select } from '@/components/shared/inputs/select';
+import { lineChartData } from '@/mockups/chart';
 import { usd } from '@/utils/format-numbers';
 import { RateTableProp } from './types';
 
@@ -15,9 +17,9 @@ export function RateTable(props: RateTableProp) {
         <DatePicker width="w-64" />
       </CardHeading>
       <CardContent>
-        <div className="flex">
-          <div className="w-full">
-            <div className="mt-4 flex w-full">
+        <div className="flex flex-col md:flex-row w-full">
+          <div className="flex-1 overflow-x-scroll md:overflow-x-hidden w-full">
+            <div className="mt-4 flex w-max md:w-full">
               <div className="w-4/5 flex w-full gap-1 p-2 pl-6">
                 <div className="w-full flex justify-start">
                   <p className="text-xs text-grey">VDER Stack</p>
@@ -39,7 +41,7 @@ export function RateTable(props: RateTableProp) {
               </div>
             </div>
             {data?.map((row: any, index) => (
-              <div key={index} className="flex w-full">
+              <div key={index} className="flex w-max md:w-full">
                 <div className="w-4/5 flex w-full gap-1 p-2">
                   <div className="rounded-xl w-full bg-white-smoke flex gap-2 cursor-pointer">
                     <div className="w-full flex justify-start items-center p-4">
@@ -80,7 +82,13 @@ export function RateTable(props: RateTableProp) {
               </div>
             ))}
           </div>
-          <div className="w-full"></div>
+          <div className="flex-1">
+            <LineChart
+              height="full"
+              data={lineChartData as []}
+              dataKeys={['pv']}
+            />
+          </div>
         </div>
       </CardContent>
     </Card>
