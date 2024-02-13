@@ -57,7 +57,7 @@ function TableBody(props: TableRowInput) {
   const { row, navigate } = props;
   return (
     <div
-      className="rounded-xl bg-white-smoke mt-2 mb-2 gap-2 cursor-pointer w-full"
+      className="rounded-xl bg-white-smoke hover:bg-yellow mt-2 mb-2 gap-2 cursor-pointer w-full"
       onClick={() => navigate('portifolioId')}
     >
       <div className="flex p-4">
