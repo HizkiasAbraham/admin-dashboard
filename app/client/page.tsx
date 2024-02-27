@@ -33,11 +33,13 @@ import { SubscribedAllocated } from '@/components/client/dashboard-items/subscri
 import { ARDashboardItem } from '@/components/client/dashboard-items/ar';
 import { Churn } from '@/components/client/dashboard-items/churn';
 import { CreditRate } from '@/components/client/dashboard-items/credit-rate';
+import { TextInput } from '@/components/shared/inputs/text-input';
 
 export default function Client() {
   const [selectedTabItem, setSelectedTabItem] = useState('on');
   return (
     <div>
+      <TextInput placeholder='Username'/>
       <div className="flex gap-4">
         <div className="flex-1">
           <SubscribedAllocated />
