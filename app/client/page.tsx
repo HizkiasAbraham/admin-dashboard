@@ -39,7 +39,9 @@ export default function Client() {
   const [selectedTabItem, setSelectedTabItem] = useState('on');
   return (
     <div>
-      <TextInput placeholder='Username'/>
+      <div className="w-64">
+      <TextInput placeholder='Username' type='text' endingIcon={<Icon.Search className='h-5 w-5' />} />
+      </div>
       <div className="flex gap-4">
         <div className="flex-1">
           <SubscribedAllocated />
