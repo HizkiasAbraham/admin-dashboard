@@ -1,11 +1,17 @@
+"use client";
 import { FullFlatButton } from "@/components/shared/buttons/full-solid-button";
 import { Icon } from "@/components/shared/icon";
 import { CheckBox } from "@/components/shared/inputs/check-box";
 import { TextInput } from "@/components/shared/inputs/text-input";
+import Link from "next/link";
 
 export default function Login() {
   return (
-    <form>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+      }}
+    >
       <p className="text-2xl font-bold text-black w-64">
         Welcome back to Meadow
       </p>
@@ -30,7 +36,7 @@ export default function Login() {
           <FullFlatButton>Sign In</FullFlatButton>
         </div>
         <div className="flex-1 flex justify-center md:justify-end text-blue">
-          <a href="/auth/reset-password">Forgot password?</a>
+          <Link href="/auth/reset-password">Forgot password?</Link>
         </div>
       </div>
       <div className="invisible md:visible mt-8">

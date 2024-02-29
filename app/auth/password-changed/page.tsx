@@ -1,7 +1,11 @@
+"use client";
 import { FullFlatButton } from "@/components/shared/buttons/full-solid-button";
 import { Icon } from "@/components/shared/icon";
+import { useRouter } from "next/navigation";
 
 export default function PasswordChanged() {
+  const router = useRouter();
+
   return (
     <div>
       <div className="flex justify-center flex-col ">
@@ -21,7 +25,9 @@ export default function PasswordChanged() {
           </p>
         </div>
         <div className="mt-6">
-          <FullFlatButton>Sign In</FullFlatButton>
+          <FullFlatButton onClick={() => router.push("/auth/login")}>
+            Sign In
+          </FullFlatButton>
         </div>
       </div>
     </div>

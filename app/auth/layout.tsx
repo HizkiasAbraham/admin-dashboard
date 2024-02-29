@@ -1,5 +1,6 @@
 import bg from "@/public/images/auth-background.png";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function AuthLayout({
   children,
@@ -12,7 +13,14 @@ export default function AuthLayout({
         <div className="w-full h-screen md:w-1/2 flex flex-col">
           <div className="flex-1">
             <div className="flex flex-1 cursor-pointer mt-8 p-4">
-              <Image alt="" width={150} height={380} src={"/images/logo.png"} />
+              <Link href="/">
+                <Image
+                  alt=""
+                  width={150}
+                  height={380}
+                  src={"/images/logo.png"}
+                />
+              </Link>
             </div>
           </div>
           <div className="flex-1 p-4">{children}</div>

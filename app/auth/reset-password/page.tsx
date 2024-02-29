@@ -4,10 +4,16 @@ import { FullFlatButton } from "@/components/shared/buttons/full-solid-button";
 import { Icon } from "@/components/shared/icon";
 import { TextInput } from "@/components/shared/inputs/text-input";
 import { useRouter } from "next/navigation";
+
 export default function ResetPassword() {
   const router = useRouter();
   return (
-    <form>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        router.push("/auth/new-password");
+      }}
+    >
       <div
         className="invisible md:visible flex gap-2 items-center cursor-pointer"
         onClick={() => router.back()}
@@ -32,7 +38,7 @@ export default function ResetPassword() {
         <FullFlatButton>Send instructions</FullFlatButton>
       </div>
       <div className="mt-4 md:hidden">
-        <FullOutlinedButton>
+        <FullOutlinedButton onClick={() => router.back()}>
           <Icon.ArrowLeft className="h-4 w-5" /> Go back
         </FullOutlinedButton>
       </div>

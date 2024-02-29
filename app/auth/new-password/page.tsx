@@ -8,7 +8,12 @@ import { useRouter } from "next/navigation";
 export default function NewPassword() {
   const router = useRouter();
   return (
-    <form>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        router.push("/auth/password-changed");
+      }}
+    >
       <div
         className="flex gap-2 items-center cursor-pointer invisible md:visible"
         onClick={() => router.back()}
