@@ -4,12 +4,15 @@ import { Icon } from "@/components/shared/icon";
 import { CheckBox } from "@/components/shared/inputs/check-box";
 import { TextInput } from "@/components/shared/inputs/text-input";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
+  const router = useRouter();
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
+        // router.push("/subscriber");
       }}
     >
       <p className="text-2xl font-bold text-black w-64">
