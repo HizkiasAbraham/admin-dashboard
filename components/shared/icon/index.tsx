@@ -16,6 +16,10 @@ import EyeSlash from "@heroicons/react/24/outline/EyeSlashIcon";
 import CheckCircle from "@heroicons/react/24/outline/CheckCircleIcon";
 import Bars3Icon from "@heroicons/react/24/outline/Bars3BottomRightIcon";
 import XMark from "@heroicons/react/24/outline/XMarkIcon";
+import USDIcon from "@heroicons/react/24/outline/CurrencyDollarIcon";
+import CloudIcon from "@heroicons/react/24/outline/CloudIcon";
+import ArchiveBox from "@heroicons/react/24/outline/ArchiveBoxIcon";
+import BoltIcon from "@heroicons/react/24/outline/BoltIcon";
 
 const ArrowUpRight = () => (
   <div className="w-4 h-4 rounded-full inline-flex items-center justify-center bg-green text-white text-xl font-bold">
@@ -48,4 +52,8 @@ export const Icon = {
   CheckCircle: (props: any) => <CheckCircle {...props} />,
   DrawerToggler: (props: any) => <Bars3Icon {...props} />,
   Cancel: (props: any) => <XMark {...props} />,
+  USD: (props: any) => <USDIcon {...props} />,
+  CloudIcon: (props: any) => <CloudIcon {...props} />,
+  GallonBucket: (props: any) => <ArchiveBox {...props} />,
+  Flash: (props: any) => <BoltIcon {...props} />,
 };
