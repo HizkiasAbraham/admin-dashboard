@@ -12,7 +12,7 @@ export default function Login() {
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        // router.push("/subscriber");
+        router.push("/subscriber/dashboard");
       }}
     >
       <p className="text-2xl font-bold text-black w-64">
