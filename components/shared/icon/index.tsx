@@ -9,10 +9,13 @@ import SearchIcon from "@heroicons/react/24/outline/MagnifyingGlassIcon";
 import CalendarIcon from "@heroicons/react/24/outline/CalendarIcon";
 import ArrowURight from "@heroicons/react/24/outline/ArrowUpRightIcon";
 import ArrowDLeft from "@heroicons/react/24/outline/ArrowDownLeftIcon";
+import ChevronD from "@heroicons/react/24/outline/ChevronDownIcon";
 import ChevronL from "@heroicons/react/24/outline/ChevronLeftIcon";
 import ChevronR from "@heroicons/react/24/outline/ChevronRightIcon";
 import EyeSlash from "@heroicons/react/24/outline/EyeSlashIcon";
 import CheckCircle from "@heroicons/react/24/outline/CheckCircleIcon";
+import Bars3Icon from "@heroicons/react/24/outline/Bars3BottomRightIcon";
+import XMark from "@heroicons/react/24/outline/XMarkIcon";
 
 const ArrowUpRight = () => (
   <div className="w-4 h-4 rounded-full inline-flex items-center justify-center bg-green text-white text-xl font-bold">
@@ -30,6 +33,7 @@ export const Icon = {
   Home: (props: any) => <HomeIcon {...props} />,
   Location: (props: any) => <LocationIcon {...props} />,
   Notification: (props: any) => <NotificationIcon {...props} />,
+  ArrowDown: (props: any) => <ChevronD {...props} />,
   Account: (props: any) => <UserAcconutIcon {...props} />,
   ArrowLeft: (props: any) => <ArrowLeftIcon {...props} />,
   ArrowRight: (props: any) => <ArrowRightIcon {...props} />,
@@ -42,4 +46,6 @@ export const Icon = {
   ChevronRight: (props: any) => <ChevronR {...props} />,
   VisibilityHidden: (props: any) => <EyeSlash {...props} />,
   CheckCircle: (props: any) => <CheckCircle {...props} />,
+  DrawerToggler: (props: any) => <Bars3Icon {...props} />,
+  Cancel: (props: any) => <XMark {...props} />,
 };
