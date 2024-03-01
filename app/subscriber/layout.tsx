@@ -31,7 +31,9 @@ export default function SubscriberLayout({
         <div className="hidden md:block w-72 grow-0">
           <SideBar />
         </div>
-        <div className="w-full grow">{children}</div>
+        <div className="w-full grow">
+          <div className="w-full p-6 pt-0 md:pt-5">{children}</div>
+        </div>
       </div>
     </div>
   );

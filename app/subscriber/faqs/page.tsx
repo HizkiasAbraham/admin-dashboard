@@ -1,3 +1,9 @@
+import { BreadCrumb } from "@/components/subscriber/bread-crumb";
+
 export default function Faqs() {
-  return <div>Faqs goes here</div>;
+  return (
+    <div>
+      <BreadCrumb pageName="Frequently Asked Questions" showSearchAndUpload />
+    </div>
+  );
 }

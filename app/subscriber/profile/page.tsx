@@ -1,3 +1,9 @@
+import { BreadCrumb } from "@/components/subscriber/bread-crumb";
+
 export default function Profile() {
-  return <div>Profile goes here</div>;
+  return (
+    <div>
+      <BreadCrumb pageName="Profile Settings" />
+    </div>
+  );
 }
