@@ -21,6 +21,7 @@ import USDIcon from "@heroicons/react/24/outline/CurrencyDollarIcon";
 import CloudIcon from "@heroicons/react/24/outline/CloudIcon";
 import ArchiveBox from "@heroicons/react/24/outline/ArchiveBoxIcon";
 import BoltIcon from "@heroicons/react/24/outline/BoltIcon";
+import DocumentText from "@heroicons/react/24/outline/DocumentTextIcon";
 
 const ArrowUpRight = () => (
   <div className="w-4 h-4 rounded-full inline-flex items-center justify-center bg-green text-white text-xl font-bold">
@@ -58,4 +59,5 @@ export const Icon = {
   CloudIcon: (props: any) => <CloudIcon {...props} />,
   GallonBucket: (props: any) => <ArchiveBox {...props} />,
   Flash: (props: any) => <BoltIcon {...props} />,
+  DocumentFile: (props: any) => <DocumentText {...props} />,
 };
