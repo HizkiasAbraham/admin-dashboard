@@ -5,6 +5,7 @@ import UserAcconutIcon from "@heroicons/react/24/outline/UserIcon";
 import ArrowLeftIcon from "@heroicons/react/24/outline/ArrowLeftIcon";
 import ArrowRightIcon from "@heroicons/react/24/outline/ArrowRightIcon";
 import UploadIcon from "@heroicons/react/24/outline/ArrowUpTrayIcon";
+import DownloadIcon from "@heroicons/react/24/outline/ArrowDownTrayIcon";
 import SearchIcon from "@heroicons/react/24/outline/MagnifyingGlassIcon";
 import CalendarIcon from "@heroicons/react/24/outline/CalendarIcon";
 import ArrowURight from "@heroicons/react/24/outline/ArrowUpRightIcon";
@@ -42,6 +43,7 @@ export const Icon = {
   ArrowLeft: (props: any) => <ArrowLeftIcon {...props} />,
   ArrowRight: (props: any) => <ArrowRightIcon {...props} />,
   Upload: (props: any) => <UploadIcon {...props} />,
+  Download: (props: any) => <DownloadIcon {...props} />,
   Search: (props: any) => <SearchIcon {...props} />,
   Calendar: (props: any) => <CalendarIcon {...props} />,
   ArrowUpRight,
