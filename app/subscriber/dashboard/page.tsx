@@ -5,6 +5,7 @@ import { FarmDetailAnalytics } from "@/components/subscriber/farm-detail";
 import { SolarEnergyCredits } from "@/components/subscriber/solar-energy-credits";
 import { SolarEnergyCreditsUsageHistory } from "@/components/subscriber/solar-energy-credits-usage-table";
 import { TotalSavings } from "@/components/subscriber/total-savings";
+import { solarEnergyCreditsHistory } from "@/mockups/solarEnergyCreditsUsage";
 
 export default function Dashboard() {
   return (
@@ -114,8 +115,10 @@ export default function Dashboard() {
           <TotalSavings />
         </div>
       </div>
-      <div className="mt-5">
-        <SolarEnergyCreditsUsageHistory />
+      <div className="mt-5 w-full overflow-x-scroll md:overflow-x-hidden">
+        <SolarEnergyCreditsUsageHistory
+          data={solarEnergyCreditsHistory as []}
+        />
       </div>
     </div>
   );
