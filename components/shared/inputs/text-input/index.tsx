@@ -1,13 +1,24 @@
 import { TextInputProps } from "./types";
 
 export function TextInput(props: TextInputProps) {
-  const { type, value, onChange, placeholder, disabled, endingIcon } = props;
+  const {
+    name,
+    required,
+    type,
+    value,
+    onChange,
+    placeholder,
+    disabled,
+    endingIcon,
+  } = props;
   return (
     <div className="w-full">
       <div className="relative w-full h-14 rounded-full ">
         <input
+          name={name}
           type={type}
           value={value}
+          required={required}
           onChange={onChange}
           className={`peer w-full h-full border-inactive ${
             disabled ? "bg-light-grey" : ""

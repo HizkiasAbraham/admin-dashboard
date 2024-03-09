@@ -5,16 +5,16 @@ import { CheckBox } from "@/components/shared/inputs/check-box";
 import { TextInput } from "@/components/shared/inputs/text-input";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { login } from "./actions";
+// @ts-ignore
+import { experimental_useFormState as useFormState } from "react-dom";
 
 export default function Login() {
+  const [error, dispatch] = useFormState(login, undefined);
   const router = useRouter();
+
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        router.push("/subscriber/dashboard");
-      }}
-    >
+    <form action={dispatch}>
       <p className="text-2xl font-bold text-black w-64">
         Welcome back to Meadow
       </p>
@@ -22,12 +22,19 @@ export default function Login() {
         Sign into your account to continue
       </p>
       <div className="mt-6">
-        <TextInput type="text" placeholder="Username" />
+        <TextInput
+          name="username"
+          type="text"
+          placeholder="Username"
+          required
+        />
       </div>
       <div className="mt-4">
         <TextInput
+          name="password"
           type="password"
           placeholder="Password"
+          required
           endingIcon={<Icon.VisibilityHidden className="h-5 w-5" />}
         />
       </div>
@@ -43,7 +50,7 @@ export default function Login() {
         </div>
       </div>
       <div className="invisible md:visible mt-8">
-        <FullFlatButton>Sign In</FullFlatButton>
+        <FullFlatButton type={"submit"}>Sign In</FullFlatButton>
       </div>
     </form>
   );
