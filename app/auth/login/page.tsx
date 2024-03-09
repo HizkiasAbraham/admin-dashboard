@@ -6,8 +6,21 @@ import { TextInput } from "@/components/shared/inputs/text-input";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { login } from "./actions";
-// @ts-ignore
-import { experimental_useFormState as useFormState } from "react-dom";
+import {
+  // @ts-ignore
+  experimental_useFormState as useFormState,
+  // @ts-ignore
+  experimental_useFormStatus as useFormStatus,
+} from "react-dom";
+
+const SubmitButton = () => {
+  const { pending } = useFormStatus();
+  return (
+    <FullFlatButton type={"submit"} disabled={pending}>
+      {!pending ? <span>Sign In</span> : <span>Signing in...</span>}
+    </FullFlatButton>
+  );
+};
 
 export default function Login() {
   const [error, dispatch] = useFormState(login, undefined);
@@ -49,8 +62,9 @@ export default function Login() {
           <Link href="/auth/reset-password">Forgot password?</Link>
         </div>
       </div>
+      {error && <p className="text-red mt-1">{error}</p>}
       <div className="invisible md:visible mt-8">
-        <FullFlatButton type={"submit"}>Sign In</FullFlatButton>
+        <SubmitButton />
       </div>
     </form>
   );
