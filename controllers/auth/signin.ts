@@ -5,6 +5,7 @@ export async function signIn(username: string, password: string) {
       headers: {
         'Content-Type': 'application/json'
       },
+      cache: 'no-store',
       body: JSON.stringify({ username, password }),
     });
     const data = await result.json();
