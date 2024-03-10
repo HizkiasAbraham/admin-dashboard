@@ -1,6 +1,6 @@
 export async function signIn(username: string, password: string) {
   try {
-    let result = await fetch(`${process.env.API_SERVER_URL}/auth/login`, {
+    let result = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/auth/login`, {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
