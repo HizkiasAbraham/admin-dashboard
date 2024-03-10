@@ -1,12 +1,20 @@
+"use client";
+
 import bg from "@/public/images/auth-background.png";
 import Image from "next/image";
 import Link from "next/link";
+import { redirect } from "next/navigation";
+import { useEffect } from "react";
 
 export default function AuthLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  useEffect(() => {
+    const userInfo = localStorage.getItem("userInfo");
+    if (userInfo) redirect('/')
+  }, []);
   return (
     <div className="flex flex-col md:flex-row">
       <div className="flex-1 flex justify-center">
