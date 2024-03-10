@@ -1,7 +1,7 @@
 "use client";
 import { Icon } from "@/components/shared/icon";
-import { Spinner } from "@/components/shared/spinner";
 import Drawer from "@/components/subscriber/drawer";
+import { Loading } from "@/components/subscriber/loading";
 import { SideBar } from "@/components/subscriber/side-bar";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -44,9 +44,7 @@ export default function SubscriberLayout({
   }, []);
 
   return loading ? (
-    <div className="w-screen h-screen flex items-center justify-center">
-      <Spinner size="large" color="green" />
-    </div>
+   <Loading />
   ) : (
     <div>
       <Drawer isOpen={isOpen}>
