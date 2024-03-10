@@ -1,9 +1,11 @@
 "use client";
 import { Icon } from "@/components/shared/icon";
+import { Spinner } from "@/components/shared/spinner";
 import Drawer from "@/components/subscriber/drawer";
 import { SideBar } from "@/components/subscriber/side-bar";
 import Image from "next/image";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function SubscriberLayout({
   children,
@@ -11,7 +13,41 @@ export default function SubscriberLayout({
   children: React.ReactNode;
 }>) {
   const [isOpen, setIsOpen] = useState(false);
-  return (
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const router = useRouter();
+
+  const getUserInfo = async () => {
+    try {
+      setLoading(true);
+      const result = await fetch("/api/getUserInfo", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (result.status === 200) {
+        const userInfo = await result.json();
+        localStorage.setItem("userInfo", JSON.stringify(userInfo.data));
+        setLoading(false)
+      }
+      if (result.status === 401) {
+        localStorage.clear();
+        router.push("/");
+      }
+    } catch (error) {
+      setError("something went wrong...");
+    }
+  };
+
+  useEffect(() => {
+    getUserInfo();
+  }, []);
+
+  return loading ? (
+    <div className="w-screen h-screen flex items-center justify-center">
+      <Spinner size="large" color="green" />
+    </div>
+  ) : (
     <div>
       <Drawer isOpen={isOpen}>
         <SideBar setIsOpen={setIsOpen} />
