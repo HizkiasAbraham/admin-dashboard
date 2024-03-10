@@ -3,6 +3,7 @@ import { Icon } from "@/components/shared/icon";
 import Image from "next/image";
 import { SidebarProps } from "./types";
 import { useRouter, usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const subscriberPages = [
   { path: "dashboard", label: "Dashboard" },
@@ -13,6 +14,7 @@ const subscriberPages = [
 ];
 
 export function SideBar(props: SidebarProps) {
+  const [userData, setUserData] = useState<any>();
   const { setIsOpen } = props;
   const router = useRouter();
   const pathName = usePathname();
@@ -22,6 +24,12 @@ export function SideBar(props: SidebarProps) {
     if (setIsOpen) setIsOpen(false);
   };
   const isActive = (path: string) => pathName.includes(path);
+
+  useEffect(() => {
+    const userData = localStorage.getItem("userInfo");
+    if (!userData) return;
+    setUserData(JSON.parse(userData));
+  }, []);
 
   return (
     <div className="h-screen bg-green w-full flex flex-col text-white">
@@ -42,7 +50,7 @@ export function SideBar(props: SidebarProps) {
             <div className="flex flex-col">
               <p className="font-semibold md:font-medium text-xs">Account</p>
               <p className="font-bold md:font-semibold text-sm">
-                22 Upper Main St. Apt
+                {userData?.profile?.location}
               </p>
             </div>
             <div>
@@ -86,7 +94,7 @@ export function SideBar(props: SidebarProps) {
             src={"/images/user-account.png"}
             className="hidden md:block rounded"
           />
-          <p className="font-bold md:font-medium">Frank Castle</p>
+          <p className="font-bold md:font-medium">{userData?.profile?.name}</p>
         </div>
       </div>
     </div>
