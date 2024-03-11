@@ -3,5 +3,7 @@ export const getUserInfo = () =>
     headers: {
       "Content-Type": "application/json",
     },
-    cache: 'no-store'
-  })
+    cache: "no-store",
+  });
+
+export const logOut = () => fetch("/api/logout", { method: "Post" });
