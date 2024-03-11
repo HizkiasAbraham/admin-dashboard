@@ -13,7 +13,7 @@ export default function ClientLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [userData, setUserData] = useState<any>();
   const router = useRouter();
@@ -23,10 +23,10 @@ export default function ClientLayout({
     try {
       setLoading(true);
       const result = await getUserInfo();
-      if (result.status !== 200) return redirect("/");
+      if (result.status !== 200) return router.push("/");
       const userData = await result.json();
       const { role, profile } = userData.data;
-      console.log('user data', userData)
+      setUserData(userData.data)
       if (role !== "client") return router.push("/");
       localStorage.setItem("userInfo", JSON.stringify({ profile, role }));
       setLoading(false);
@@ -37,8 +37,8 @@ export default function ClientLayout({
   };
 
   useEffect(() => {
-    if (!!userData &&!pathname.startsWith("/client")) redirect("/");
-  }, [pathname]);
+    if (!!userData &&!pathname.startsWith("/client")) router.push("/");
+  }, [pathname, userData]);
 
   useEffect(() => {
     initialize();

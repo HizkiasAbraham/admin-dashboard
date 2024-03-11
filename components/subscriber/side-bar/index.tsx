@@ -4,6 +4,7 @@ import Image from "next/image";
 import { SidebarProps } from "./types";
 import { useRouter, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { logOut } from "@/utils/http-requests/auth";
 
 const subscriberPages = [
   { path: "dashboard", label: "Dashboard" },
@@ -24,6 +25,15 @@ export function SideBar(props: SidebarProps) {
     if (setIsOpen) setIsOpen(false);
   };
   const isActive = (path: string) => pathName.includes(path);
+
+  const doLogout = async () => {
+    try {
+      await logOut();
+      window.location.pathname = "/";
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
 
   useEffect(() => {
     const userData = localStorage.getItem("userInfo");
@@ -76,6 +86,16 @@ export function SideBar(props: SidebarProps) {
             )}
           </div>
         ))}
+        <div
+          onClick={doLogout}
+          className="flex h-10 items-center justify-between hover:bg-green-hover cursor-pointer"
+        >
+          <div className="pl-6">
+            <p className="font-bold text-base md:text-sm md:font-medium">
+              Logout
+            </p>
+          </div>
+        </div>
       </div>
       <div className="left-8 bottom-10 md:bottom-8 absolute">
         <div className="flex gap-5 md:gap-2 items-center cursor-pointer">

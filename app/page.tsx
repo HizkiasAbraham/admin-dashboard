@@ -5,14 +5,15 @@ import { redirect } from "next/navigation";
 
 const processRedirecting = async () => {
   let result: any;
-  
+
   try {
     const authToken = cookies().get("authToken");
     if (!authToken?.value) return redirect("/auth/login");
     result = await getUserInfo(authToken.value);
-  } catch (error) {}
-  
-  revalidatePath('/')
+  } catch (error) {
+  }
+
+  revalidatePath("/");
   const userRole = result?.role;
   if (userRole) return redirect(`/${userRole}/dashboard`);
 

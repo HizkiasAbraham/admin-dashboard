@@ -3,8 +3,6 @@
 import bg from "@/public/images/auth-background.png";
 import Image from "next/image";
 import Link from "next/link";
-import { redirect } from "next/navigation";
-import { useEffect } from "react";
 
 export default function AuthLayout({
   children,
@@ -33,11 +31,11 @@ export default function AuthLayout({
               <div className="flex justify-center md:justify-start text-grey font-medium text-sm">
                 <div className="flex gap-2">
                   <div>
-                    <a href="">Privacy Policy</a>
+                    <a href="/">Privacy Policy</a>
                   </div>
                   <div>|</div>
                   <div>
-                    <a href="">Terms of Use</a>
+                    <a href="/">Terms of Use</a>
                   </div>
                 </div>
               </div>

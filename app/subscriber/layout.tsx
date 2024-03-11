@@ -4,7 +4,7 @@ import Drawer from "@/components/subscriber/drawer";
 import { Loading } from "@/components/shared/loading";
 import { SideBar } from "@/components/subscriber/side-bar";
 import Image from "next/image";
-import { redirect, usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { getUserInfo } from "@/utils/http-requests/auth";
 
@@ -14,32 +14,35 @@ export default function SubscriberLayout({
   children: React.ReactNode;
 }>) {
   const [isOpen, setIsOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [userData, setUserData] = useState<any>()
+  const [loading, setLoading] = useState(true);
+  const [userData, setUserData] = useState<any>();
   const [error, setError] = useState("");
   const router = useRouter();
 
   const pathname = usePathname();
 
   const initialize = async () => {
+    setLoading(true);
+    let statusCode;
+    let userData;
     try {
-      setLoading(true);
       const result = await getUserInfo();
-      if (result.status !== 200) return redirect("/");
-      const userData = await result.json();
-      const { role, profile } = userData.data;
-      if (role !== "subscriber") return router.push("/");
-      localStorage.setItem("userInfo", JSON.stringify({ profile, role }));
-      setUserData({profile, role})
-      setLoading(false);
+      statusCode = result.status;
+      userData = await result.json();
     } catch (error) {
-      setError('Something went wrong')
-      setLoading(false)
+      setError("Something went wrong");
+      setLoading(false);
     }
+    if (statusCode !== 200) window.location.pathname = "/";
+    const { role, profile } = userData.data;
+    if (role !== "subscriber") return (window.location.pathname = "/");
+    localStorage.setItem("userInfo", JSON.stringify({ profile, role }));
+    setUserData({ profile, role });
+    setLoading(false);
   };
 
   useEffect(() => {
-    if (!!userData && !pathname.startsWith("/subscriber")) redirect("/");
+    if (!!userData && !pathname.startsWith("/subscriber")) router.push("/");
   }, [pathname]);
 
   useEffect(() => {
