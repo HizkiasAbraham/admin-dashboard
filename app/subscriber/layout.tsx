@@ -1,11 +1,12 @@
 "use client";
 import { Icon } from "@/components/shared/icon";
 import Drawer from "@/components/subscriber/drawer";
-import { Loading } from "@/components/subscriber/loading";
+import { Loading } from "@/components/shared/loading";
 import { SideBar } from "@/components/subscriber/side-bar";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { redirect, usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { getUserInfo } from "@/utils/http-requests/auth";
 
 export default function SubscriberLayout({
   children,
@@ -13,38 +14,40 @@ export default function SubscriberLayout({
   children: React.ReactNode;
 }>) {
   const [isOpen, setIsOpen] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [userData, setUserData] = useState<any>()
   const [error, setError] = useState("");
   const router = useRouter();
 
-  const getUserInfo = async () => {
+  const pathname = usePathname();
+
+  const initialize = async () => {
     try {
       setLoading(true);
-      const result = await fetch("/api/getUserInfo", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      if (result.status === 200) {
-        const userInfo = await result.json();
-        localStorage.setItem("userInfo", JSON.stringify(userInfo.data));
-        setLoading(false)
-      }
-      if (result.status === 401) {
-        localStorage.clear();
-        router.push("/");
-      }
+      const result = await getUserInfo();
+      if (result.status !== 200) return redirect("/");
+      const userData = await result.json();
+      const { role, profile } = userData.data;
+      if (role !== "subscriber") return router.push("/");
+      localStorage.setItem("userInfo", JSON.stringify({ profile, role }));
+      setUserData({profile, role})
+      setLoading(false);
     } catch (error) {
-      setError("something went wrong...");
+      setError('Something went wrong')
+      setLoading(false)
     }
   };
 
   useEffect(() => {
-    getUserInfo();
+    if (!!userData && !pathname.startsWith("/subscriber")) redirect("/");
+  }, [pathname]);
+
+  useEffect(() => {
+    initialize();
   }, []);
 
   return loading ? (
-   <Loading />
+    <Loading />
   ) : (
     <div>
       <Drawer isOpen={isOpen}>

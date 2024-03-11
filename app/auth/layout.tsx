@@ -11,10 +11,6 @@ export default function AuthLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  useEffect(() => {
-    const userInfo = localStorage.getItem("userInfo");
-    if (userInfo) redirect('/')
-  }, []);
   return (
     <div className="flex flex-col md:flex-row">
       <div className="flex-1 flex justify-center">

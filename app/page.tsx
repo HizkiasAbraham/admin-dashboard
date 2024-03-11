@@ -1,4 +1,5 @@
 import { getUserInfo } from "@/controllers/auth/getUserInfo";
+import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -11,10 +12,10 @@ const processRedirecting = async () => {
     result = await getUserInfo(authToken.value);
   } catch (error) {}
   
+  revalidatePath('/')
   const userRole = result?.role;
-  if (userRole === "subscriber") return redirect("/subscriber/dashboard");
-  if (userRole === "customer") return redirect("/client/dashboard");
-  
+  if (userRole) return redirect(`/${userRole}/dashboard`);
+
   return redirect("/auth/login");
 };
 
