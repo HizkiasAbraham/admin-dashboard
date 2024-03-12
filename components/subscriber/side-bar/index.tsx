@@ -114,7 +114,7 @@ export function SideBar(props: SidebarProps) {
             src={"/images/user-account.png"}
             className="hidden md:block rounded"
           />
-          <p className="font-bold md:font-medium">{userData?.profile?.name}</p>
+          <p className="font-bold md:font-medium md:w-36">{`${userData?.profile?.firstName} ${userData?.profile?.lastName}`}</p>
         </div>
       </div>
     </div>
