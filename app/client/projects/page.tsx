@@ -1,4 +1,4 @@
-import { ProjectsTable } from "@/components/client/tables/projects-table";
+import { ProjectsTable } from "@/src/components/client/tables/projects-table";
 import { projects } from "@/src/mockups/projects";
 
 export default function Projets() {

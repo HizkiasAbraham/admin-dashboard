@@ -1,9 +1,9 @@
 "use client";
-import Header from "@/components/client/header";
-import { BreadCrumb } from "@/components/shared/breadcrumb";
-import { OutlinedButton } from "@/components/shared/buttons/outlined-button";
-import { Icon } from "@/components/shared/icon";
-import { Loading } from "@/components/shared/loading";
+import Header from "@/src/components/client/header";
+import { BreadCrumb } from "@/src/components/shared/breadcrumb";
+import { OutlinedButton } from "@/src/components/shared/buttons/outlined-button";
+import { Icon } from "@/src/components/shared/icon";
+import { Loading } from "@/src/components/shared/loading";
 import { getUserInfo } from "@/src/utils/http-requests/auth";
 import { redirect, usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";

@@ -1,10 +1,10 @@
-import { Card, CardContent } from "@/components/shared/card";
-import { Icon } from "@/components/shared/icon";
-import { BreadCrumb } from "@/components/subscriber/bread-crumb";
-import { FarmDetailAnalytics } from "@/components/subscriber/farm-detail";
-import { SolarEnergyCredits } from "@/components/subscriber/solar-energy-credits";
-import { SolarEnergyCreditsUsageHistory } from "@/components/subscriber/solar-energy-credits-usage-table";
-import { TotalSavings } from "@/components/subscriber/total-savings";
+import { Card, CardContent } from "@/src/components/shared/card";
+import { Icon } from "@/src/components/shared/icon";
+import { BreadCrumb } from "@/src/components/subscriber/bread-crumb";
+import { FarmDetailAnalytics } from "@/src/components/subscriber/farm-detail";
+import { SolarEnergyCredits } from "@/src/components/subscriber/solar-energy-credits";
+import { SolarEnergyCreditsUsageHistory } from "@/src/components/subscriber/solar-energy-credits-usage-table";
+import { TotalSavings } from "@/src/components/subscriber/total-savings";
 import { solarEnergyCreditsHistory } from "@/src/mockups/solarEnergyCreditsUsage";
 
 export default function Dashboard() {

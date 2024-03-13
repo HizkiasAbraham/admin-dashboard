@@ -1,6 +1,6 @@
-import { Accordion } from "@/components/shared/accordion/indext";
-import { Card, CardContent } from "@/components/shared/card";
-import { BreadCrumb } from "@/components/subscriber/bread-crumb";
+import { Accordion } from "@/src/components/shared/accordion/indext";
+import { Card, CardContent } from "@/src/components/shared/card";
+import { BreadCrumb } from "@/src/components/subscriber/bread-crumb";
 import { faqs } from "@/src/mockups/faq";
 
 export default function Faqs() {

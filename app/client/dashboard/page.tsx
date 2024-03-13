@@ -1,6 +1,6 @@
-import { ProjectMap } from "@/components/client/dashboard-items/project-map";
-import { PortifoliosTable } from "@/components/client/tables/portifolios-table";
-import { ProjectsTable } from "@/components/client/tables/projects-table";
+import { ProjectMap } from "@/src/components/client/dashboard-items/project-map";
+import { PortifoliosTable } from "@/src/components/client/tables/portifolios-table";
+import { ProjectsTable } from "@/src/components/client/tables/projects-table";
 import { projects } from "@/src/mockups/projects";
 import { portifiolios } from "@/src/mockups/protfolios";
 

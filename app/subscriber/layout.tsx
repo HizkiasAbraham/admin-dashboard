@@ -1,8 +1,8 @@
 "use client";
-import { Icon } from "@/components/shared/icon";
-import Drawer from "@/components/subscriber/drawer";
-import { Loading } from "@/components/shared/loading";
-import { SideBar } from "@/components/subscriber/side-bar";
+import { Icon } from "@/src/components/shared/icon";
+import Drawer from "@/src/components/subscriber/drawer";
+import { Loading } from "@/src/components/shared/loading";
+import { SideBar } from "@/src/components/subscriber/side-bar";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";

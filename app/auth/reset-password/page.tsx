@@ -1,8 +1,8 @@
 "use client";
-import { FullOutlinedButton } from "@/components/shared/buttons/full-outlined-button";
-import { FullFlatButton } from "@/components/shared/buttons/full-solid-button";
-import { Icon } from "@/components/shared/icon";
-import { TextInput } from "@/components/shared/inputs/text-input";
+import { FullOutlinedButton } from "@/src/components/shared/buttons/full-outlined-button";
+import { FullFlatButton } from "@/src/components/shared/buttons/full-solid-button";
+import { Icon } from "@/src/components/shared/icon";
+import { TextInput } from "@/src/components/shared/inputs/text-input";
 import { useRouter } from "next/navigation";
 
 export default function ResetPassword() {

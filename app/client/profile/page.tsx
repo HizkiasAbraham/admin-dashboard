@@ -1,5 +1,5 @@
 "use client";
-import { SolidButton } from "@/components/shared/buttons/solid-button";
+import { SolidButton } from "@/src/components/shared/buttons/solid-button";
 import { logOut } from "@/src/utils/http-requests/auth";
 import { useRouter } from "next/navigation";
 

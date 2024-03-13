@@ -1,11 +1,11 @@
-import { ChurnWithChartsCard } from "@/components/client/churn-w-charts-card";
-import { ARDashboardItem } from "@/components/client/dashboard-items/ar";
-import { Revenue } from "@/components/client/dashboard-items/revenue";
-import { SubscribedAllocated } from "@/components/client/dashboard-items/subscribed-allocated";
-import { SubscriberCategorization } from "@/components/client/portifolio-detail/subscriber-categorization";
-import { BankedCredits } from "@/components/client/tables/banked-credits";
-import { ProjectsTable } from "@/components/client/tables/projects-table";
-import { VarianceAnalysis } from "@/components/client/variance-analysis";
+import { ChurnWithChartsCard } from "@/src/components/client/churn-w-charts-card";
+import { ARDashboardItem } from "@/src/components/client/dashboard-items/ar";
+import { Revenue } from "@/src/components/client/dashboard-items/revenue";
+import { SubscribedAllocated } from "@/src/components/client/dashboard-items/subscribed-allocated";
+import { SubscriberCategorization } from "@/src/components/client/portifolio-detail/subscriber-categorization";
+import { BankedCredits } from "@/src/components/client/tables/banked-credits";
+import { ProjectsTable } from "@/src/components/client/tables/projects-table";
+import { VarianceAnalysis } from "@/src/components/client/variance-analysis";
 import { bankedCredits } from "@/src/mockups/bank-credits";
 import { projects } from "@/src/mockups/projects";
 

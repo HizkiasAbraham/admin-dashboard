@@ -1,6 +1,6 @@
 "use client";
-import { FullFlatButton } from "@/components/shared/buttons/full-solid-button";
-import { Icon } from "@/components/shared/icon";
+import { FullFlatButton } from "@/src/components/shared/buttons/full-solid-button";
+import { Icon } from "@/src/components/shared/icon";
 import { useRouter } from "next/navigation";
 
 export default function PasswordChanged() {
