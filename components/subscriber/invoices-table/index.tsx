@@ -1,7 +1,7 @@
 import { Card, CardContent } from "@/components/shared/card";
 import { InvoicesTableProps } from "./types";
 import { OutlinedButton } from "@/components/shared/buttons/outlined-button";
-import { usd } from "@/utils/format-numbers";
+import { usd } from "@/src/utils/format-numbers";
 import { Icon } from "@/components/shared/icon";
 
 export function InvoicesTable(props: InvoicesTableProps) {

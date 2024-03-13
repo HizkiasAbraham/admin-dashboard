@@ -4,7 +4,7 @@ import { BreadCrumb } from "@/components/shared/breadcrumb";
 import { OutlinedButton } from "@/components/shared/buttons/outlined-button";
 import { Icon } from "@/components/shared/icon";
 import { Loading } from "@/components/shared/loading";
-import { getUserInfo } from "@/utils/http-requests/auth";
+import { getUserInfo } from "@/src/utils/http-requests/auth";
 import { redirect, usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -26,7 +26,7 @@ export default function ClientLayout({
       if (result.status !== 200) return router.push("/");
       const userData = await result.json();
       const { role, profile } = userData.data;
-      setUserData(userData.data)
+      setUserData(userData.data);
       if (role !== "client") return router.push("/");
       localStorage.setItem("userInfo", JSON.stringify({ profile, role }));
       setLoading(false);
@@ -37,7 +37,7 @@ export default function ClientLayout({
   };
 
   useEffect(() => {
-    if (!!userData &&!pathname.startsWith("/client")) router.push("/");
+    if (!!userData && !pathname.startsWith("/client")) router.push("/");
   }, [pathname, userData]);
 
   useEffect(() => {

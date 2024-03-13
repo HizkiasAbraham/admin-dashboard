@@ -1,18 +1,18 @@
-'use client';
-import { Card, CardContent, CardHeading } from '@/components/shared/card';
-import { Carousel } from '@/components/shared/crousel';
-import { TabSelector } from '@/components/shared/tab-selector';
-import { crouselItems } from '@/mockups/crousel-items';
-import { useState } from 'react';
+"use client";
+import { Card, CardContent, CardHeading } from "@/components/shared/card";
+import { Carousel } from "@/components/shared/crousel";
+import { TabSelector } from "@/components/shared/tab-selector";
+import { crouselItems } from "@/src/mockups/crousel-items";
+import { useState } from "react";
 
 const tabViewItems = [
-  { id: 'photo', label: 'Site Photos' },
-  { id: 'map', label: 'Map View' },
+  { id: "photo", label: "Site Photos" },
+  { id: "map", label: "Map View" },
 ];
 
 export function ProjectDetails() {
   const [currentTabViewItem, setCurrentTabviewItem] = useState(
-    tabViewItems[0].id,
+    tabViewItems[0].id
   );
 
   const getTabItems = (): any => ({

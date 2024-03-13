@@ -4,7 +4,7 @@ import Image from "next/image";
 import { SidebarProps } from "./types";
 import { useRouter, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { logOut } from "@/utils/http-requests/auth";
+import { logOut } from "@/src/utils/http-requests/auth";
 
 const subscriberPages = [
   { path: "dashboard", label: "Dashboard" },

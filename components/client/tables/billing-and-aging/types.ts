@@ -1,4 +1,4 @@
-import { billingAndAging } from '@/mockups/billingAndAging';
+import { billingAndAging } from "@/src/mockups/billingAndAging";
 
 export type BillingAndAgingInput = {
   data: [];

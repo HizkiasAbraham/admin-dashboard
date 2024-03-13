@@ -1,15 +1,15 @@
-'use client';
-import { SolidButton } from '@/components/shared/buttons/solid-button';
-import { Card, CardHeading, CardContent } from '@/components/shared/card';
-import { usd } from '@/utils/format-numbers';
-import { useState } from 'react';
+"use client";
+import { SolidButton } from "@/components/shared/buttons/solid-button";
+import { Card, CardHeading, CardContent } from "@/components/shared/card";
+import { usd } from "@/src/utils/format-numbers";
+import { useState } from "react";
 
 const arActionButtons = [
-  { label: 'Cur.' },
-  { label: '30d' },
-  { label: '60d' },
-  { label: '90d' },
-  { label: 'Total' },
+  { label: "Cur." },
+  { label: "30d" },
+  { label: "60d" },
+  { label: "90d" },
+  { label: "Total" },
 ];
 
 export function ARDashboardItem() {
@@ -29,9 +29,9 @@ export function ARDashboardItem() {
             <SolidButton
               onClick={() => setuCurrentActive(index)}
               key={index}
-              bg={currentActive === index ? 'yellow' : ''}
+              bg={currentActive === index ? "yellow" : ""}
             >
-              {' '}
+              {" "}
               {button.label}
             </SolidButton>
           ))}

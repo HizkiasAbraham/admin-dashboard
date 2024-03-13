@@ -1,4 +1,4 @@
-import { customers } from '@/mockups/customers';
+import { customers } from "@/src/mockups/customers";
 
 const item = customers[0];
 

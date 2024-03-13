@@ -5,7 +5,7 @@ import { FarmDetailAnalytics } from "@/components/subscriber/farm-detail";
 import { SolarEnergyCredits } from "@/components/subscriber/solar-energy-credits";
 import { SolarEnergyCreditsUsageHistory } from "@/components/subscriber/solar-energy-credits-usage-table";
 import { TotalSavings } from "@/components/subscriber/total-savings";
-import { solarEnergyCreditsHistory } from "@/mockups/solarEnergyCreditsUsage";
+import { solarEnergyCreditsHistory } from "@/src/mockups/solarEnergyCreditsUsage";
 
 export default function Dashboard() {
   return (

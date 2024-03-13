@@ -1,5 +1,5 @@
-'use client';
-import { usd } from '@/utils/format-numbers';
+"use client";
+import { usd } from "@/src/utils/format-numbers";
 import {
   ResponsiveContainer,
   LineChart as LChart,
@@ -7,13 +7,13 @@ import {
   Tooltip,
   Line,
   YAxis,
-} from 'recharts';
-import { chartColorVariants, ChartInput } from '../types';
+} from "recharts";
+import { chartColorVariants, ChartInput } from "../types";
 
 export function LineChart(props: ChartInput) {
   const { data, dataKeys, height } = props;
   return (
-    <div className={`w-full h-${height || '80'}`}>
+    <div className={`w-full h-${height || "80"}`}>
       <ResponsiveContainer width="100%" height="100%">
         <LChart
           width={500}
@@ -35,12 +35,12 @@ export function LineChart(props: ChartInput) {
           />
           <YAxis
             axisLine={false}
-            tickFormatter={(value) => usd().format(value / 100) + 'k'}
+            tickFormatter={(value) => usd().format(value / 100) + "k"}
           />
           <Tooltip />
           {dataKeys?.map((dataKey, index) => (
             <Line
-              type={'natural'}
+              type={"natural"}
               key={index}
               stroke={chartColorVariants[index]}
               strokeWidth={3}

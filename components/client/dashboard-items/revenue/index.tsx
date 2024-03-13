@@ -1,7 +1,7 @@
-import { Card, CardContent, CardHeading } from '@/components/shared/card';
-import { Icon } from '@/components/shared/icon';
-import { DatePicker } from '@/components/shared/inputs/date-picker';
-import { usd } from '@/utils/format-numbers';
+import { Card, CardContent, CardHeading } from "@/components/shared/card";
+import { Icon } from "@/components/shared/icon";
+import { DatePicker } from "@/components/shared/inputs/date-picker";
+import { usd } from "@/src/utils/format-numbers";
 
 export function Revenue() {
   return (

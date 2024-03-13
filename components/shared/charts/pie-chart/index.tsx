@@ -1,14 +1,14 @@
-'use client';
-import { getPercentage } from '@/utils/calculate-percentage';
-import { useEffect, useState } from 'react';
+"use client";
+import { getPercentage } from "@/src/utils/calculate-percentage";
+import { useEffect, useState } from "react";
 import {
   Cell,
   Pie,
   ResponsiveContainer,
   Sector,
   PieChart as PiChart,
-} from 'recharts';
-import { chartColorVariants, ChartInput } from '../types';
+} from "recharts";
+import { chartColorVariants, ChartInput } from "../types";
 
 const renderActiveShape = (props: any) => {
   const RADIAN = Math.PI / 180;
@@ -34,7 +34,7 @@ const renderActiveShape = (props: any) => {
   const my = cy + (outerRadius + 30) * sin;
   const ex = mx + (cos >= 0 ? 1 : -1) * 22;
   const ey = my;
-  const textAnchor = cos >= 0 ? 'start' : 'end';
+  const textAnchor = cos >= 0 ? "start" : "end";
 
   return (
     <g>
@@ -88,8 +88,8 @@ export function PieChart(props: ChartInput) {
 
   useEffect(() => {
     handleResize();
-    window.addEventListener('reset', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("reset", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const onPieEnter = (_: any, index: number) => {
@@ -134,7 +134,7 @@ export function PieChart(props: ChartInput) {
               <div className="p-3 flex gap-1 items-center">
                 <div className={`w-1/4 border-l-2 border-purple`}>
                   <p className="font-bold text-sm text black p-1">
-                    {getPercentage(data, d.value, 'value', 2)}
+                    {getPercentage(data, d.value, "value", 2)}
                   </p>
                 </div>
                 <div className="w-1/2 flex justify-start">

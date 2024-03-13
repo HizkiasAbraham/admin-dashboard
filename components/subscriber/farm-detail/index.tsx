@@ -3,8 +3,8 @@ import { Card } from "@/components/shared/card";
 import { LineChart } from "@/components/shared/charts/line-chart";
 import { Carousel } from "@/components/shared/crousel";
 import { TabSelector } from "@/components/shared/tab-selector";
-import { lineChartData } from "@/mockups/chart";
-import { crouselItems } from "@/mockups/crousel-items";
+import { lineChartData } from "@/src/mockups/chart";
+import { crouselItems } from "@/src/mockups/crousel-items";
 import { useState } from "react";
 
 const tabViewItems = [

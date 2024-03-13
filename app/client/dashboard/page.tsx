@@ -1,8 +1,8 @@
-import { ProjectMap } from '@/components/client/dashboard-items/project-map';
-import { PortifoliosTable } from '@/components/client/tables/portifolios-table';
-import { ProjectsTable } from '@/components/client/tables/projects-table';
-import { projects } from '@/mockups/projects';
-import { portifiolios } from '@/mockups/protfolios';
+import { ProjectMap } from "@/components/client/dashboard-items/project-map";
+import { PortifoliosTable } from "@/components/client/tables/portifolios-table";
+import { ProjectsTable } from "@/components/client/tables/projects-table";
+import { projects } from "@/src/mockups/projects";
+import { portifiolios } from "@/src/mockups/protfolios";
 
 export default function Dashboard() {
   return (

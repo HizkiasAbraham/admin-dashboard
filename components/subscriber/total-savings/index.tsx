@@ -1,7 +1,7 @@
 "use client";
 import { Card, CardContent, CardHeading } from "@/components/shared/card";
 import { LineChart } from "@/components/shared/charts/line-chart";
-import { lineChartData } from "@/mockups/chart";
+import { lineChartData } from "@/src/mockups/chart";
 
 export function TotalSavings() {
   return (

@@ -1,12 +1,12 @@
-import { Card, CardContent, CardHeading } from '@/components/shared/card';
-import { LineChart } from '@/components/shared/charts/line-chart';
-import { DatePicker } from '@/components/shared/inputs/date-picker';
-import { lineChartData } from '@/mockups/chart';
+import { Card, CardContent, CardHeading } from "@/components/shared/card";
+import { LineChart } from "@/components/shared/charts/line-chart";
+import { DatePicker } from "@/components/shared/inputs/date-picker";
 import {
   BankedCreditRowInput,
   BankedCreditsInput,
   TableHeaderInput,
-} from './types';
+} from "./types";
+import { lineChartData } from "@/src/mockups/chart";
 
 export function BankedCredits(props: BankedCreditsInput) {
   const { hostBankCredits, customerBankCredits } = props;
@@ -36,7 +36,7 @@ export function BankedCredits(props: BankedCreditsInput) {
             <LineChart
               data={lineChartData as []}
               height="full"
-              dataKeys={['pv', 'uv']}
+              dataKeys={["pv", "uv"]}
             />
           </div>
         </div>

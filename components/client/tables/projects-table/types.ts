@@ -1,4 +1,4 @@
-import { projects } from '@/mockups/projects';
+import { projects } from "@/src/mockups/projects";
 
 export type ProjectsTableInput = {
   data: [];

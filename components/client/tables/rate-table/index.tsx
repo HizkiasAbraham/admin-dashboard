@@ -1,11 +1,10 @@
-import { Card, CardContent, CardHeading } from '@/components/shared/card';
-import { LineChart } from '@/components/shared/charts/line-chart';
-import { DatePicker } from '@/components/shared/inputs/date-picker';
-import { SearchInput } from '@/components/shared/inputs/searchInput';
-import { Select } from '@/components/shared/inputs/select';
-import { lineChartData } from '@/mockups/chart';
-import { usd } from '@/utils/format-numbers';
-import { RateTableProp } from './types';
+import { Card, CardContent, CardHeading } from "@/components/shared/card";
+import { LineChart } from "@/components/shared/charts/line-chart";
+import { DatePicker } from "@/components/shared/inputs/date-picker";
+import { SearchInput } from "@/components/shared/inputs/searchInput";
+import { usd } from "@/src/utils/format-numbers";
+import { RateTableProp } from "./types";
+import { lineChartData } from "@/src/mockups/chart";
 
 export function RateTable(props: RateTableProp) {
   const { data } = props;
@@ -53,17 +52,17 @@ export function RateTable(props: RateTableProp) {
                       <p className="font-medium text-black text-sm">
                         {row?.residential
                           ? usd(5).format(row?.residential)
-                          : '-'}
+                          : "-"}
                       </p>
                     </div>
                     <div className="w-full flex justify-end items-center p-4">
                       <p className="font-medium text-black text-sm">
-                        {row?.smallCml ? usd(5).format(row?.smallCml) : '-'}
+                        {row?.smallCml ? usd(5).format(row?.smallCml) : "-"}
                       </p>
                     </div>
                     <div className="w-full flex justify-end items-center p-4 pr-8">
                       <p className="font-medium text-black text-sm">
-                        {row?.largeCml ? usd(5).format(row?.largeCml) : '-'}
+                        {row?.largeCml ? usd(5).format(row?.largeCml) : "-"}
                       </p>
                     </div>
                   </div>
@@ -74,7 +73,7 @@ export function RateTable(props: RateTableProp) {
                       <p className="font-bold text-purple text-sm">
                         {row?.blendedRate
                           ? usd(5).format(row?.blendedRate)
-                          : '-'}
+                          : "-"}
                       </p>
                     </div>
                   </div>
@@ -86,7 +85,7 @@ export function RateTable(props: RateTableProp) {
             <LineChart
               height="full"
               data={lineChartData as []}
-              dataKeys={['pv']}
+              dataKeys={["pv"]}
             />
           </div>
         </div>

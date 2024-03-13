@@ -1,19 +1,19 @@
-'use client';
+"use client";
 
-import { Card, CardContent, CardHeading } from '@/components/shared/card';
-import { Icon } from '@/components/shared/icon';
-import { DatePicker } from '@/components/shared/inputs/date-picker';
-import { SearchInput } from '@/components/shared/inputs/searchInput';
-import { Select } from '@/components/shared/inputs/select';
-import { usd } from '@/utils/format-numbers';
-import { useRouter } from 'next/navigation';
-import { ProjectsTableInput, TableRowInput } from './types';
+import { Card, CardContent, CardHeading } from "@/components/shared/card";
+import { Icon } from "@/components/shared/icon";
+import { DatePicker } from "@/components/shared/inputs/date-picker";
+import { SearchInput } from "@/components/shared/inputs/searchInput";
+import { Select } from "@/components/shared/inputs/select";
+import { usd } from "@/src/utils/format-numbers";
+import { useRouter } from "next/navigation";
+import { ProjectsTableInput, TableRowInput } from "./types";
 
 export function ProjectsTable(props: ProjectsTableInput) {
   const router = useRouter();
 
   const navigate = (projectId: string) =>
-    router.push('/client/projects/' + projectId);
+    router.push("/client/projects/" + projectId);
 
   const { data } = props;
   return (
@@ -30,8 +30,8 @@ export function ProjectsTable(props: ProjectsTableInput) {
             <div className="flex-auto flex justify-end gap-2">
               <Select
                 options={[
-                  { label: 'Portiffolio 1', value: 'er' },
-                  { label: 'Portiffolio 2', value: 'er' },
+                  { label: "Portiffolio 1", value: "er" },
+                  { label: "Portiffolio 2", value: "er" },
                 ]}
                 placeHolder="Portifolio"
               />
@@ -101,7 +101,7 @@ function TableRow(props: TableRowInput) {
   return (
     <div
       className="rounded-xl bg-white-smoke hover:bg-yellow flex mt-2 mb-4 gap-2 cursor-pointer"
-      onClick={() => navigate('projectId')}
+      onClick={() => navigate("projectId")}
     >
       <div className="w-full">
         <div className="flex flex-col gap-1 p-4">
@@ -113,7 +113,7 @@ function TableRow(props: TableRowInput) {
       </div>
       <div className="w-full flex justify-start items-center">
         <p className="font-bold text-black text-sm">
-          {row?.kwcSize?.toLocaleString('en-US')}
+          {row?.kwcSize?.toLocaleString("en-US")}
         </p>
       </div>
       <div className="w-full flex justify-start items-center">
@@ -161,7 +161,7 @@ function TableRow(props: TableRowInput) {
       </div>
       <div className="w-full flex justify-start items-center">
         <p className="font-bold text-black text-sm">
-          {row?.kwhProduction?.toLocaleString('en-US')}
+          {row?.kwhProduction?.toLocaleString("en-US")}
         </p>
       </div>
       <div className="w-full flex justify-start items-center">

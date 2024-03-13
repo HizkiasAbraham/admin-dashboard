@@ -1,4 +1,4 @@
-import { portifiolios } from '@/mockups/protfolios';
+import { portifiolios } from "@/src/mockups/protfolios";
 
 export type PortfoliosTableInput = {
   data: [];

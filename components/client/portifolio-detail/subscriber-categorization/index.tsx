@@ -1,6 +1,6 @@
-import { Card, CardContent, CardHeading } from '@/components/shared/card';
-import { PieChart } from '@/components/shared/charts/pie-chart';
-import { piechartData } from '@/mockups/chart';
+import { Card, CardContent, CardHeading } from "@/components/shared/card";
+import { PieChart } from "@/components/shared/charts/pie-chart";
+import { piechartData } from "@/src/mockups/chart";
 
 export function SubscriberCategorization() {
   return (

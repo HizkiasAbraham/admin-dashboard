@@ -6,7 +6,7 @@ import { SideBar } from "@/components/subscriber/side-bar";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { getUserInfo } from "@/utils/http-requests/auth";
+import { getUserInfo } from "@/src/utils/http-requests/auth";
 
 export default function SubscriberLayout({
   children,

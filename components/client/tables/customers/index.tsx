@@ -1,9 +1,9 @@
-import { OutlinedButton } from '@/components/shared/buttons/outlined-button';
-import { Card, CardContent } from '@/components/shared/card';
-import { SearchInput } from '@/components/shared/inputs/searchInput';
-import { Paginator } from '@/components/shared/paginator';
-import { usd } from '@/utils/format-numbers';
-import { CustomersInput, CustomersRow } from './types';
+import { OutlinedButton } from "@/components/shared/buttons/outlined-button";
+import { Card, CardContent } from "@/components/shared/card";
+import { SearchInput } from "@/components/shared/inputs/searchInput";
+import { Paginator } from "@/components/shared/paginator";
+import { usd } from "@/src/utils/format-numbers";
+import { CustomersInput, CustomersRow } from "./types";
 
 export function CustomersTable(props: CustomersInput) {
   const { data } = props;
@@ -27,7 +27,7 @@ export function CustomersTable(props: CustomersInput) {
           ))}
           <div className="mt-4">
             <Paginator alignment="end" />
-          </div>{' '}
+          </div>{" "}
         </div>
       </CardContent>
     </Card>
@@ -90,7 +90,7 @@ function TableRow(props: CustomersRow) {
         </div>
         <div className="w-full flex justify-end items-center border-r-2 border-inactive">
           <p className="font-medium text-black text-sm pr-4">
-            {row.historic12MonthKwh.toLocaleString('en-US')}
+            {row.historic12MonthKwh.toLocaleString("en-US")}
           </p>
         </div>
         <div className="w-full flex justify-end items-center pr-2">

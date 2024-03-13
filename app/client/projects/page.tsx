@@ -1,5 +1,5 @@
-import { ProjectsTable } from '@/components/client/tables/projects-table';
-import { projects } from '@/mockups/projects';
+import { ProjectsTable } from "@/components/client/tables/projects-table";
+import { projects } from "@/src/mockups/projects";
 
 export default function Projets() {
   return (

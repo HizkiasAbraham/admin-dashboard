@@ -1,8 +1,8 @@
-import { OutlinedButton } from '@/components/shared/buttons/outlined-button';
-import { Card, CardContent, CardHeading } from '@/components/shared/card';
-import { DatePicker } from '@/components/shared/inputs/date-picker';
-import { usd } from '@/utils/format-numbers';
-import { BillingAndAgingInput, RowInput } from './types';
+import { OutlinedButton } from "@/components/shared/buttons/outlined-button";
+import { Card, CardContent, CardHeading } from "@/components/shared/card";
+import { DatePicker } from "@/components/shared/inputs/date-picker";
+import { usd } from "@/src/utils/format-numbers";
+import { BillingAndAgingInput, RowInput } from "./types";
 
 export function BillingAndAging(props: BillingAndAgingInput) {
   const { data } = props;

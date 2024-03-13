@@ -1,17 +1,17 @@
-'use client';
-import { OutlinedButton } from '@/components/shared/buttons/outlined-button';
-import { Card, CardContent, CardHeading } from '@/components/shared/card';
-import { BarChart } from '@/components/shared/charts/bar-chart';
-import { DatePicker } from '@/components/shared/inputs/date-picker';
-import { TabSelector } from '@/components/shared/tab-selector';
-import { barChartData } from '@/mockups/chart';
-import { useState } from 'react';
-import { TabContentInput } from './types';
+"use client";
+import { OutlinedButton } from "@/components/shared/buttons/outlined-button";
+import { Card, CardContent, CardHeading } from "@/components/shared/card";
+import { BarChart } from "@/components/shared/charts/bar-chart";
+import { DatePicker } from "@/components/shared/inputs/date-picker";
+import { TabSelector } from "@/components/shared/tab-selector";
+import { useState } from "react";
+import { TabContentInput } from "./types";
+import { barChartData } from "@/src/mockups/chart";
 
 const churnGraphTabItems = [
-  { id: 'customerNumberKWC', label: 'Customer # and kWdc' },
-  { id: 'projectsComparision', label: 'Projects Comparision' },
-  { id: 'churnReasons', label: 'Churn Reasons' },
+  { id: "customerNumberKWC", label: "Customer # and kWdc" },
+  { id: "projectsComparision", label: "Projects Comparision" },
+  { id: "churnReasons", label: "Churn Reasons" },
 ];
 
 const TabItemComponents = {};
@@ -28,7 +28,7 @@ export function ChurnWithChartsCard() {
       <CardContent>
         <div className="mt-4 mb-4 flex items-center">
           <p className="text-2xl font-bold">
-            {(3250).toLocaleString('en-US')} kW <span>.</span>153 <span>.</span>
+            {(3250).toLocaleString("en-US")} kW <span>.</span>153 <span>.</span>
             2%
           </p>
         </div>
@@ -55,7 +55,7 @@ function TabContent(props: TabContentInput) {
         <BarChart
           data={barChartData as []}
           height="80"
-          dataKeys={['pv', 'uv']}
+          dataKeys={["pv", "uv"]}
         />
       </div>
     </div>

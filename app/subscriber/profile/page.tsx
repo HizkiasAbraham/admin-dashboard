@@ -6,7 +6,7 @@ import { TextInput } from "@/components/shared/inputs/text-input";
 import { ToggleSwitch } from "@/components/shared/inputs/toggle-switch";
 import { TabSelector } from "@/components/shared/tab-selector";
 import { BreadCrumb } from "@/components/subscriber/bread-crumb";
-import { profileDocuments } from "@/mockups/profile-documents";
+import { profileDocuments } from "@/src/mockups/profile-documents";
 import { useState } from "react";
 
 const tabItems = [

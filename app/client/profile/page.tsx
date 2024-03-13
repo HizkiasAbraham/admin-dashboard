@@ -1,6 +1,6 @@
 "use client";
 import { SolidButton } from "@/components/shared/buttons/solid-button";
-import { logOut } from "@/utils/http-requests/auth";
+import { logOut } from "@/src/utils/http-requests/auth";
 import { useRouter } from "next/navigation";
 
 export default function Project() {

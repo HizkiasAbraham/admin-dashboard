@@ -2,7 +2,7 @@ import { OutlinedButton } from "@/components/shared/buttons/outlined-button";
 import { Card, CardContent, CardHeading } from "@/components/shared/card";
 import { SocialEnergyCreditUsageTableProps } from "./types";
 import { Icon } from "@/components/shared/icon";
-import { usd } from "@/utils/format-numbers";
+import { usd } from "@/src/utils/format-numbers";
 import { Paginator } from "@/components/shared/paginator";
 
 export function SolarEnergyCreditsUsageHistory(
