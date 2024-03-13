@@ -1,8 +1,8 @@
 "use client";
-import { FullFlatButton } from "@/components/shared/buttons/full-solid-button";
-import { Icon } from "@/components/shared/icon";
-import { CheckBox } from "@/components/shared/inputs/check-box";
-import { TextInput } from "@/components/shared/inputs/text-input";
+import { FullFlatButton } from "@/src/components/shared/buttons/full-solid-button";
+import { Icon } from "@/src/components/shared/icon";
+import { CheckBox } from "@/src/components/shared/inputs/check-box";
+import { TextInput } from "@/src/components/shared/inputs/text-input";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { login } from "./actions";

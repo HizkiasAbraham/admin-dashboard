@@ -1,8 +1,8 @@
-import { Card, CardContent } from "@/components/shared/card";
-import { TextInput } from "@/components/shared/inputs/text-input";
-import { BreadCrumb } from "@/components/subscriber/bread-crumb";
-import { InvoicesTable } from "@/components/subscriber/invoices-table";
-import { invoicesData } from "@/mockups/invoices";
+import { Card, CardContent } from "@/src/components/shared/card";
+import { TextInput } from "@/src/components/shared/inputs/text-input";
+import { BreadCrumb } from "@/src/components/subscriber/bread-crumb";
+import { InvoicesTable } from "@/src/components/subscriber/invoices-table";
+import { invoicesData } from "@/src/mockups/invoices";
 
 export default function Billing() {
   return (

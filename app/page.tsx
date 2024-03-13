@@ -1,4 +1,3 @@
-import { getUserInfo } from "@/controllers/auth/getUserInfo";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
@@ -9,10 +8,18 @@ const processRedirecting = async () => {
   try {
     const authToken = cookies().get("authToken");
     if (!authToken?.value) return redirect("/auth/login");
-    result = await getUserInfo(authToken.value);
-  } catch (error) {
-  }
-
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_SERVER_URL}/auth/userInfo`,
+      {
+        method: "GET",
+        headers: {
+          authorization: authToken.value,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    result = await response.json();
+  } catch (error) {}
   revalidatePath("/");
   const userRole = result?.role;
   if (userRole) return redirect(`/${userRole}/dashboard`);

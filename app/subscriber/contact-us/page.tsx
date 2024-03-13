@@ -1,8 +1,8 @@
-import { FullFlatButton } from "@/components/shared/buttons/full-solid-button";
-import { Card, CardContent } from "@/components/shared/card";
-import { TextArea } from "@/components/shared/inputs/text-area";
-import { TextInput } from "@/components/shared/inputs/text-input";
-import { BreadCrumb } from "@/components/subscriber/bread-crumb";
+import { FullFlatButton } from "@/src/components/shared/buttons/full-solid-button";
+import { Card, CardContent } from "@/src/components/shared/card";
+import { TextArea } from "@/src/components/shared/inputs/text-area";
+import { TextInput } from "@/src/components/shared/inputs/text-input";
+import { BreadCrumb } from "@/src/components/subscriber/bread-crumb";
 
 export default function ContactUS() {
   return (

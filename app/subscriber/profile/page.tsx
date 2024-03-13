@@ -1,12 +1,12 @@
 "use client";
-import { FullFlatButton } from "@/components/shared/buttons/full-solid-button";
-import { Card, CardContent } from "@/components/shared/card";
-import { Icon } from "@/components/shared/icon";
-import { TextInput } from "@/components/shared/inputs/text-input";
-import { ToggleSwitch } from "@/components/shared/inputs/toggle-switch";
-import { TabSelector } from "@/components/shared/tab-selector";
-import { BreadCrumb } from "@/components/subscriber/bread-crumb";
-import { profileDocuments } from "@/mockups/profile-documents";
+import { FullFlatButton } from "@/src/components/shared/buttons/full-solid-button";
+import { Card, CardContent } from "@/src/components/shared/card";
+import { Icon } from "@/src/components/shared/icon";
+import { TextInput } from "@/src/components/shared/inputs/text-input";
+import { ToggleSwitch } from "@/src/components/shared/inputs/toggle-switch";
+import { TabSelector } from "@/src/components/shared/tab-selector";
+import { BreadCrumb } from "@/src/components/subscriber/bread-crumb";
+import { profileDocuments } from "@/src/mockups/profile-documents";
 import { useState } from "react";
 
 const tabItems = [

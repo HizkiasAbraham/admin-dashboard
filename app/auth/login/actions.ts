@@ -1,6 +1,5 @@
 "use server";
 
-import { signIn } from "@/controllers/auth/signin";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 
@@ -10,9 +9,20 @@ export async function login(_currentState: any, formData: FormData) {
   if (!username && !password) return "Please provide username and password";
   let authToken = "";
   try {
-    const result = await signIn(username as string, password as string);
+    const result = await fetch(
+      `${process.env.NEXT_PUBLIC_API_SERVER_URL}/auth/login`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        cache: "no-store",
+        body: JSON.stringify({ username, password }),
+      }
+    );
     if (result.status === 401) return "Invalid username or password";
-    authToken = result.data.token;
+    const data = await result.json();
+    authToken = data.token;
   } catch (error) {
     return "Something went wrong...";
   }
