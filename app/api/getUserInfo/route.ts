@@ -3,15 +3,13 @@ import { cookies } from "next/headers";
 export async function GET(): Promise<Response> {
   try {
     const authToken = cookies().get("authToken");
-    if (!authToken?.value)
-      return Response.json({ message: "unautorized" }, { status: 401 });
 
     const result = await fetch(
       `${process.env.NEXT_PUBLIC_API_SERVER_URL}/auth/userInfo`,
       {
         method: "GET",
         headers: {
-          authorization: authToken.value,
+          authorization: authToken?.value as string,
           "Content-Type": "application/json",
         },
       }
