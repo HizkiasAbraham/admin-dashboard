@@ -28,7 +28,7 @@ export async function login(_currentState: any, formData: FormData) {
   }
 
   const expires = new Date();
-  expires.setMonth(expires.getMonth() + 1);
+  expires.setHours(expires.getHours() + 1);
   cookies().set("authToken", authToken, {
     secure: process.env.NODE_ENV === "production",
     expires,
