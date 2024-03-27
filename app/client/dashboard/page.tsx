@@ -35,7 +35,7 @@ export default function Dashboard() {
               data={data.portfolios.map((d: any) => ({
                 ...portifiolios[0],
                 name: d.name,
-                numberOfProjects: d.projects.length
+                numberOfProjects: d.projects.length,
               }))}
             />
           )}
@@ -50,7 +50,29 @@ export default function Dashboard() {
               address: d.address,
               state: d.state,
               utility: d.utility,
-              // kwcSize: d.capacityKwDc,
+              kwcSize: d.capacityKwDc,
+              kwhProduction: d.p50kWh,
+              revenue: {
+                current: d.kpis?.[0]?.revenue || 0,
+                diffAmount: 0,
+                diff: 0,
+              },
+              subscription: {
+                current: d.kpis?.[0]?.subscription || 0,
+                diff: 0,
+              },
+              allocation: {
+                current: d.kpis?.[0]?.allocation || 0,
+                diff: 0,
+              },
+              creditRate: {
+                current: d.kpis?.[0]?.creditRate || 0,
+                diff: 0,
+              },
+              churn: {
+                current: d.churn_rate_kwh || 0,
+                diff: 0
+              },
             }))}
           />
         )}
