@@ -129,7 +129,7 @@ function TableRow(props: TableRowInput) {
       <div className="flex-1 flex justify-start items-center">
         <div className="flex flex-col gap-1">
           <p className="font-bold text-black text-sm">
-            {row?.subscription?.current} %
+            {row?.subscription?.current.toFixed(2)} %
           </p>
           {!!row.subscription.diff && (
             <div className="flex gap-1 items-center">
@@ -148,7 +148,7 @@ function TableRow(props: TableRowInput) {
       <div className="flex-1 flex justify-start items-center">
         <div className="flex flex-col gap-1">
           <p className="font-bold text-black text-sm">
-            {row?.allocation?.current} %
+            {row?.allocation?.current.toFixed(2)} %
           </p>
           {!!row.allocation.diff && (
             <div className="flex gap-1 items-center">
@@ -210,7 +210,7 @@ function TableRow(props: TableRowInput) {
       <div className="flex-1 flex justify-start items-center">
         <div className="flex flex-col gap-1">
           <p className="font-bold text-black text-sm">
-            {row?.churn?.current} %
+            {row?.churn?.current.toFixed(2)} %
           </p>
           {!!row.churn?.diff && (
             <div className="flex gap-1 items-center">
