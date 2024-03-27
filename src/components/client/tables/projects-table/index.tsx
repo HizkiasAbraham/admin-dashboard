@@ -16,6 +16,7 @@ export function ProjectsTable(props: ProjectsTableInput) {
     router.push("/client/projects/" + projectId);
 
   const { data } = props;
+
   return (
     <div className="w-max md:w-full">
       <Card>
@@ -55,40 +56,40 @@ export function ProjectsTable(props: ProjectsTableInput) {
 function TableHeader() {
   return (
     <div className="flex w-full gap-1">
-      <div className="w-full flex justify-start">
-        <p className="text-xs text-grey">Name and Address </p>
+      <div className="flex-1 flex justify-start">
+        <p className="text-xs text-grey pl-4">Name and Address </p>
       </div>
-      <div className="w-full flex justify-start">
+      <div className="flex-1 flex justify-start">
         <p className="text-xs text-grey">Size kWdc</p>
       </div>
-      <div className="w-full flex justify-start">
+      <div className="flex-1 flex justify-start">
         <p className="text-xs text-grey">State</p>
       </div>
-      <div className="w-full flex justify-start">
+      <div className="flex-1 flex justify-start">
         <p className="text-xs text-grey">Utility</p>
       </div>
-      <div className="w-full flex justify-start">
+      <div className="flex-1 flex justify-start">
         <p className="text-xs text-grey">Type</p>
       </div>
-      <div className="w-full flex justify-start">
+      <div className="flex-1 flex justify-start">
         <p className="text-xs text-grey">Subscription</p>
       </div>
-      <div className="w-full flex justify-start">
+      <div className="flex-1 flex justify-start">
         <p className="text-xs text-grey">Allocation</p>
       </div>
-      <div className="w-full flex justify-start">
+      <div className="flex-1 flex justify-start">
         <p className="text-xs text-grey">Production kWh</p>
       </div>
-      <div className="w-full flex justify-start">
+      <div className="flex-1 flex justify-start">
         <p className="text-xs text-grey">Revenue</p>
       </div>
-      <div className="w-full flex justify-start">
+      {/* <div className="flex-1 flex justify-start">
         <p className="text-xs text-grey">A/R</p>
-      </div>
-      <div className="w-full flex justify-start">
+      </div> */}
+      <div className="flex-1 flex justify-start">
         <p className="text-xs text-grey">Credit Rate</p>
       </div>
-      <div className="w-full flex justify-start">
+      <div className="flex-1 flex justify-start">
         <p className="text-xs text-grey">Churn</p>
       </div>
     </div>
@@ -103,85 +104,91 @@ function TableRow(props: TableRowInput) {
       className="rounded-xl bg-white-smoke hover:bg-yellow flex mt-2 mb-4 gap-2 cursor-pointer"
       onClick={() => navigate("projectId")}
     >
-      <div className="w-full">
-        <div className="flex flex-col gap-1 p-4">
-          <p className="font-bold text-black text-sm">{row?.name}</p>
-          <p className="font-medium text-grey text-xs truncate overflow-hidden w-12 xl:w-24">
+      <div className="flex-1">
+        <div className="flex flex-col gap-1 pt-4 pb-4">
+          <p className="font-bold text-black pl-4 text-sm">{row?.name}</p>
+          <p className="font-medium text-grey pl-4 text-xs truncate overflow-hidden w-12 xl:w-24">
             {row.address}
           </p>
         </div>
       </div>
-      <div className="w-full flex justify-start items-center">
+      <div className="flex-1 flex justify-start items-center">
         <p className="font-bold text-black text-sm">
           {row?.kwcSize?.toLocaleString("en-US")}
         </p>
       </div>
-      <div className="w-full flex justify-start items-center">
+      <div className="flex-1 flex justify-start items-center">
         <p className="font-bold text-black text-sm">{row.state}</p>
       </div>
-      <div className="w-full flex justify-start items-center">
+      <div className="flex-1 flex justify-start items-center">
         <p className="font-bold text-black text-sm">{row.utility}</p>
       </div>
-      <div className="w-full flex justify-start items-center">
+      <div className="flex-1 flex justify-start items-center">
         <p className="font-bold text-black text-sm">{row.type}</p>
       </div>
-      <div className="w-full flex justify-start items-center">
+      <div className="flex-1 flex justify-start items-center">
         <div className="flex flex-col gap-1">
           <p className="font-bold text-black text-sm">
-            {row?.subscription?.current} %
+            {row?.subscription?.current.toFixed(2)} %
           </p>
-          <div className="flex gap-1 items-center">
-            {row?.subscription?.diff > 0 ? (
-              <Icon.ArrowUpRight />
-            ) : (
-              <Icon.ArrowDownLeft />
-            )}
-            <p className="font-medium text-black text-xs">
-              {row?.subscription?.diff}%
-            </p>
-          </div>
+          {!!row.subscription.diff && (
+            <div className="flex gap-1 items-center">
+              {row?.subscription?.diff > 0 ? (
+                <Icon.ArrowUpRight />
+              ) : (
+                <Icon.ArrowDownLeft />
+              )}
+              <p className="font-medium text-black text-xs">
+                {row?.subscription?.diff}%
+              </p>
+            </div>
+          )}
         </div>
       </div>
-      <div className="w-full flex justify-start items-center">
+      <div className="flex-1 flex justify-start items-center">
         <div className="flex flex-col gap-1">
           <p className="font-bold text-black text-sm">
-            {row?.allocation?.current} %
+            {row?.allocation?.current.toFixed(2)} %
           </p>
-          <div className="flex gap-1 items-center">
-            {row?.allocation?.diff > 0 ? (
-              <Icon.ArrowUpRight />
-            ) : (
-              <Icon.ArrowDownLeft />
-            )}
-            <p className="font-medium text-black text-xs">
-              {row?.allocation?.diff}%
-            </p>
-          </div>
+          {!!row.allocation.diff && (
+            <div className="flex gap-1 items-center">
+              {row?.allocation?.diff > 0 ? (
+                <Icon.ArrowUpRight />
+              ) : (
+                <Icon.ArrowDownLeft />
+              )}
+              <p className="font-medium text-black text-xs">
+                {row?.allocation?.diff}%
+              </p>
+            </div>
+          )}
         </div>
       </div>
-      <div className="w-full flex justify-start items-center">
+      <div className="flex-1 flex justify-start items-center">
         <p className="font-bold text-black text-sm">
           {row?.kwhProduction?.toLocaleString("en-US")}
         </p>
       </div>
-      <div className="w-full flex justify-start items-center">
+      <div className="flex-1 flex justify-start items-center">
         <div className="flex flex-col gap-1">
           <p className="font-bold text-black text-sm">
             {usd().format(row?.revenue?.current)}
           </p>
-          <div className="flex gap-1 items-center">
-            {row?.revenue?.diff > 0 ? (
-              <Icon.ArrowUpRight />
-            ) : (
-              <Icon.ArrowDownLeft />
-            )}
-            <p className="font-medium text-black text-xs">
-              {usd().format(row?.revenue?.diffAmount)}({row?.revenue?.diff})%
-            </p>
-          </div>
+          {!!row.revenue.diff && (
+            <div className="flex gap-1 items-center">
+              {row?.revenue?.diff > 0 ? (
+                <Icon.ArrowUpRight />
+              ) : (
+                <Icon.ArrowDownLeft />
+              )}
+              <p className="font-medium text-black text-xs">
+                {usd().format(row?.revenue?.diffAmount)}({row?.revenue?.diff})%
+              </p>
+            </div>
+          )}
         </div>
       </div>
-      <div className="w-full flex justify-start items-center">
+      {/* <div className="flex-1 flex justify-start items-center">
         <div className="flex flex-col gap-1">
           <p className="font-bold text-black text-sm">
             {usd().format(row?.ar?.current)}
@@ -193,25 +200,30 @@ function TableRow(props: TableRowInput) {
             </p>
           </div>
         </div>
+      </div> */}
+      <div className="flex-1 flex justify-start items-center">
+        <p className="font-bold text-black text-sm">
+          {/* @ts-ignore */}
+          {row.creditRate?.current?.toFixed(2)}
+        </p>
       </div>
-      <div className="w-full flex justify-start items-center">
-        <p className="font-bold text-black text-sm">{row.creditRate}</p>
-      </div>
-      <div className="w-full flex justify-start items-center">
+      <div className="flex-1 flex justify-start items-center">
         <div className="flex flex-col gap-1">
           <p className="font-bold text-black text-sm">
-            {row?.churn?.current} %
+            {row?.churn?.current.toFixed(2)} %
           </p>
-          <div className="flex gap-1 items-center">
-            {row?.churn?.diff > 0 ? (
-              <Icon.ArrowUpRight />
-            ) : (
-              <Icon.ArrowDownLeft />
-            )}
-            <p className="font-medium text-black text-xs">
-              {row?.churn?.diff}%
-            </p>
-          </div>
+          {!!row.churn?.diff && (
+            <div className="flex gap-1 items-center">
+              {row?.churn?.diff > 0 ? (
+                <Icon.ArrowUpRight />
+              ) : (
+                <Icon.ArrowDownLeft />
+              )}
+              <p className="font-medium text-black text-xs">
+                {row?.churn?.diff}%
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </div>
