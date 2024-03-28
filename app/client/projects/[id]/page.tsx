@@ -1,3 +1,5 @@
+"use client";
+
 import { ChurnWithChartsCard } from "@/src/components/client/churn-w-charts-card";
 import { ARDashboardItem } from "@/src/components/client/dashboard-items/ar";
 import { Churn } from "@/src/components/client/dashboard-items/churn";
@@ -15,25 +17,40 @@ import { bankedCredits } from "@/src/mockups/bank-credits";
 import { billingAndAging } from "@/src/mockups/billingAndAging";
 import { customers } from "@/src/mockups/customers";
 import { rateTable } from "@/src/mockups/rate-table";
+import { getProjectById } from "@/src/utils/http-requests/client";
+import { useEffect, useState } from "react";
 
-export default function ProjectDetailPage() {
-  return (
+export default function ProjectDetailPage(props: { params: { id: string } }) {
+  const [data, setData] = useState<any>();
+  const [error, setError] = useState("");
+
+  const fetchProjctDetail = async () => {
+    try {
+      const result = await getProjectById(props.params.id);
+      const { data } = await result.json();
+      setData(data.project);
+      console.log(data.project);
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    fetchProjctDetail();
+  }, []);
+
+  return !!data ? (
     <>
       <div className="flex flex-col md:flex-row gap-3">
         <div className="flex-1">
-          <SubscribedAllocated />
+          <SubscribedAllocated project={data} />
         </div>
         <div className="flex-1">
-          <Revenue />
+          <Revenue project={data}/>
         </div>
         <div className="flex-1">
-          <ARDashboardItem />
+          <Churn project={data} />
         </div>
       </div>
       <div className="flex flex-col md:flex-row mt-3 gap-3">
-        <div className="flex-1">
-          <Churn />
-        </div>
         <div className="flex-1">
           <CreditRate />
         </div>
@@ -43,7 +60,7 @@ export default function ProjectDetailPage() {
       </div>
       <div className="flex flex-col md:flex-row mt-3 gap-3">
         <div className="flex-1">
-          <ProjectDetails />
+          <ProjectDetails project={data} />
         </div>
       </div>
       <div className="flex flex-col md:flex-row mt-3 gap-3">
@@ -74,5 +91,7 @@ export default function ProjectDetailPage() {
         <CustomersTable data={customers as []} />
       </div>
     </>
+  ) : (
+    <></>
   );
 }

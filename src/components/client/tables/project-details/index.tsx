@@ -4,17 +4,19 @@ import { Carousel } from "@/src/components/shared/crousel";
 import { TabSelector } from "@/src/components/shared/tab-selector";
 import { crouselItems } from "@/src/mockups/crousel-items";
 import { useState } from "react";
+import { ProjectDetailProps } from "./types";
+import moment from "moment";
 
 const tabViewItems = [
   { id: "photo", label: "Site Photos" },
   { id: "map", label: "Map View" },
 ];
 
-export function ProjectDetails() {
+export function ProjectDetails(props: ProjectDetailProps) {
   const [currentTabViewItem, setCurrentTabviewItem] = useState(
     tabViewItems[0].id
   );
-
+  const { project } = props;
   const getTabItems = (): any => ({
     photo: <Carousel items={crouselItems} autoSlide={false} />,
     map: (
@@ -40,13 +42,13 @@ export function ProjectDetails() {
               <div className="w-full bg-light-grey border-2 border-inactive rounded-xl">
                 <div className="p-2">
                   <p className="font-medium text-xs text-grey">Name</p>
-                  <p className="font-medium text-black text-sm">Main Project</p>
+                  <p className="font-medium text-black text-sm">{project?.name}</p>
                 </div>
               </div>
               <div className="w-full bg-light-grey border-2 border-inactive rounded-xl">
                 <div className="p-2">
-                  <p className="font-medium text-xs text-grey">Project Type</p>
-                  <p className="font-medium text-black text-sm">NEM</p>
+                  <p className="font-medium text-xs text-grey">Credit Type</p>
+                  <p className="font-medium text-black text-sm">{project?.creditType}</p>
                 </div>
               </div>
             </div>
@@ -55,7 +57,7 @@ export function ProjectDetails() {
                 <div className="p-2">
                   <p className="font-medium text-xs text-grey">Address</p>
                   <p className="font-medium text-black text-sm">
-                    38507 Kihn Mountains, Miami
+                    {project?.address}
                   </p>
                 </div>
               </div>
@@ -72,31 +74,13 @@ export function ProjectDetails() {
               <div className="w-full bg-light-grey border-2 border-inactive rounded-xl">
                 <div className="p-2">
                   <p className="font-medium text-xs text-grey">Utility</p>
-                  <p className="font-medium text-black text-sm">NYSEG</p>
+                  <p className="font-medium text-black text-sm">{project?.utility}</p>
                 </div>
               </div>
               <div className="w-full bg-light-grey border-2 border-inactive rounded-xl">
                 <div className="p-2">
                   <p className="font-medium text-xs text-grey">COD Date</p>
-                  <p className="font-medium text-black text-sm">Aug 23, 2023</p>
-                </div>
-              </div>
-            </div>
-            <div className="flex gap-4 mt-6 flex-col md:flex-row">
-              <div className="w-full bg-light-grey border-2 border-inactive rounded-xl">
-                <div className="p-2">
-                  <p className="font-medium text-xs text-grey">Address</p>
-                  <p className="font-medium text-black text-sm">
-                    38507 Kihn Mountains, Miami
-                  </p>
-                </div>
-              </div>
-              <div className="w-full bg-light-grey border-2 border-inactive rounded-xl">
-                <div className="p-2">
-                  <p className="font-medium text-xs text-grey">
-                    Project Subscriber Discount
-                  </p>
-                  <p className="font-medium text-black text-sm">5%</p>
+                  <p className="font-medium text-black text-sm">{moment(project?.startDate).format("MMM D, YYYY")}</p>
                 </div>
               </div>
             </div>
@@ -104,7 +88,7 @@ export function ProjectDetails() {
               <div className="w-full bg-light-grey border-2 border-inactive rounded-xl">
                 <div className="p-2">
                   <p className="font-medium text-xs text-grey">System Size</p>
-                  <p className="font-medium text-black text-sm">7,000 kWdc</p>
+                  <p className="font-medium text-black text-sm">{project?.capacityKwDc?.toLocaleString("en-us")} kWdc</p>
                 </div>
               </div>
               <div className="w-full bg-light-grey border-2 border-inactive rounded-xl">
@@ -113,7 +97,7 @@ export function ProjectDetails() {
                     Estimated P50 Production
                   </p>
                   <p className="font-medium text-black text-sm">
-                    9,975,000 kWh
+                    {project.p50kWh?.toLocaleString("en-us")} kWh
                   </p>
                 </div>
               </div>

@@ -102,7 +102,7 @@ function TableRow(props: TableRowInput) {
   return (
     <div
       className="rounded-xl bg-white-smoke hover:bg-yellow flex mt-2 mb-4 gap-2 cursor-pointer"
-      onClick={() => navigate("projectId")}
+      onClick={() => navigate(row?.id)}
     >
       <div className="flex-1">
         <div className="flex flex-col gap-1 pt-4 pb-4">
