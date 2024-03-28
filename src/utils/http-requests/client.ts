@@ -1,5 +1,7 @@
+import { fetchClient } from "./base";
+
 export const getDashboardData = () =>
-  fetch("/api/client/dashboard", {
+  fetchClient("/api/client/dashboard", {
     headers: {
       "Content-Type": "application/json",
     },
