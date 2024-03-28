@@ -7,3 +7,10 @@ export const getDashboardData = () =>
     },
     cache: "no-store",
   });
+
+export const getProjectById = (id: string) =>
+  fetch(`/api/client/projects/${id}`, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
