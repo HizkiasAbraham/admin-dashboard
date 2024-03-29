@@ -1,5 +1,7 @@
+import { fetchClient } from "./base";
+
 export const getUserInfo = () =>
-  fetch("/api/getUserInfo", {
+  fetchClient("/api/getUserInfo", {
     headers: {
       "Content-Type": "application/json",
     },
