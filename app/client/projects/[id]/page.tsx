@@ -28,8 +28,7 @@ export default function ProjectDetailPage(props: { params: { id: string } }) {
     try {
       const result = await getProjectById(props.params.id);
       const { data } = await result.json();
-      setData(data.project);
-      console.log(data.project);
+      setData(data);
     } catch (error) {}
   };
 
@@ -41,13 +40,13 @@ export default function ProjectDetailPage(props: { params: { id: string } }) {
     <>
       <div className="flex flex-col md:flex-row gap-3">
         <div className="flex-1">
-          <SubscribedAllocated project={data} />
+          <SubscribedAllocated project={data.project} />
         </div>
         <div className="flex-1">
-          <Revenue project={data}/>
+          <Revenue project={data.project}/>
         </div>
         <div className="flex-1">
-          <Churn project={data} />
+          <Churn project={data.project} />
         </div>
       </div>
       <div className="flex flex-col md:flex-row mt-3 gap-3">
@@ -60,7 +59,7 @@ export default function ProjectDetailPage(props: { params: { id: string } }) {
       </div>
       <div className="flex flex-col md:flex-row mt-3 gap-3">
         <div className="flex-1">
-          <ProjectDetails project={data} />
+          <ProjectDetails project={data.project} />
         </div>
       </div>
       <div className="flex flex-col md:flex-row mt-3 gap-3">
@@ -76,7 +75,7 @@ export default function ProjectDetailPage(props: { params: { id: string } }) {
         />
       </div>
       <div className="mt-3">
-        <SubscriberCategorization />
+        <SubscriberCategorization data={data.subscriberCategorization} />
       </div>
       <div className="mt-3">
         <RateTable data={rateTable as []} />
