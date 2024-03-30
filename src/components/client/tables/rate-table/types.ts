@@ -1,3 +1,3 @@
 export type RateTableProp = {
-  data: [];
+  data: any;
 };

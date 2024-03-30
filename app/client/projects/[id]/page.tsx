@@ -78,7 +78,7 @@ export default function ProjectDetailPage(props: { params: { id: string } }) {
         <SubscriberCategorization data={data.subscriberCategorization} />
       </div>
       <div className="mt-3">
-        <RateTable data={rateTable as []} />
+        <RateTable data={data} />
       </div>
       <div className="mt-3">
         <BillingAndAging data={billingAndAging as []} />
