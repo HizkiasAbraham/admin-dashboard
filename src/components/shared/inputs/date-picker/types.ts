@@ -1,4 +1,4 @@
 export type DatePickerInput = {
   width?: string;
-  onDatePicked?: Function;
+  onDatePicked?: any;
 };

@@ -46,6 +46,7 @@ export default function Dashboard() {
           <ProjectsTable
             data={data.projects.map((d: any) => ({
               ...projects[0],
+              id: d._id,
               name: d.name,
               address: d.address,
               state: d.state,

@@ -1,5 +1,6 @@
 export const projects = [
   {
+    id: "",
     name: 'Main Project',
     address: '38507 Kihn Mountains, New York',
     kwcSize: 7000,
