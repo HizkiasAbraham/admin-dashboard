@@ -172,7 +172,7 @@ function TableRow(props: TableRowInput) {
       <div className="flex-1 flex justify-start items-center">
         <div className="flex flex-col gap-1">
           <p className="font-bold text-black text-sm">
-            {usd().format(row?.revenue?.current)}
+            {usd(2).format(row?.revenue?.current)}
           </p>
           {!!row.revenue.diff && (
             <div className="flex gap-1 items-center">
