@@ -23,9 +23,7 @@ export default function ClientLayout({
     try {
       setLoading(true);
       const result = await getUserInfo();
-      if (result.status !== 200) return router.push("/");
-      const userData = await result.json();
-      const { role, profile } = userData.data;
+      const { role, profile } = result.data;
       setUserData(userData.data);
       if (role !== "client") return router.push("/");
       localStorage.setItem("userInfo", JSON.stringify({ profile, role }));

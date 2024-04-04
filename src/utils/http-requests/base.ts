@@ -1,6 +1,6 @@
 import { logOut } from "./auth";
 
-export const fetchClient = (url: string, opts: {}) => {
+export const fetchClient = (url: string, opts: {} = {}) => {
   return fetch(url, {
     ...opts,
     headers: {
@@ -11,6 +11,8 @@ export const fetchClient = (url: string, opts: {}) => {
       await logOut();
       window.location.href = "/auth/login";
     }
-    return await res.json();
+  
+    const data =  await res.json();
+    return { ...data, status: res.status}
   });
 };
