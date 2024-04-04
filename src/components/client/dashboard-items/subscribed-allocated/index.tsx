@@ -15,7 +15,7 @@ export function SubscribedAllocated(props: DashboardItemProps) {
               <div className="p-2 flex flex-col">
                 <div className="w-full border-l-2 border-green flex">
                   <p className="font-bold text-sm text-black ml-1">
-                    {project?.kpis?.[0]?.subscription.toFixed(2)}%
+                    {project?.kpiData?.subscription.toFixed(2)}%
                   </p>
                 </div>
                 <p className="font-medium text-xs text-grey mt-1">Subscribed</p>
@@ -25,7 +25,7 @@ export function SubscribedAllocated(props: DashboardItemProps) {
               <div className="p-2 flex flex-col">
                 <div className="w-full border-l-2 border-yellow flex">
                   <p className="font-bold text-sm text-black ml-1">
-                    {project?.kpis?.[0]?.allocation.toFixed(2)}%
+                    {project?.kpiData?.allocation.toFixed(2)}%
                   </p>
                 </div>
                 <p className="font-medium text-xs text-grey mt-1">Allocated</p>

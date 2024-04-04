@@ -40,7 +40,6 @@ export function ProjectsTable(props: ProjectsTableInput) {
   return (
     <div className="w-max md:w-full">
       <Card>
-        {loading && <IndeterminateProgress />}
         <CardHeading title="Projects">
           <DatePicker width="w-48" onDatePicked={setBillingPeriod} />
         </CardHeading>
@@ -62,6 +61,7 @@ export function ProjectsTable(props: ProjectsTableInput) {
               <Select options={[]} placeHolder="Utility" />
             </div>
           </div>
+          {loading && <IndeterminateProgress />}
           <div className="mt-2 mb-2">
             <TableHeader />
             {data.map((row, index) => (
@@ -203,7 +203,8 @@ function TableRow(props: any) {
                 <Icon.ArrowDownLeft />
               )}
               <p className="font-medium text-black text-xs">
-                {usd().format(kpiData?.revenueDiff?.change)}({kpiData?.revenueDiff?.diff.toFixed(2)})%
+                {usd().format(kpiData?.revenueDiff?.change)}(
+                {kpiData?.revenueDiff?.diff.toFixed(2)})%
               </p>
             </div>
           )}

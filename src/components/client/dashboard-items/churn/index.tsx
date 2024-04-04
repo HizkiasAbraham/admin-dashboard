@@ -7,18 +7,24 @@ import { DashboardItemProps } from "../types";
 
 export function Churn(props: DashboardItemProps) {
   const [currentActive, setCurrentActive] = useState<number>(0);
-  const { project } = props;
+  const { project, onChange } = props;
 
   const churnActionButtons = [
-    { label: "Customer #", value: `${project?.churn_rate_customer?.toFixed(2)}%` },
-    { label: "kWdc", value:`${project?.churn_rate_kwh?.toFixed(2)} kWdc` },
+    {
+      label: "Customer #",
+      value: `${project?.churn_rate_customer?.toFixed(2)}%`,
+    },
+    { label: "kWdc", value: `${project?.churn_rate_kwh?.toFixed(2)} kWdc` },
     // { label: "Project%" },
   ];
-console.log("the project", project)
+  console.log("the project", project);
   return (
     <Card>
       <CardHeading title="Churn">
-        <DatePicker width="w-48" />
+        <DatePicker
+          width="w-48"
+          onDatePicked={(data: string) => onChange(data)}
+        />
       </CardHeading>
       <CardContent>
         <div className="mt-4 mb-4">

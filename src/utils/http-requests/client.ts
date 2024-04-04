@@ -9,5 +9,5 @@ export const getProjects = (billingPeriod: string) => {
   return fetchClient(`/api/client/projects?billingPeriod=${billingPeriod}`);
 };
 
-export const getProjectById = (id: string) =>
-  fetchClient(`/api/client/projects/${id}`);
+export const getProjectById = (id: string, billingPeriod: string) =>
+  fetchClient(`/api/client/projects/${id}?billingPeriod=${billingPeriod}`);
