@@ -11,8 +11,8 @@ export default function Projets() {
   const fetchDashboardData = async () => {
     try {
       const result = await getDashboardData();
-      const jsonData = await result.json();
-      setData(jsonData.data);
+      // const jsonData = await result.json();
+      // setData(jsonData.data);
     } catch (error) {}
   };
 

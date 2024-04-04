@@ -8,20 +8,41 @@ import { Select } from "@/src/components/shared/inputs/select";
 import { usd } from "@/src/utils/format-numbers";
 import { useRouter } from "next/navigation";
 import { ProjectsTableInput, TableRowInput } from "./types";
+import { useEffect, useState } from "react";
+import { IndeterminateProgress } from "@/src/components/shared/indeterminate-progress";
+import { getProjects } from "@/src/utils/http-requests/client";
 
 export function ProjectsTable(props: ProjectsTableInput) {
+  const [data, setData] = useState(props.data);
+  const [loading, setLoading] = useState(false);
+  const [billingPeriod, setBillingPeriod] = useState<string>("");
   const router = useRouter();
+
+  const fetchProjectsData = async () => {
+    try {
+      setLoading(true);
+      const result = await getProjects(billingPeriod);
+      setData(result.data?.projects);
+      setLoading(false);
+    } catch (error) {}
+  };
+
+  // Todo, add portfolio, state, utility and crdit type filters
+  useEffect(() => {
+    if (billingPeriod) {
+      fetchProjectsData();
+    }
+  }, [billingPeriod]);
 
   const navigate = (projectId: string) =>
     router.push("/client/projects/" + projectId);
 
-  const { data } = props;
-
   return (
     <div className="w-max md:w-full">
       <Card>
+        {loading && <IndeterminateProgress />}
         <CardHeading title="Projects">
-          <DatePicker width="w-48" />
+          <DatePicker width="w-48" onDatePicked={setBillingPeriod} />
         </CardHeading>
         <CardContent>
           <div className="flex pt-2 pb-2">
@@ -96,13 +117,13 @@ function TableHeader() {
   );
 }
 
-function TableRow(props: TableRowInput) {
+function TableRow(props: any) {
   const { row, navigate } = props;
-
+  const { kpiData } = row;
   return (
     <div
       className="rounded-xl bg-white-smoke hover:bg-yellow flex mt-2 mb-4 gap-2 cursor-pointer"
-      onClick={() => navigate(row?.id)}
+      onClick={() => navigate(row?._id)}
     >
       <div className="flex-1">
         <div className="flex flex-col gap-1 pt-4 pb-4">
@@ -124,22 +145,22 @@ function TableRow(props: TableRowInput) {
         <p className="font-bold text-black text-sm">{row.utility}</p>
       </div>
       <div className="flex-1 flex justify-start items-center">
-        <p className="font-bold text-black text-sm">{row.type}</p>
+        <p className="font-bold text-black text-sm">{row.creditType}</p>
       </div>
       <div className="flex-1 flex justify-start items-center">
         <div className="flex flex-col gap-1">
           <p className="font-bold text-black text-sm">
-            {row?.subscription?.current.toFixed(2)} %
+            {kpiData?.subscription?.toFixed(2)} %
           </p>
-          {!!row.subscription.diff && (
+          {!!kpiData?.subscriptionDiff?.diff && (
             <div className="flex gap-1 items-center">
-              {row?.subscription?.diff > 0 ? (
+              {kpiData?.subscriptionDiff?.diff > 0 ? (
                 <Icon.ArrowUpRight />
               ) : (
                 <Icon.ArrowDownLeft />
               )}
               <p className="font-medium text-black text-xs">
-                {row?.subscription?.diff}%
+                {kpiData?.subscriptionDiff?.diff}%
               </p>
             </div>
           )}
@@ -148,17 +169,17 @@ function TableRow(props: TableRowInput) {
       <div className="flex-1 flex justify-start items-center">
         <div className="flex flex-col gap-1">
           <p className="font-bold text-black text-sm">
-            {row?.allocation?.current.toFixed(2)} %
+            {kpiData?.allocation?.toFixed(2)} %
           </p>
-          {!!row.allocation.diff && (
+          {!!kpiData.allocationDiff?.diff && (
             <div className="flex gap-1 items-center">
-              {row?.allocation?.diff > 0 ? (
+              {kpiData?.allocationDiff?.diff > 0 ? (
                 <Icon.ArrowUpRight />
               ) : (
                 <Icon.ArrowDownLeft />
               )}
               <p className="font-medium text-black text-xs">
-                {row?.allocation?.diff}%
+                {kpiData?.allocationDiff?.diff}%
               </p>
             </div>
           )}
@@ -166,23 +187,23 @@ function TableRow(props: TableRowInput) {
       </div>
       <div className="flex-1 flex justify-start items-center">
         <p className="font-bold text-black text-sm">
-          {row?.kwhProduction?.toLocaleString("en-US")}
+          {row?.p50kWh?.toLocaleString("en-US")}
         </p>
       </div>
       <div className="flex-1 flex justify-start items-center">
         <div className="flex flex-col gap-1">
           <p className="font-bold text-black text-sm">
-            {usd(2).format(row?.revenue?.current)}
+            {usd(2).format(kpiData?.revenue)}
           </p>
-          {!!row.revenue.diff && (
+          {!!kpiData.revenueDiff?.change && (
             <div className="flex gap-1 items-center">
-              {row?.revenue?.diff > 0 ? (
+              {kpiData?.revenueDiff?.change > 0 ? (
                 <Icon.ArrowUpRight />
               ) : (
                 <Icon.ArrowDownLeft />
               )}
               <p className="font-medium text-black text-xs">
-                {usd().format(row?.revenue?.diffAmount)}({row?.revenue?.diff})%
+                {usd().format(kpiData?.revenueDiff?.change)}({kpiData?.revenueDiff?.diff.toFixed(2)})%
               </p>
             </div>
           )}
@@ -204,13 +225,13 @@ function TableRow(props: TableRowInput) {
       <div className="flex-1 flex justify-start items-center">
         <p className="font-bold text-black text-sm">
           {/* @ts-ignore */}
-          {row.creditRate?.current?.toFixed(2)}
+          {kpiData.creditRate?.toFixed(2)}
         </p>
       </div>
       <div className="flex-1 flex justify-start items-center">
         <div className="flex flex-col gap-1">
           <p className="font-bold text-black text-sm">
-            {row?.churn?.current.toFixed(2)} %
+            {row?.churn_rate_customer?.toFixed(2)} %
           </p>
           {!!row.churn?.diff && (
             <div className="flex gap-1 items-center">
