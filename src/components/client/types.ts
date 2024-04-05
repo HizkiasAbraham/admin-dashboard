@@ -24,10 +24,12 @@ type KpiData = {
   revenue?: number;
   allocation?: number;
   creditRate?: number;
+  ar?: number;
   totalKwhAllocation?: number;
   subscriptionDiff?: DiffData;
   allocationDiff?: DiffData;
   revenueDiff?: DiffData;
+  arDiff?: DiffData;
   billingPeriod?: string;
 };
 

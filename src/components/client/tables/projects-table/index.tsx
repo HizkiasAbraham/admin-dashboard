@@ -11,10 +11,11 @@ import { ProjectsTableInput, TableRowInput } from "./types";
 import { useEffect, useState } from "react";
 import { IndeterminateProgress } from "@/src/components/shared/indeterminate-progress";
 import { getProjects } from "@/src/utils/http-requests/client";
+import { Project } from "../../types";
 
 export function ProjectsTable(props: ProjectsTableInput) {
-  const [data, setData] = useState(props.data);
-  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState<Project[]>(props.data);
+  const [loading, setLoading] = useState<boolean>(false);
   const [billingPeriod, setBillingPeriod] = useState<string>("");
   const router = useRouter();
 
@@ -107,9 +108,9 @@ function TableHeader() {
       <div className="flex-1 flex justify-start">
         <p className="text-xs text-grey">Revenue</p>
       </div>
-      {/* <div className="flex-1 flex justify-start">
+      <div className="flex-1 flex justify-center">
         <p className="text-xs text-grey">A/R</p>
-      </div> */}
+      </div>
       <div className="flex-1 flex justify-start">
         <p className="text-xs text-grey">Credit Rate</p>
       </div>
@@ -120,7 +121,7 @@ function TableHeader() {
   );
 }
 
-function TableRow(props: any) {
+function TableRow(props: TableRowInput) {
   const { row, navigate } = props;
   const { kpiData } = row;
   return (
@@ -184,7 +185,7 @@ function TableRow(props: any) {
           <p className="font-bold text-black text-sm">
             {kpiData?.allocation?.toFixed(2)} %
           </p>
-          {!!kpiData.allocationDiff?.diff && (
+          {!!kpiData?.allocationDiff?.diff && (
             <div className="flex gap-1 items-center">
               {kpiData?.allocationDiff?.diff > 0 ? (
                 <Icon.ArrowUpRight />
@@ -201,9 +202,9 @@ function TableRow(props: any) {
       <div className="flex-1 flex justify-start items-center">
         <div className="flex flex-col gap-1">
           <p className="font-bold text-black text-sm">
-            {usd(2).format(kpiData?.revenue)}
+            {usd(2).format(kpiData?.revenue || 0)}
           </p>
-          {!!kpiData.revenueDiff?.change && (
+          {!!kpiData?.revenueDiff?.change && (
             <div className="flex gap-1 items-center">
               {kpiData?.revenueDiff?.change > 0 ? (
                 <Icon.ArrowUpRight />
@@ -212,25 +213,32 @@ function TableRow(props: any) {
               )}
               <p className="font-medium text-black text-xs">
                 {usd().format(kpiData?.revenueDiff?.change)}(
-                {kpiData?.revenueDiff?.diff.toFixed(2)})%
+                {kpiData?.revenueDiff?.diff?.toFixed(2)})%
               </p>
             </div>
           )}
         </div>
       </div>
-      {/* <div className="flex-1 flex justify-start items-center">
+      <div className="flex-1 flex justify-center items-center">
         <div className="flex flex-col gap-1">
           <p className="font-bold text-black text-sm">
-            {usd().format(row?.ar?.current)}
+            {kpiData?.ar ? usd().format(kpiData?.arDiff?.change || 0) : "-"}
           </p>
-          <div className="flex gap-1 items-center">
-            {row?.ar?.diff > 0 ? <Icon.ArrowUpRight /> : <Icon.ArrowDownLeft />}
-            <p className="font-medium text-black text-xs">
-              {usd().format(row?.ar?.diffAmount)}({row?.ar?.diff})%
-            </p>
-          </div>
+          {!!kpiData?.arDiff?.diff && (
+            <div className="flex gap-1 items-center">
+              {kpiData?.arDiff?.diff ? (
+                <Icon.ArrowUpRight />
+              ) : (
+                <Icon.ArrowDownLeft />
+              )}
+              <p className="font-medium text-black text-xs">
+                {usd().format(kpiData?.arDiff?.change || 0)}(
+                {kpiData?.arDiff?.diff})%
+              </p>
+            </div>
+          )}
         </div>
-      </div> */}
+      </div>
       <div className="flex-1 flex justify-start items-center">
         <p className="font-bold text-black text-sm">
           {/* @ts-ignore */}
@@ -242,7 +250,7 @@ function TableRow(props: any) {
           <p className="font-bold text-black text-sm">
             {row?.churn_rate_customer?.toFixed(2)} %
           </p>
-          {!!row.churn?.diff && (
+          {/* {!!row?.churn?.diff && (
             <div className="flex gap-1 items-center">
               {row?.churn?.diff > 0 ? (
                 <Icon.ArrowUpRight />
@@ -253,7 +261,7 @@ function TableRow(props: any) {
                 {row?.churn?.diff}%
               </p>
             </div>
-          )}
+          )} */}
         </div>
       </div>
     </div>

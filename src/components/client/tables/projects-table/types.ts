@@ -1,10 +1,11 @@
 import { projects } from "@/src/mockups/projects";
+import { Project } from "../../types";
 
 export type ProjectsTableInput = {
-  data: [];
+  data: Project[];
 };
 
 export type TableRowInput = {
-  row: (typeof projects)[0];
-  navigate: any;
+  row: Project;
+  navigate: Function;
 };

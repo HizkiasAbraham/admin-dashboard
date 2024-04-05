@@ -3,7 +3,6 @@ import { ProjectMap } from "@/src/components/client/dashboard-items/project-map"
 import { PortifoliosTable } from "@/src/components/client/tables/portifolios-table";
 import { ProjectsTable } from "@/src/components/client/tables/projects-table";
 import { IndeterminateProgress } from "@/src/components/shared/indeterminate-progress";
-import { projects } from "@/src/mockups/projects";
 import { portifiolios } from "@/src/mockups/protfolios";
 import { getDashboardData } from "@/src/utils/http-requests/client";
 import { useEffect, useState } from "react";
