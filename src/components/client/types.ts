@@ -4,6 +4,9 @@ export type Portfolio = {
   sizekWdc: number;
   numberOfProjects: number;
   revenue: number;
+  churn_rate_customer?: number;
+  churn_rate_kwh?: number;
+  kpiData?: KpiData;
 };
 
 export type Project = {
@@ -16,6 +19,7 @@ export type Project = {
   utility?: string;
   creditType?: string;
   churn_rate_customer?: number;
+  churn_rate_kwh?: number;
   kpiData?: KpiData;
 };
 
