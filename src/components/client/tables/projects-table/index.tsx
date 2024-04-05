@@ -84,6 +84,12 @@ function TableHeader() {
         <p className="text-xs text-grey">Size kWdc</p>
       </div>
       <div className="flex-1 flex justify-start">
+        <p className="text-xs text-grey">P50 kWh</p>
+      </div>
+      <div className="flex-1 flex justify-start">
+        <p className="text-xs text-grey">Total kWh</p>
+      </div>
+      <div className="flex-1 flex justify-start">
         <p className="text-xs text-grey">State</p>
       </div>
       <div className="flex-1 flex justify-start">
@@ -97,9 +103,6 @@ function TableHeader() {
       </div>
       <div className="flex-1 flex justify-start">
         <p className="text-xs text-grey">Allocation</p>
-      </div>
-      <div className="flex-1 flex justify-start">
-        <p className="text-xs text-grey">Production kWh</p>
       </div>
       <div className="flex-1 flex justify-start">
         <p className="text-xs text-grey">Revenue</p>
@@ -135,7 +138,17 @@ function TableRow(props: any) {
       </div>
       <div className="flex-1 flex justify-start items-center">
         <p className="font-bold text-black text-sm">
-          {row?.kwcSize?.toLocaleString("en-US")}
+          {row?.capacityKwDc?.toLocaleString("en-US")}
+        </p>
+      </div>
+      <div className="flex-1 flex justify-start items-center">
+        <p className="font-bold text-black text-sm">
+          {row?.p50kWh?.toLocaleString("en-US")}
+        </p>
+      </div>
+      <div className="flex-1 flex justify-start items-center">
+        <p className="font-bold text-black text-sm">
+          {kpiData?.totalKwhAllocation?.toLocaleString("en-US")}
         </p>
       </div>
       <div className="flex-1 flex justify-start items-center">
@@ -186,11 +199,6 @@ function TableRow(props: any) {
         </div>
       </div>
       <div className="flex-1 flex justify-start items-center">
-        <p className="font-bold text-black text-sm">
-          {row?.p50kWh?.toLocaleString("en-US")}
-        </p>
-      </div>
-      <div className="flex-1 flex justify-start items-center">
         <div className="flex flex-col gap-1">
           <p className="font-bold text-black text-sm">
             {usd(2).format(kpiData?.revenue)}
@@ -226,7 +234,7 @@ function TableRow(props: any) {
       <div className="flex-1 flex justify-start items-center">
         <p className="font-bold text-black text-sm">
           {/* @ts-ignore */}
-          {kpiData.creditRate?.toFixed(2)}
+          {kpiData.creditRate?.toFixed(4)}
         </p>
       </div>
       <div className="flex-1 flex justify-start items-center">
