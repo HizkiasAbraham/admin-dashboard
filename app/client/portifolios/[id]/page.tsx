@@ -14,10 +14,10 @@ export default function PortiFolioDetail() {
     <>
       <div className="flex flex-col md:flex-row gap-3">
         <div className="flex-1">
-          <SubscribedAllocated project={{}} />
+          {/* <SubscribedAllocated data={{}} /> */}
         </div>
         <div className="flex-1">
-          <Revenue project={{}} />
+          {/* <Revenue project={{}} /> */}
         </div>
         <div className="flex-1">
           <ARDashboardItem />

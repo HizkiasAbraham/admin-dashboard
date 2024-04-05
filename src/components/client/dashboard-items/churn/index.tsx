@@ -4,27 +4,29 @@ import { Card, CardContent, CardHeading } from "@/src/components/shared/card";
 import { DatePicker } from "@/src/components/shared/inputs/date-picker";
 import { useState } from "react";
 import { DashboardItemProps } from "../types";
+import { IndeterminateProgress } from "@/src/components/shared/indeterminate-progress";
+import { useUpdateDashboardItem } from "@/src/hooks/useUpdateDashboardItem";
 
 export function Churn(props: DashboardItemProps) {
   const [currentActive, setCurrentActive] = useState<number>(0);
-  const { project, onChange } = props;
-
+  const { data, loading, setQueryPeriod } = useUpdateDashboardItem(
+    props.data,
+    props.dashboardType
+  );
   const churnActionButtons = [
     {
       label: "Customer #",
-      value: `${project?.churn_rate_customer?.toFixed(2)}%`,
+      value: `${data?.churn_rate_customer?.toFixed(2)}%`,
     },
-    { label: "kWdc", value: `${project?.churn_rate_kwh?.toFixed(2)} kWdc` },
+    { label: "kWdc", value: `${data?.churn_rate_kwh?.toFixed(2)} kWdc` },
     // { label: "Project%" },
   ];
-  console.log("the project", project);
+
   return (
     <Card>
+      {loading && <IndeterminateProgress />}
       <CardHeading title="Churn">
-        <DatePicker
-          width="w-48"
-          onDatePicked={(data: string) => onChange(data)}
-        />
+        <DatePicker width="w-40 md:w-64" onDatePicked={setQueryPeriod} />
       </CardHeading>
       <CardContent>
         <div className="mt-4 mb-4">

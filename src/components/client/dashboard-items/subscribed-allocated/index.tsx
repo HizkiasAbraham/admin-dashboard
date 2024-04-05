@@ -2,7 +2,7 @@ import { Card, CardContent } from "@/src/components/shared/card";
 import { DashboardItemProps } from "../types";
 
 export function SubscribedAllocated(props: DashboardItemProps) {
-  const { project } = props;
+  const { data } = props;
   const Green = () => <div className="w-4 bg-green rounded h-full"></div>;
   const Yellow = () => <div className="w-4 bg-yellow rounded h-full"></div>;
 
@@ -15,7 +15,7 @@ export function SubscribedAllocated(props: DashboardItemProps) {
               <div className="p-2 flex flex-col">
                 <div className="w-full border-l-2 border-green flex">
                   <p className="font-bold text-sm text-black ml-1">
-                    {project?.kpiData?.subscription.toFixed(2)}%
+                    {data?.kpiData?.subscription?.toFixed(2)}%
                   </p>
                 </div>
                 <p className="font-medium text-xs text-grey mt-1">Subscribed</p>
@@ -25,7 +25,7 @@ export function SubscribedAllocated(props: DashboardItemProps) {
               <div className="p-2 flex flex-col">
                 <div className="w-full border-l-2 border-yellow flex">
                   <p className="font-bold text-sm text-black ml-1">
-                    {project?.kpiData?.allocation.toFixed(2)}%
+                    {data?.kpiData?.allocation?.toFixed(2)}%
                   </p>
                 </div>
                 <p className="font-medium text-xs text-grey mt-1">Allocated</p>
