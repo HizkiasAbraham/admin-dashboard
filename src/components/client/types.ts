@@ -43,3 +43,24 @@ type DiffData = {
   diff?: number;
   change?: number;
 };
+
+export type SubscriberCategory = {
+  category: string;
+  total: number;
+};
+
+export type MtcStack = {
+  mtc?: number;
+  eValue?: number;
+  capacity?: number;
+  energy?: number;
+  drv?: number;
+  lsrv?: number;
+  kwh_allocation?: number;
+};
+
+export type MtcCreditRate = {
+  residential?: MtcStack;
+  small_commertial?: MtcStack;
+  large_commertial?: MtcStack;
+};

@@ -83,7 +83,10 @@ export default function ProjectDetailPage(props: { params: { id: string } }) {
             />
           </div>
           <div className="mt-3">
-            <SubscriberCategorization data={data?.subscriberCategorization} />
+            <SubscriberCategorization
+              data={data?.subscriberCategorization}
+              projectId={data.project?._id}
+            />
           </div>
           <div className="mt-3">
             <RateTable data={data} />
