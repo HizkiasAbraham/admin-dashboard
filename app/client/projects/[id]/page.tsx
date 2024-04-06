@@ -18,6 +18,7 @@ import {
   SubscriberCategory,
 } from "@/src/components/client/types";
 import { VarianceAnalysis } from "@/src/components/client/variance-analysis";
+import { BreadCrumb } from "@/src/components/shared/breadcrumb";
 import { IndeterminateProgress } from "@/src/components/shared/indeterminate-progress";
 import { bankedCredits } from "@/src/mockups/bank-credits";
 import { billingAndAging } from "@/src/mockups/billingAndAging";
@@ -51,6 +52,18 @@ export default function ProjectDetailPage(props: { params: { id: string } }) {
       {loading && <IndeterminateProgress />}
       {!loading && !!data.project && (
         <>
+          <BreadCrumb
+            classes="mb-2"
+            paths={[
+              { name: "Dashboard", url: "/client/dashboard" },
+              {
+                name: data.project.portfolio?.name || "",
+                url: `/client/portifolios/${data.project?.portfolio?._id}`,
+              },
+              { name: data.project.name || "", url: "" },
+            ]}
+            showSearchAndUpload
+          />
           <div className="flex flex-col md:flex-row gap-3">
             <div className="flex-1">
               <SubscribedAllocated data={data?.project} />

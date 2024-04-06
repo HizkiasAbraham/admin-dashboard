@@ -12,6 +12,7 @@ export type Portfolio = {
 export type Project = {
   _id: string;
   name?: string;
+  portfolio?: Partial<Portfolio>;
   address?: string;
   capacityKwDc?: number;
   p50kWh?: number;

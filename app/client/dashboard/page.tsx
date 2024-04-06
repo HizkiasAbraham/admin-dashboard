@@ -2,6 +2,7 @@
 import { ProjectMap } from "@/src/components/client/dashboard-items/project-map";
 import { PortifoliosTable } from "@/src/components/client/tables/portifolios-table";
 import { ProjectsTable } from "@/src/components/client/tables/projects-table";
+import { BreadCrumb } from "@/src/components/shared/breadcrumb";
 import { IndeterminateProgress } from "@/src/components/shared/indeterminate-progress";
 import { portifiolios } from "@/src/mockups/protfolios";
 import { getDashboardData } from "@/src/utils/http-requests/client";
@@ -31,6 +32,11 @@ export default function Dashboard() {
     <IndeterminateProgress />
   ) : (
     <>
+      <BreadCrumb
+        classes="mb-2"
+        paths={[{ name: "Dashboard", url: "" }]}
+        showSearchAndUpload
+      />
       <div className="flex flex-col md:flex-row gap-3">
         <div className="flex-1">
           <ProjectMap />
