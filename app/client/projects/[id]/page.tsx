@@ -12,7 +12,11 @@ import { BillingAndAging } from "@/src/components/client/tables/billing-and-agin
 import { CustomersTable } from "@/src/components/client/tables/customers";
 import { ProjectDetails } from "@/src/components/client/tables/project-details";
 import { RateTable } from "@/src/components/client/tables/rate-table";
-import { Project } from "@/src/components/client/types";
+import {
+  MtcCreditRate,
+  Project,
+  SubscriberCategory,
+} from "@/src/components/client/types";
 import { VarianceAnalysis } from "@/src/components/client/variance-analysis";
 import { IndeterminateProgress } from "@/src/components/shared/indeterminate-progress";
 import { bankedCredits } from "@/src/mockups/bank-credits";
@@ -24,7 +28,8 @@ import { useEffect, useState } from "react";
 export default function ProjectDetailPage(props: { params: { id: string } }) {
   const [data, setData] = useState<{
     project?: Project;
-    subscriberCategorization?: any;
+    subscriberCategorization?: SubscriberCategory[];
+    creditRateData?: MtcCreditRate;
   }>({});
   const [loading, setLoading] = useState(false);
 
@@ -84,12 +89,16 @@ export default function ProjectDetailPage(props: { params: { id: string } }) {
           </div>
           <div className="mt-3">
             <SubscriberCategorization
-              data={data?.subscriberCategorization}
+              data={data?.subscriberCategorization || []}
               projectId={data.project?._id}
             />
           </div>
           <div className="mt-3">
-            <RateTable data={data} />
+            <RateTable
+              data={data?.creditRateData || {}}
+              projectId={data.project?._id || ""}
+              creditType={data.project?.creditType || ""}
+            />
           </div>
           <div className="mt-3">
             <BillingAndAging data={billingAndAging as []} />

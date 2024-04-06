@@ -1,3 +1,7 @@
+import { MtcCreditRate } from "../../types";
+
 export type RateTableProp = {
-  data: any;
+  data: MtcCreditRate;
+  creditType: string;
+  projectId: string;
 };

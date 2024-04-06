@@ -57,10 +57,12 @@ export type MtcStack = {
   drv?: number;
   lsrv?: number;
   kwh_allocation?: number;
+  [index: string]: any;
 };
 
 export type MtcCreditRate = {
   residential?: MtcStack;
   small_commertial?: MtcStack;
   large_commertial?: MtcStack;
+  [index: string]: any;
 };

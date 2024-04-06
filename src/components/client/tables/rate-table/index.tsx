@@ -8,6 +8,9 @@ import { RateTableProp } from "./types";
 import { lineChartData } from "@/src/mockups/chart";
 import { TabSelector } from "@/src/components/shared/tab-selector";
 import { useState } from "react";
+import { useProjectDetail } from "@/src/hooks/useProjectDetail";
+import { MtcCreditRate } from "../../types";
+import { IndeterminateProgress } from "@/src/components/shared/indeterminate-progress";
 
 const tabItems = [
   { label: "USD/kWh", id: "usdKwh" },
@@ -21,23 +24,30 @@ const vrdeStackItems = [
   { name: "Energy", field: "energy" },
   { name: "DRV", field: "drv" },
   { name: "LSRV", field: "lsrv" },
+  { name: "blendedRate", field: "blendedRate" },
 ];
 
 export function RateTable(props: RateTableProp) {
   const [currentSelectedTab, setCurrentSelectedTab] = useState(tabItems[0].id);
+  const { data, loading, setBillingPeriod } = useProjectDetail<MtcCreditRate>(
+    props.data,
+    props.projectId,
+    "credit-rate",
+    "creditRateData"
+  );
 
   const getComputedValue = (numinator: number, denominator: number = 1) => {
     return currentSelectedTab === "usdKwh"
       ? numinator / denominator
       : numinator;
   };
-  const { data } = props;
 
   return (
     <Card>
+      {loading && <IndeterminateProgress />}
       <CardHeading title="Rate table">
         <SearchInput width="w-64" placeHolder="Search..." />
-        <DatePicker width="w-64" />
+        <DatePicker onDatePicked={setBillingPeriod} width="w-64" />
         <div className="w-64">
           <TabSelector
             items={tabItems}
@@ -52,9 +62,7 @@ export function RateTable(props: RateTableProp) {
             <div className="mt-4 flex w-max md:w-full">
               <div className="w-4/5 flex w-full gap-1 p-2">
                 <div className="w-full flex justify-center">
-                  <p className="text-xs text-grey">
-                    {data.project.creditType} Stack
-                  </p>
+                  <p className="text-xs text-grey">{props.creditType} Stack</p>
                 </div>
                 <div className="w-full flex justify-center">
                   <p className="text-xs text-grey">Residential</p>
@@ -72,13 +80,12 @@ export function RateTable(props: RateTableProp) {
                 </div>
               </div>
             </div>
-            {vrdeStackItems.map((row: any, index) => {
-              const { residential, large_commertial, small_commertial } =
-                data.creditRateData;
+            {vrdeStackItems.map((row, index) => {
+              const { residential, large_commertial, small_commertial } = data;
 
-              const residentialTotalKwh = residential.kwh_allocation || 1;
-              const largeTotalKwh = large_commertial.kwh_allocation || 1;
-              const smallTotalKwh = small_commertial.kwh_allocation || 1;
+              const residentialTotalKwh = residential?.kwh_allocation || 1;
+              const largeTotalKwh = large_commertial?.kwh_allocation || 1;
+              const smallTotalKwh = small_commertial?.kwh_allocation || 1;
 
               return (
                 <div key={index} className="flex w-max md:w-full">
@@ -131,9 +138,10 @@ export function RateTable(props: RateTableProp) {
                     <div className="rounded-xl w-full bg-dark-grey flex gap-2 cursor-pointer justify-end">
                       <div className="w-full flex justify-center items-center p-4">
                         <p className="font-bold text-purple text-sm">
-                          {row?.blendedRate
+                          -
+                          {/* {row?.blendedRate
                             ? usd(5).format(row?.blendedRate)
-                            : "-"}
+                            : "-"} */}
                         </p>
                       </div>
                     </div>
