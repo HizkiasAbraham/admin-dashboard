@@ -1,3 +1,10 @@
 export type BreadcrumbInput = {
-  paths?: string[];
+  paths?: Path[];
+  showSearchAndUpload?: boolean;
+  classes?: string;
+};
+
+type Path = {
+  name: string;
+  url: string;
 };
