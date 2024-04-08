@@ -6,7 +6,10 @@ export function DatePicker(props: DatePickerInput) {
 
   return (
     <div className={`relative ${width || ""}`}>
-      <select onSelect={onDatePicked} className="bg-none display-none background-none border border-inactive rounded-xl px-4 py-2 pl-4 pr-4 w-full cursor-pointer">
+      <select
+        onChange={(e) => (!!onDatePicked ? onDatePicked(e.target.value) : "")}
+        className="bg-none display-none background-none border border-inactive rounded-xl px-4 py-2 pl-4 pr-4 w-full cursor-pointer"
+      >
         <option value="last_30_days">Last 30 days</option>
         <option value="last_60_days">Last 60 days</option>
         <option value="last_90_days">Last 90 days</option>

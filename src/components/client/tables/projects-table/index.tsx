@@ -8,20 +8,41 @@ import { Select } from "@/src/components/shared/inputs/select";
 import { usd } from "@/src/utils/format-numbers";
 import { useRouter } from "next/navigation";
 import { ProjectsTableInput, TableRowInput } from "./types";
+import { useEffect, useState } from "react";
+import { IndeterminateProgress } from "@/src/components/shared/indeterminate-progress";
+import { getProjects } from "@/src/utils/http-requests/client";
+import { Project } from "../../types";
 
 export function ProjectsTable(props: ProjectsTableInput) {
+  const [data, setData] = useState<Project[]>(props.data);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [billingPeriod, setBillingPeriod] = useState<string>("");
   const router = useRouter();
+
+  const fetchProjectsData = async () => {
+    try {
+      setLoading(true);
+      const result = await getProjects(billingPeriod);
+      setData(result.data?.projects);
+      setLoading(false);
+    } catch (error) {}
+  };
+
+  // Todo, add portfolio, state, utility and crdit type filters
+  useEffect(() => {
+    if (billingPeriod) {
+      fetchProjectsData();
+    }
+  }, [billingPeriod]);
 
   const navigate = (projectId: string) =>
     router.push("/client/projects/" + projectId);
-
-  const { data } = props;
 
   return (
     <div className="w-max md:w-full">
       <Card>
         <CardHeading title="Projects">
-          <DatePicker width="w-48" />
+          <DatePicker width="w-48" onDatePicked={setBillingPeriod} />
         </CardHeading>
         <CardContent>
           <div className="flex pt-2 pb-2">
@@ -41,6 +62,7 @@ export function ProjectsTable(props: ProjectsTableInput) {
               <Select options={[]} placeHolder="Utility" />
             </div>
           </div>
+          {loading && <IndeterminateProgress />}
           <div className="mt-2 mb-2">
             <TableHeader />
             {data.map((row, index) => (
@@ -63,6 +85,12 @@ function TableHeader() {
         <p className="text-xs text-grey">Size kWdc</p>
       </div>
       <div className="flex-1 flex justify-start">
+        <p className="text-xs text-grey">P50 kWh</p>
+      </div>
+      <div className="flex-1 flex justify-start">
+        <p className="text-xs text-grey">Total kWh</p>
+      </div>
+      <div className="flex-1 flex justify-start">
         <p className="text-xs text-grey">State</p>
       </div>
       <div className="flex-1 flex justify-start">
@@ -78,14 +106,11 @@ function TableHeader() {
         <p className="text-xs text-grey">Allocation</p>
       </div>
       <div className="flex-1 flex justify-start">
-        <p className="text-xs text-grey">Production kWh</p>
-      </div>
-      <div className="flex-1 flex justify-start">
         <p className="text-xs text-grey">Revenue</p>
       </div>
-      {/* <div className="flex-1 flex justify-start">
+      <div className="flex-1 flex justify-center">
         <p className="text-xs text-grey">A/R</p>
-      </div> */}
+      </div>
       <div className="flex-1 flex justify-start">
         <p className="text-xs text-grey">Credit Rate</p>
       </div>
@@ -98,11 +123,11 @@ function TableHeader() {
 
 function TableRow(props: TableRowInput) {
   const { row, navigate } = props;
-
+  const { kpiData } = row;
   return (
     <div
       className="rounded-xl bg-white-smoke hover:bg-yellow flex mt-2 mb-4 gap-2 cursor-pointer"
-      onClick={() => navigate(row?.id)}
+      onClick={() => navigate(row?._id)}
     >
       <div className="flex-1">
         <div className="flex flex-col gap-1 pt-4 pb-4">
@@ -114,7 +139,17 @@ function TableRow(props: TableRowInput) {
       </div>
       <div className="flex-1 flex justify-start items-center">
         <p className="font-bold text-black text-sm">
-          {row?.kwcSize?.toLocaleString("en-US")}
+          {row?.capacityKwDc?.toLocaleString("en-US")}
+        </p>
+      </div>
+      <div className="flex-1 flex justify-start items-center">
+        <p className="font-bold text-black text-sm">
+          {row?.p50kWh?.toLocaleString("en-US")}
+        </p>
+      </div>
+      <div className="flex-1 flex justify-start items-center">
+        <p className="font-bold text-black text-sm">
+          {kpiData?.totalKwhAllocation?.toLocaleString("en-US")}
         </p>
       </div>
       <div className="flex-1 flex justify-start items-center">
@@ -124,22 +159,22 @@ function TableRow(props: TableRowInput) {
         <p className="font-bold text-black text-sm">{row.utility}</p>
       </div>
       <div className="flex-1 flex justify-start items-center">
-        <p className="font-bold text-black text-sm">{row.type}</p>
+        <p className="font-bold text-black text-sm">{row.creditType}</p>
       </div>
       <div className="flex-1 flex justify-start items-center">
         <div className="flex flex-col gap-1">
           <p className="font-bold text-black text-sm">
-            {row?.subscription?.current.toFixed(2)} %
+            {kpiData?.subscription?.toFixed(2)} %
           </p>
-          {!!row.subscription.diff && (
+          {!!kpiData?.subscriptionDiff?.diff && (
             <div className="flex gap-1 items-center">
-              {row?.subscription?.diff > 0 ? (
+              {kpiData?.subscriptionDiff?.diff > 0 ? (
                 <Icon.ArrowUpRight />
               ) : (
                 <Icon.ArrowDownLeft />
               )}
               <p className="font-medium text-black text-xs">
-                {row?.subscription?.diff}%
+                {kpiData?.subscriptionDiff?.diff}%
               </p>
             </div>
           )}
@@ -148,71 +183,74 @@ function TableRow(props: TableRowInput) {
       <div className="flex-1 flex justify-start items-center">
         <div className="flex flex-col gap-1">
           <p className="font-bold text-black text-sm">
-            {row?.allocation?.current.toFixed(2)} %
+            {kpiData?.allocation?.toFixed(2)} %
           </p>
-          {!!row.allocation.diff && (
+          {!!kpiData?.allocationDiff?.diff && (
             <div className="flex gap-1 items-center">
-              {row?.allocation?.diff > 0 ? (
+              {kpiData?.allocationDiff?.diff > 0 ? (
                 <Icon.ArrowUpRight />
               ) : (
                 <Icon.ArrowDownLeft />
               )}
               <p className="font-medium text-black text-xs">
-                {row?.allocation?.diff}%
+                {kpiData?.allocationDiff?.diff}%
               </p>
             </div>
           )}
         </div>
       </div>
       <div className="flex-1 flex justify-start items-center">
-        <p className="font-bold text-black text-sm">
-          {row?.kwhProduction?.toLocaleString("en-US")}
-        </p>
-      </div>
-      <div className="flex-1 flex justify-start items-center">
         <div className="flex flex-col gap-1">
           <p className="font-bold text-black text-sm">
-            {usd(2).format(row?.revenue?.current)}
+            {usd(2).format(kpiData?.revenue || 0)}
           </p>
-          {!!row.revenue.diff && (
+          {!!kpiData?.revenueDiff?.change && (
             <div className="flex gap-1 items-center">
-              {row?.revenue?.diff > 0 ? (
+              {kpiData?.revenueDiff?.change > 0 ? (
                 <Icon.ArrowUpRight />
               ) : (
                 <Icon.ArrowDownLeft />
               )}
               <p className="font-medium text-black text-xs">
-                {usd().format(row?.revenue?.diffAmount)}({row?.revenue?.diff})%
+                {usd().format(kpiData?.revenueDiff?.change)}(
+                {kpiData?.revenueDiff?.diff?.toFixed(2)})%
               </p>
             </div>
           )}
         </div>
       </div>
-      {/* <div className="flex-1 flex justify-start items-center">
+      <div className="flex-1 flex justify-center items-center">
         <div className="flex flex-col gap-1">
           <p className="font-bold text-black text-sm">
-            {usd().format(row?.ar?.current)}
+            {kpiData?.ar ? usd().format(kpiData?.arDiff?.change || 0) : "-"}
           </p>
-          <div className="flex gap-1 items-center">
-            {row?.ar?.diff > 0 ? <Icon.ArrowUpRight /> : <Icon.ArrowDownLeft />}
-            <p className="font-medium text-black text-xs">
-              {usd().format(row?.ar?.diffAmount)}({row?.ar?.diff})%
-            </p>
-          </div>
+          {!!kpiData?.arDiff?.diff && (
+            <div className="flex gap-1 items-center">
+              {kpiData?.arDiff?.diff ? (
+                <Icon.ArrowUpRight />
+              ) : (
+                <Icon.ArrowDownLeft />
+              )}
+              <p className="font-medium text-black text-xs">
+                {usd().format(kpiData?.arDiff?.change || 0)}(
+                {kpiData?.arDiff?.diff})%
+              </p>
+            </div>
+          )}
         </div>
-      </div> */}
+      </div>
       <div className="flex-1 flex justify-start items-center">
         <p className="font-bold text-black text-sm">
           {/* @ts-ignore */}
-          {row.creditRate?.current?.toFixed(2)}
+          {kpiData.creditRate?.toFixed(4)}
         </p>
       </div>
       <div className="flex-1 flex justify-start items-center">
         <div className="flex flex-col gap-1">
           <p className="font-bold text-black text-sm">
-            {row?.churn?.current.toFixed(2)} %
+            {row?.churn_rate_customer?.toFixed(2)} %
           </p>
-          {!!row.churn?.diff && (
+          {/* {!!row?.churn?.diff && (
             <div className="flex gap-1 items-center">
               {row?.churn?.diff > 0 ? (
                 <Icon.ArrowUpRight />
@@ -223,7 +261,7 @@ function TableRow(props: TableRowInput) {
                 {row?.churn?.diff}%
               </p>
             </div>
-          )}
+          )} */}
         </div>
       </div>
     </div>

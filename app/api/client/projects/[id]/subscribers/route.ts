@@ -10,7 +10,7 @@ export async function GET(
     const authToken = cookies().get("authToken");
     const search = new URL(req.url).searchParams
     const result = await getRequest(
-      `client/projects/${id}?${search.toString()}`,
+      `client/projects/${id}/subscribers?${search.toString()}`,
       authToken?.value as string
     );
     const resultJson = await result.json();

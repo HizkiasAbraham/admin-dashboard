@@ -8,6 +8,9 @@ import { barChartData } from "@/src/mockups/chart";
 import { useEffect, useState } from "react";
 import { SubscriberCategorizationProps } from "./types";
 import { groupBy, orderBy } from "lodash";
+import { SubscriberCategory } from "../../types";
+import { useProjectDetail } from "@/src/hooks/useProjectDetail";
+import { IndeterminateProgress } from "@/src/components/shared/indeterminate-progress";
 
 const tabItems = [
   { label: "QTY", id: "qty" },
@@ -15,7 +18,10 @@ const tabItems = [
 ];
 
 export function SubscriberCategorization(props: SubscriberCategorizationProps) {
-  const { data } = props;
+  const { loading, data, setBillingPeriod } = useProjectDetail<
+    SubscriberCategory[]
+  >(props.data, props.projectId, "subscribers", "subscriberCategorization");
+
   const [currentSelectedTab, setCurrentSelectedTab] = useState(tabItems[0].id);
   const [piechartData, setPiechartData] = useState<any[]>([]);
   const [totalSubscribers, setTotalSubscribers] = useState(0);
@@ -34,7 +40,7 @@ export function SubscriberCategorization(props: SubscriberCategorizationProps) {
       piechartD.push({ group: key, value: total });
     });
     for (const pi of piechartD) {
-      allSum += pi.value
+      allSum += pi.value;
     }
     setPiechartData(orderBy(piechartD, ["value"], ["desc"]));
     setTotalSubscribers(allSum);
@@ -42,10 +48,11 @@ export function SubscriberCategorization(props: SubscriberCategorizationProps) {
 
   useEffect(() => {
     processGrouping();
-  }, []);
+  }, [data]);
 
   return (
     <Card>
+      {loading && <IndeterminateProgress />}
       <CardHeading title="Subscriber Categorization">
         <div className="w-full md:w-64">
           <TabSelector
@@ -54,7 +61,7 @@ export function SubscriberCategorization(props: SubscriberCategorizationProps) {
             onTabItemChanged={setCurrentSelectedTab}
           />
         </div>
-        <DatePicker />
+        <DatePicker width="w-48" onDatePicked={setBillingPeriod} />
       </CardHeading>
       <CardContent>
         <div className="flex flex-col md:flex-row gap-3">

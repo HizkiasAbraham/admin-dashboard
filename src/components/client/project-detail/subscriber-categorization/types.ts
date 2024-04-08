@@ -1,3 +1,6 @@
+import { SubscriberCategory } from "../../types";
+
 export type SubscriberCategorizationProps = {
-  data: [];
+  data: SubscriberCategory[];
+  projectId: string
 };
