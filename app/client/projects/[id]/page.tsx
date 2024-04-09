@@ -7,12 +7,13 @@ import { CreditRate } from "@/src/components/client/dashboard-items/credit-rate"
 import { Revenue } from "@/src/components/client/dashboard-items/revenue";
 import { SubscribedAllocated } from "@/src/components/client/dashboard-items/subscribed-allocated";
 import { SubscriberCategorization } from "@/src/components/client/project-detail/subscriber-categorization";
-import { BankedCredits } from "@/src/components/client/tables/banked-credits";
+import { BankedCredits} from "@/src/components/client/tables/banked-credits";
 import { BillingAndAging } from "@/src/components/client/tables/billing-and-aging";
 import { CustomersTable } from "@/src/components/client/tables/customers";
 import { ProjectDetails } from "@/src/components/client/tables/project-details";
 import { RateTable } from "@/src/components/client/tables/rate-table";
 import {
+  BankedCredit,
   MtcCreditRate,
   Project,
   SubscriberCategory,
@@ -20,7 +21,6 @@ import {
 import { VarianceAnalysis } from "@/src/components/client/variance-analysis";
 import { BreadCrumb } from "@/src/components/shared/breadcrumb";
 import { IndeterminateProgress } from "@/src/components/shared/indeterminate-progress";
-import { bankedCredits } from "@/src/mockups/bank-credits";
 import { billingAndAging } from "@/src/mockups/billingAndAging";
 import { customers } from "@/src/mockups/customers";
 import { getProjectById } from "@/src/utils/http-requests/client";
@@ -31,6 +31,7 @@ export default function ProjectDetailPage(props: { params: { id: string } }) {
     project?: Project;
     subscriberCategorization?: SubscriberCategory[];
     creditRateData?: MtcCreditRate;
+    bankedCreditData?: BankedCredit;
   }>({});
   const [loading, setLoading] = useState(false);
 
@@ -96,8 +97,9 @@ export default function ProjectDetailPage(props: { params: { id: string } }) {
           </div>
           <div className="mt-5">
             <BankedCredits
-              customerBankCredits={bankedCredits.customerBankCredits}
-              hostBankCredits={bankedCredits.hostBankCredits}
+              data={data?.bankedCreditData}
+              itemId={data?.project?._id}
+              dashboardType="project"
             />
           </div>
           <div className="mt-3">

@@ -1,17 +1,11 @@
+import { BankedCredit, BankedCreditItem } from "../../types";
+
 export type BankedCreditsInput = {
-  hostBankCredits: RowItem[];
-  customerBankCredits: RowItem[];
+  data?: BankedCredit
+  itemId: string;
+  dashboardType?: string;
 };
 
-export type BankedCreditRowInput = {
-  row: RowItem;
-};
+export type HeaderProp = { label: string };
 
-export type TableHeaderInput = {
-  label: string;
-};
-
-type RowItem = {
-  label?: string;
-  value: number;
-};
+export type RowProp = { item?: BankedCreditItem };
