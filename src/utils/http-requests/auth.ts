@@ -1,11 +1,5 @@
 import { fetchClient } from "./base";
 
-export const getUserInfo = () =>
-  fetchClient("/api/getUserInfo", {
-    headers: {
-      "Content-Type": "application/json",
-    },
-    cache: "no-store",
-  });
+export const getUserInfo = () => fetchClient("auth/userInfo");
 
 export const logOut = () => fetch("/api/logout", { method: "Post" });
