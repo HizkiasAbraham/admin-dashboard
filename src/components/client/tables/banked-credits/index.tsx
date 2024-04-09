@@ -4,7 +4,7 @@ import { DatePicker } from "@/src/components/shared/inputs/date-picker";
 import { BankedCreditsInput, HeaderProp, RowProp } from "./types";
 import { lineChartData } from "@/src/mockups/chart";
 import { useProjectDetail } from "@/src/hooks/useProjectDetail";
-import { BankedCredit, BankedCreditItem } from "../../types";
+import { BankedCredit } from "../../types";
 import { IndeterminateProgress } from "@/src/components/shared/indeterminate-progress";
 
 const itemLabels: { [index: string]: any } = {
@@ -12,11 +12,13 @@ const itemLabels: { [index: string]: any } = {
   currentBank: "Current Bank",
   newBankAdditions: "New Bank Additionals",
   newBankRelease: "New Bank Release",
+  newAllocableCredits: "New Allocatable Credits",
+  newAppliedCredits: "New Applied Credits"
 };
 
 export function BankedCredits(props: BankedCreditsInput) {
   const { data: intialData, itemId } = props;
-  
+
   const { data, loading, setBillingPeriod } = useProjectDetail<BankedCredit>(
     intialData || {},
     itemId,

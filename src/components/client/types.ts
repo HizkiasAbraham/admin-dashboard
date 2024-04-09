@@ -73,6 +73,8 @@ export type BankedCreditItem = {
   currentBank: number;
   newBankAdditions: number;
   newBankRelease: number;
+  newAllocableCredits: number;
+  newAppliedCredits: number;
   [index: string]: any;
 };
 
