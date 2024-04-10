@@ -16,12 +16,12 @@ export function Churn(props: DashboardItemProps) {
   const churnActionButtons = [
     {
       label: "Customer #",
-      value: `${data?.churn_rate_customer?.toFixed(2)}%`,
+      value: `${data?.kpiData?.total_canceled_customers}`,
     },
-    { label: "kWdc", value: `${data?.churn_rate_kwh?.toFixed(2)} kWdc` },
+    { label: "kWdc", value: `${data?.kpiData?.canceled_kwh?.toLocaleString('en-us')}` },
     // { label: "Project%" },
   ];
-
+console.log('the data here is', data)
   return (
     <Card>
       {loading && <IndeterminateProgress />}

@@ -29,12 +29,18 @@ type KpiData = {
   revenue?: number;
   allocation?: number;
   creditRate?: number;
+  churn_rate_kwh?: number;
+  churn_rate_customer?: number;
+  total_canceled_customers?: number;
+  canceled_kwh?: number;
   ar?: number;
   totalKwhAllocation?: number;
   subscriptionDiff?: DiffData;
   allocationDiff?: DiffData;
   revenueDiff?: DiffData;
   arDiff?: DiffData;
+  churnRateKwhDiff?: DiffData;
+  churnRateCustomerDiff?: DiffData;
   billingPeriod?: string;
   totalP50kWh?: number;
   numberOfProjects?: number;
