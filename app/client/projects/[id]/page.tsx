@@ -7,13 +7,14 @@ import { CreditRate } from "@/src/components/client/dashboard-items/credit-rate"
 import { Revenue } from "@/src/components/client/dashboard-items/revenue";
 import { SubscribedAllocated } from "@/src/components/client/dashboard-items/subscribed-allocated";
 import { SubscriberCategorization } from "@/src/components/client/project-detail/subscriber-categorization";
-import { BankedCredits} from "@/src/components/client/tables/banked-credits";
+import { BankedCredits } from "@/src/components/client/tables/banked-credits";
 import { BillingAndAging } from "@/src/components/client/tables/billing-and-aging";
 import { CustomersTable } from "@/src/components/client/tables/customers";
 import { ProjectDetails } from "@/src/components/client/tables/project-details";
 import { RateTable } from "@/src/components/client/tables/rate-table";
 import {
   BankedCredit,
+  BillingAndAging as BillingAging,
   MtcCreditRate,
   Project,
   SubscriberCategory,
@@ -21,7 +22,6 @@ import {
 import { VarianceAnalysis } from "@/src/components/client/variance-analysis";
 import { BreadCrumb } from "@/src/components/shared/breadcrumb";
 import { IndeterminateProgress } from "@/src/components/shared/indeterminate-progress";
-import { billingAndAging } from "@/src/mockups/billingAndAging";
 import { customers } from "@/src/mockups/customers";
 import { getProjectById } from "@/src/utils/http-requests/client";
 import { useEffect, useState } from "react";
@@ -32,6 +32,7 @@ export default function ProjectDetailPage(props: { params: { id: string } }) {
     subscriberCategorization?: SubscriberCategory[];
     creditRateData?: MtcCreditRate;
     bankedCreditData?: BankedCredit;
+    billingAndAgingData?: BillingAging
   }>({});
   const [loading, setLoading] = useState(false);
 
@@ -116,7 +117,7 @@ export default function ProjectDetailPage(props: { params: { id: string } }) {
             />
           </div>
           <div className="mt-3">
-            <BillingAndAging data={billingAndAging as []} />
+            <BillingAndAging itemId={data?.project?._id || ""} data={data?.billingAndAgingData} />
           </div>
           <div className="mt-3">
             <VarianceAnalysis />

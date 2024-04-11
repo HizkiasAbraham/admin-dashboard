@@ -82,3 +82,16 @@ export type BankedCredit = {
   hostBankReport?: BankedCreditItem;
   customerBankReport?: BankedCreditItem;
 };
+
+export type BillingDataItem = {
+  gross: number;
+  subscriberDiscount: number;
+  paymentProcessFees: number;
+  net: number;
+};
+
+export type BillingAndAging = {
+  grossRevenue?: BillingDataItem;
+  collected?: BillingDataItem;
+  accountReceivable?: BillingDataItem;
+};
