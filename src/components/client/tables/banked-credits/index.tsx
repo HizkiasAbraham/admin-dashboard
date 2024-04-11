@@ -1,19 +1,36 @@
 import { Card, CardContent, CardHeading } from "@/src/components/shared/card";
 import { LineChart } from "@/src/components/shared/charts/line-chart";
 import { DatePicker } from "@/src/components/shared/inputs/date-picker";
-import {
-  BankedCreditRowInput,
-  BankedCreditsInput,
-  TableHeaderInput,
-} from "./types";
+import { BankedCreditsInput, HeaderProp, RowProp } from "./types";
 import { lineChartData } from "@/src/mockups/chart";
+import { useProjectDetail } from "@/src/hooks/useProjectDetail";
+import { BankedCredit } from "../../types";
+import { IndeterminateProgress } from "@/src/components/shared/indeterminate-progress";
+
+const itemLabels: { [index: string]: any } = {
+  previousBank: "Previous Bank",
+  currentBank: "Current Bank",
+  newBankAdditions: "New Bank Additionals",
+  newBankRelease: "New Bank Release",
+  newAllocableCredits: "New Allocatable Credits",
+  newAppliedCredits: "New Applied Credits"
+};
 
 export function BankedCredits(props: BankedCreditsInput) {
-  const { hostBankCredits, customerBankCredits } = props;
+  const { data: intialData, itemId } = props;
+
+  const { data, loading, setBillingPeriod } = useProjectDetail<BankedCredit>(
+    intialData || {},
+    itemId,
+    "banked-credits",
+    "bankedCreditData"
+  );
+
   return (
     <Card>
+      {loading && <IndeterminateProgress />}
       <CardHeading title="Banked Credits">
-        <DatePicker />
+        <DatePicker width="w-48" onDatePicked={setBillingPeriod} />
       </CardHeading>
       <CardContent>
         <div className="flex flex-col md:flex-row gap-3">
@@ -21,15 +38,11 @@ export function BankedCredits(props: BankedCreditsInput) {
             {/* Host bank */}
             <div className="mt-4 border-b-2 pb-4 border-inactive">
               <TableHeader label="Host Bank Credits" />
-              {hostBankCredits.map((row, index) => (
-                <TableRow key={index} row={row} />
-              ))}
+              <TableRow item={data?.hostBankReport} />
             </div>
             <div className="mt-6">
               <TableHeader label="Customer Bank Credits" />
-              {customerBankCredits.map((row, index) => (
-                <TableRow key={index} row={row} />
-              ))}
+              <TableRow item={data?.customerBankReport} />
             </div>
           </div>
           <div className=" md:w-2/3">
@@ -47,7 +60,7 @@ export function BankedCredits(props: BankedCreditsInput) {
   );
 }
 
-function TableHeader(props: TableHeaderInput) {
+function TableHeader(props: HeaderProp) {
   const { label } = props;
   return (
     <div className="flex w-full gap-1">
@@ -61,20 +74,21 @@ function TableHeader(props: TableHeaderInput) {
   );
 }
 
-function TableRow(props: BankedCreditRowInput) {
-  const { row } = props;
-
+function TableRow(props: RowProp) {
+  const { item } = props;
   return (
     <div className="rounded-xl bg-white-smoke mt-2 mb-2 gap-2 cursor-pointer">
-      <div className="flex p-3">
-        <div className="w-full flex flex-1 justify-start items-center">
-          <p className="font-medium text-sm">{row?.label}</p>
+      {Object.keys(item || {}).map((field) => (
+        <div key={field} className="flex p-3">
+          <div className="w-full flex flex-1 justify-start items-center">
+            <p className="font-medium text-sm">{itemLabels[field]}</p>
+          </div>
+          <div className="flex-1"></div>
+          <div className="w-full flex flex-1 justify-end items-center border-l-2 border-inactive">
+            <p className="font-medium text-sm"> {item?.[field]?.toFixed(0)}</p>
+          </div>
         </div>
-        <div className="flex-1"></div>
-        <div className="w-full flex flex-1 justify-end items-center border-l-2 border-inactive">
-          <p className="font-medium text-sm"> {row?.value}</p>
-        </div>
-      </div>
+      ))}
     </div>
   );
 }

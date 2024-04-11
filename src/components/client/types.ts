@@ -67,3 +67,31 @@ export type MtcCreditRate = {
   large_commertial?: MtcStack;
   [index: string]: any;
 };
+
+export type BankedCreditItem = {
+  previousBank: number;
+  currentBank: number;
+  newBankAdditions: number;
+  newBankRelease: number;
+  newAllocableCredits: number;
+  newAppliedCredits: number;
+  [index: string]: any;
+};
+
+export type BankedCredit = {
+  hostBankReport?: BankedCreditItem;
+  customerBankReport?: BankedCreditItem;
+};
+
+export type BillingDataItem = {
+  gross: number;
+  subscriberDiscount: number;
+  paymentProcessFees: number;
+  net: number;
+};
+
+export type BillingAndAging = {
+  grossRevenue?: BillingDataItem;
+  collected?: BillingDataItem;
+  accountReceivable?: BillingDataItem;
+};

@@ -2,14 +2,25 @@ import { OutlinedButton } from "@/src/components/shared/buttons/outlined-button"
 import { Card, CardContent, CardHeading } from "@/src/components/shared/card";
 import { DatePicker } from "@/src/components/shared/inputs/date-picker";
 import { usd } from "@/src/utils/format-numbers";
-import { BillingAndAgingInput, RowInput } from "./types";
+import { BillingAndAgingInput, BillingRowInput } from "./types";
+import { useProjectDetail } from "@/src/hooks/useProjectDetail";
+import { IndeterminateProgress } from "@/src/components/shared/indeterminate-progress";
 
 export function BillingAndAging(props: BillingAndAgingInput) {
-  const { data } = props;
+  const { data: initialData, itemId } = props;
+
+  const { data, loading, setBillingPeriod } = useProjectDetail(
+    initialData,
+    itemId,
+    "billing-and-aging",
+    "billingAndAgingData"
+  );
+
   return (
     <Card>
+      {loading && <IndeterminateProgress />}
       <CardHeading title="Billing and Aging">
-        <DatePicker width="w-48" />
+        <DatePicker width="w-48" onDatePicked={setBillingPeriod} />
         <OutlinedButton color="green">Export .csv</OutlinedButton>
       </CardHeading>
       <CardContent>
@@ -35,43 +46,50 @@ export function BillingAndAging(props: BillingAndAgingInput) {
               </div>
             </div>
           </div>
-          {data?.map((row: any, index) => (
-            <div key={index} className="flex w-full">
-              <div className="w-4/5 flex w-full gap-1 p-2">
-                <div className="rounded-xl w-full bg-white-smoke flex gap-2 cursor-pointer">
-                  <div className="w-full flex justify-start items-center p-4">
-                    <p className="font-bold text-black text-sm">{row?.type}</p>
-                  </div>
-                  <div className="w-full flex justify-end items-center p-4">
-                    <p className="font-bold text-black text-sm">
-                      {usd().format(row?.gross)}
-                    </p>
-                  </div>
-                  <div className="w-full flex justify-end items-center p-4">
-                    <p className="font-bold text-black text-sm">
-                      {usd().format(row?.subscriberDiscount)}
-                    </p>
-                  </div>
-                  <div className="w-full flex justify-end items-center p-4 pr-8">
-                    <p className="font-bold text-black text-sm">
-                      {usd().format(row?.paymentProcessFee)}
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="w-64 flex gap-1 p-2 justify-end">
-                <div className="rounded-xl w-full bg-dark-grey flex gap-2 cursor-pointer justify-end">
-                  <div className="w-full flex justify-end items-center p-4">
-                    <p className="font-bold text-purple text-sm">
-                      {usd().format(row?.net)}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
+          <RowItem type="Gross Revenue" row={data?.grossRevenue} />
+          <RowItem type="Collected" row={data?.collected} />
+          <RowItem type="Account Receivable" row={data?.accountReceivable} />
         </div>
       </CardContent>
     </Card>
+  );
+}
+
+function RowItem(props: BillingRowInput) {
+  const { type, row } = props;
+  return (
+    <div className="flex w-full">
+      <div className="w-4/5 flex w-full gap-1 p-2">
+        <div className="rounded-xl w-full bg-white-smoke flex gap-2 cursor-pointer">
+          <div className="w-full flex justify-start items-center p-4">
+            <p className="font-bold text-black text-sm">{type}</p>
+          </div>
+          <div className="w-full flex justify-end items-center p-4">
+            <p className="font-bold text-black text-sm">
+              {usd().format(row?.gross || 0)}
+            </p>
+          </div>
+          <div className="w-full flex justify-end items-center p-4">
+            <p className="font-bold text-black text-sm">
+              {usd().format(row?.subscriberDiscount || 0)}
+            </p>
+          </div>
+          <div className="w-full flex justify-end items-center p-4 pr-8">
+            <p className="font-bold text-black text-sm">
+              {usd().format(row?.paymentProcessFees || 0)}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className="w-64 flex gap-1 p-2 justify-end">
+        <div className="rounded-xl w-full bg-dark-grey flex gap-2 cursor-pointer justify-end">
+          <div className="w-full flex justify-end items-center p-4">
+            <p className="font-bold text-purple text-sm">
+              {usd().format(row?.net || 0)}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

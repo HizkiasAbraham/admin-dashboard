@@ -1,9 +1,11 @@
-import { billingAndAging } from "@/src/mockups/billingAndAging";
+import { BillingAndAging, BillingDataItem } from "../../types";
 
 export type BillingAndAgingInput = {
-  data: [];
+  data?: BillingAndAging;
+  itemId: string
 };
 
-export type RowInput = {
-  row: (typeof billingAndAging)[0];
+export type BillingRowInput = {
+  type: string;
+  row?: BillingDataItem;
 };
