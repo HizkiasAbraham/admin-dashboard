@@ -14,7 +14,7 @@ import { getProjects } from "@/src/utils/http-requests/client";
 import { Project } from "../../types";
 
 export function ProjectsTable(props: ProjectsTableInput) {
-  const [data, setData] = useState<Project[]>(props.data);
+  const [data, setData] = useState<Project[]>(props?.data || []);
   const [loading, setLoading] = useState<boolean>(false);
   const [billingPeriod, setBillingPeriod] = useState<string>("");
   const router = useRouter();

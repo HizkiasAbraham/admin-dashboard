@@ -2,7 +2,7 @@ import { projects } from "@/src/mockups/projects";
 import { Project } from "../../types";
 
 export type ProjectsTableInput = {
-  data: Project[];
+  data?: Project[];
 };
 
 export type TableRowInput = {
