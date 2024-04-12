@@ -97,3 +97,11 @@ export type BillingAndAging = {
   collected?: BillingDataItem;
   accountReceivable?: BillingDataItem;
 };
+
+export type ProjectDetailsPageData = {
+  project?: Project;
+  subscriberCategorization?: SubscriberCategory[];
+  creditRateData?: MtcCreditRate;
+  bankedCreditData?: BankedCredit;
+  billingAndAgingData?: BillingAndAging;
+};
