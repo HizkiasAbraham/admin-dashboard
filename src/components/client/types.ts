@@ -36,6 +36,8 @@ type KpiData = {
   revenueDiff?: DiffData;
   arDiff?: DiffData;
   billingPeriod?: string;
+  totalP50kWh?: number;
+  numberOfProjects?: number;
 };
 
 type DiffData = {
