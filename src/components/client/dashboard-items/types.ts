@@ -1,6 +1,6 @@
 import { Portfolio, Project } from "../types";
 
 export type DashboardItemProps = {
-  data: Portfolio | Project; // Will be updated to typed ones
+  data?: Portfolio | Project;
   dashboardType?: "portfolio" | "project";
 };
