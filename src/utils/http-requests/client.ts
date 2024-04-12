@@ -5,6 +5,9 @@ export const getDashboardData = () => fetchClient("client/dashboard");
 export const getPortfolios = (billingPeriod: string) =>
   fetchClient(`client/portfolios?billingPeriod=${billingPeriod}`);
 
+export const getPortfolioById = (id: string, billingPeriod: string) =>
+  fetchClient(`client/portfolios/${id}?billingPeriod=${billingPeriod}`);
+
 export const getProjects = (billingPeriod: string) => {
   return fetchClient(`client/projects?billingPeriod=${billingPeriod}`);
 };
