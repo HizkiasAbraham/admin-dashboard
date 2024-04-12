@@ -98,6 +98,12 @@ export type BillingAndAging = {
   accountReceivable?: BillingDataItem;
 };
 
+export type PortfolioDetailsPageData = {
+  portfolio?: Portfolio;
+  projects?: Project[];
+  subscriberCategorization?: SubscriberCategory[];
+};
+
 export type ProjectDetailsPageData = {
   project?: Project;
   subscriberCategorization?: SubscriberCategory[];
