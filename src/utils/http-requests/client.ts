@@ -2,6 +2,9 @@ import { fetchClient } from "./base";
 
 export const getDashboardData = () => fetchClient("client/dashboard");
 
+export const getPortfolios = (billingPeriod: string) =>
+  fetchClient(`client/portfolios?billingPeriod=${billingPeriod}`);
+
 export const getProjects = (billingPeriod: string) => {
   return fetchClient(`client/projects?billingPeriod=${billingPeriod}`);
 };
