@@ -36,6 +36,8 @@ type KpiData = {
   revenueDiff?: DiffData;
   arDiff?: DiffData;
   billingPeriod?: string;
+  totalP50kWh?: number;
+  numberOfProjects?: number;
 };
 
 type DiffData = {
@@ -94,4 +96,18 @@ export type BillingAndAging = {
   grossRevenue?: BillingDataItem;
   collected?: BillingDataItem;
   accountReceivable?: BillingDataItem;
+};
+
+export type PortfolioDetailsPageData = {
+  portfolio?: Portfolio;
+  projects?: Project[];
+  subscriberCategorization?: SubscriberCategory[];
+};
+
+export type ProjectDetailsPageData = {
+  project?: Project;
+  subscriberCategorization?: SubscriberCategory[];
+  creditRateData?: MtcCreditRate;
+  bankedCreditData?: BankedCredit;
+  billingAndAgingData?: BillingAndAging;
 };

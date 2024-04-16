@@ -1,10 +1,10 @@
-import { portifiolios } from "@/src/mockups/protfolios";
+import { Portfolio } from "../../types";
 
 export type PortfoliosTableInput = {
-  data: [];
+  data?: Portfolio[];
 };
 
 export type TableRowInput = {
-  row: (typeof portifiolios)[0];
+  row?: Portfolio;
   navigate: Function;
 };

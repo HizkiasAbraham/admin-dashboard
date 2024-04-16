@@ -12,13 +12,7 @@ import { BillingAndAging } from "@/src/components/client/tables/billing-and-agin
 import { CustomersTable } from "@/src/components/client/tables/customers";
 import { ProjectDetails } from "@/src/components/client/tables/project-details";
 import { RateTable } from "@/src/components/client/tables/rate-table";
-import {
-  BankedCredit,
-  BillingAndAging as BillingAging,
-  MtcCreditRate,
-  Project,
-  SubscriberCategory,
-} from "@/src/components/client/types";
+import { ProjectDetailsPageData } from "@/src/components/client/types";
 import { VarianceAnalysis } from "@/src/components/client/variance-analysis";
 import { BreadCrumb } from "@/src/components/shared/breadcrumb";
 import { IndeterminateProgress } from "@/src/components/shared/indeterminate-progress";
@@ -27,13 +21,7 @@ import { getProjectById } from "@/src/utils/http-requests/client";
 import { useEffect, useState } from "react";
 
 export default function ProjectDetailPage(props: { params: { id: string } }) {
-  const [data, setData] = useState<{
-    project?: Project;
-    subscriberCategorization?: SubscriberCategory[];
-    creditRateData?: MtcCreditRate;
-    bankedCreditData?: BankedCredit;
-    billingAndAgingData?: BillingAging
-  }>({});
+  const [data, setData] = useState<ProjectDetailsPageData>({});
   const [loading, setLoading] = useState(false);
 
   const fetchProjctDetail = async () => {
@@ -117,7 +105,10 @@ export default function ProjectDetailPage(props: { params: { id: string } }) {
             />
           </div>
           <div className="mt-3">
-            <BillingAndAging itemId={data?.project?._id || ""} data={data?.billingAndAgingData} />
+            <BillingAndAging
+              itemId={data?.project?._id || ""}
+              data={data?.billingAndAgingData}
+            />
           </div>
           <div className="mt-3">
             <VarianceAnalysis />

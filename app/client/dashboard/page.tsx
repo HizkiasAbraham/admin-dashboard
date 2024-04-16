@@ -4,7 +4,6 @@ import { PortifoliosTable } from "@/src/components/client/tables/portifolios-tab
 import { ProjectsTable } from "@/src/components/client/tables/projects-table";
 import { BreadCrumb } from "@/src/components/shared/breadcrumb";
 import { IndeterminateProgress } from "@/src/components/shared/indeterminate-progress";
-import { portifiolios } from "@/src/mockups/protfolios";
 import { getDashboardData } from "@/src/utils/http-requests/client";
 import { useEffect, useState } from "react";
 
@@ -41,14 +40,10 @@ export default function Dashboard() {
         <div className="flex-1">
           <ProjectMap />
         </div>
-        <div className="flex-1 w-full overflow-x-scroll md:overflow-x-hidden">
+        <div className="flex-1">
           {data && (
             <PortifoliosTable
-              data={data.portfolios.map((d: any) => ({
-                ...portifiolios[0],
-                name: d.name,
-                numberOfProjects: d.projects.length,
-              }))}
+              data={data?.portfolios}
             />
           )}
         </div>
