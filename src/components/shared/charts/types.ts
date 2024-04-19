@@ -5,8 +5,8 @@ export type ChartInput = {
 };
 
 export const chartColorVariants = [
-  '#FAD02C',
   '#5F4B8B',
+  '#FAD02C',
   '#FF4040',
   '#698DEB',
   '#5F4B8B',

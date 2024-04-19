@@ -68,7 +68,7 @@ function TabContent(props: TabContentInput) {
   const { tabId, parentTabId } = props;
   return (
     <div className="mt-2 mb-2">
-      <LineChart data={lineChartData as []} dataKeys={["pv", "uv"]} />
+      <LineChart data={lineChartData as []} dataKeys={["pv"]} />
     </div>
   );
 }
