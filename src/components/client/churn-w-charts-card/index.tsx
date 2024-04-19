@@ -5,7 +5,7 @@ import { BarChart } from "@/src/components/shared/charts/bar-chart";
 import { DatePicker } from "@/src/components/shared/inputs/date-picker";
 import { TabSelector } from "@/src/components/shared/tab-selector";
 import { useState } from "react";
-import { TabContentInput } from "./types";
+import { ChurnChartProps, TabContentInput } from "./types";
 import { barChartData } from "@/src/mockups/chart";
 
 const churnGraphTabItems = [
@@ -16,7 +16,8 @@ const churnGraphTabItems = [
 
 const TabItemComponents = {};
 
-export function ChurnWithChartsCard() {
+export function ChurnWithChartsCard(props: ChurnChartProps) {
+  const { dashboardType } = props;
   const [selectedItem, setSelectedItem] = useState(churnGraphTabItems[0].id);
 
   return (
@@ -34,7 +35,13 @@ export function ChurnWithChartsCard() {
         </div>
         <div className="mt-2">
           <TabSelector
-            items={churnGraphTabItems}
+            items={
+              dashboardType === "project"
+                ? churnGraphTabItems.filter(
+                    (i) => i.id !== "projectsComparision"
+                  )
+                : churnGraphTabItems
+            }
             selectedItem={selectedItem}
             onTabItemChanged={setSelectedItem}
           />

@@ -102,6 +102,7 @@ export type PortfolioDetailsPageData = {
   portfolio?: Portfolio;
   projects?: Project[];
   subscriberCategorization?: SubscriberCategory[];
+  bankedCreditData?: BankedCredit;
 };
 
 export type ProjectDetailsPageData = {

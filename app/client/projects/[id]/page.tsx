@@ -81,7 +81,7 @@ export default function ProjectDetailPage(props: { params: { id: string } }) {
           <div className="flex flex-col md:flex-row mt-3 gap-3">
             <div className="flex-1">one</div>
             <div className="flex-1">
-              <ChurnWithChartsCard />
+              <ChurnWithChartsCard dashboardType="project" />
             </div>
           </div>
           <div className="mt-5">

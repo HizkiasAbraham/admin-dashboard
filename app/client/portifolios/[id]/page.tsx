@@ -73,13 +73,14 @@ export default function PortiFolioDetail(props: { params: { id: string } }) {
             <ProjectsTable data={data?.projects} />
           </div>
           <div>
-            {/* <BankedCredits
-          customerBankCredits={bankedCredits.customerBankCredits}
-          hostBankCredits={bankedCredits.hostBankCredits}
-        /> */}
+            <BankedCredits
+              dashboardType="portfolio"
+              itemId={data?.portfolio?._id || ""}
+              data={data?.bankedCreditData}
+            />
           </div>
           <div className="mt-3 w-full overflow-x-scroll md:overflow-x-hidden">
-            {/* <VarianceAnalysis /> */}
+            <VarianceAnalysis />
           </div>
         </>
       )}
