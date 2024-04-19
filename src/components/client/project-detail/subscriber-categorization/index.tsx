@@ -4,7 +4,7 @@ import { PieChart } from "@/src/components/shared/charts/pie-chart";
 import { StackedBarChart } from "@/src/components/shared/charts/stacked-bar-chart";
 import { DatePicker } from "@/src/components/shared/inputs/date-picker";
 import { TabSelector } from "@/src/components/shared/tab-selector";
-import { barChartData } from "@/src/mockups/chart";
+import { lineChartData } from "@/src/mockups/chart";
 import { useEffect, useState } from "react";
 import { SubscriberCategorizationProps } from "./types";
 import { groupBy, orderBy } from "lodash";
@@ -76,7 +76,7 @@ export function SubscriberCategorization(props: SubscriberCategorizationProps) {
           </div>
           <div className="flex-1">
             <StackedBarChart
-              data={barChartData as []}
+              data={lineChartData as []}
               dataKeys={["uv", "pv", "amt"]}
             />
           </div>
