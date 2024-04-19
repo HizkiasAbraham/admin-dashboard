@@ -27,7 +27,13 @@ export function SubscriberCategorization(props: SubscriberCategorizationProps) {
     for (const pi of piechartD) {
       allSum += pi.value;
     }
-    setPiechartData(orderBy(piechartD, ["value"], ["desc"]));
+    setPiechartData(
+      orderBy(
+        piechartD.filter((p) => !["n/a", "Lights"].includes(p.group)),
+        ["value"],
+        ["desc"]
+      )
+    );
     setTotalSubscribers(allSum);
   };
 
