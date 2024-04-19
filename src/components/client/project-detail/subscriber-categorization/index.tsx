@@ -32,23 +32,19 @@ export function SubscriberCategorization(props: SubscriberCategorizationProps) {
     let allSum = 0;
 
     Object.keys(grouped).forEach((key) => {
-      const items = grouped[key];
-      let total = 0;
-      items.forEach((item: any) => {
-        total += item.total;
-      });
-      piechartD.push({ group: key, value: total });
+      if (!["n/a", "Lights"].includes(key)) {
+        const items = grouped[key];
+        let total = 0;
+        items.forEach((item: any) => {
+          total += item.total;
+        });
+        piechartD.push({ group: key, value: total });
+      }
     });
     for (const pi of piechartD) {
       allSum += pi.value;
     }
-    setPiechartData(
-      orderBy(
-        piechartD.filter((p) => !["n/a", "Lights"].includes(p.group)),
-        ["value"],
-        ["desc"]
-      )
-    );
+    setPiechartData(orderBy(piechartD, ["value"], ["desc"]));
     setTotalSubscribers(allSum);
   };
 
