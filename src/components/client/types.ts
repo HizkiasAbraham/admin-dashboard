@@ -50,6 +50,7 @@ type DiffData = {
 export type SubscriberCategory = {
   category: string;
   total: number;
+  totalKwhAllocation: number;
 };
 
 export type MtcStack = {
@@ -67,6 +68,7 @@ export type MtcCreditRate = {
   residential?: MtcStack;
   small_commertial?: MtcStack;
   large_commertial?: MtcStack;
+  blended_rate?: MtcStack;
   [index: string]: any;
 };
 

@@ -11,10 +11,11 @@ import { groupBy, orderBy } from "lodash";
 import { SubscriberCategory } from "../../types";
 import { useProjectDetail } from "@/src/hooks/useProjectDetail";
 import { IndeterminateProgress } from "@/src/components/shared/indeterminate-progress";
+import { getPercentage } from "@/src/utils/calculate-percentage";
 
 const tabItems = [
-  { label: "QTY", id: "qty" },
-  { label: "kWdc", id: "kWdc" },
+  { label: "Percentage", id: "percentage" },
+  { label: "Count", id: "count" },
 ];
 
 export function SubscriberCategorization(props: SubscriberCategorizationProps) {
@@ -30,17 +31,32 @@ export function SubscriberCategorization(props: SubscriberCategorizationProps) {
     const grouped = groupBy(data, "category");
     const piechartD: any[] = [];
     let allSum = 0;
-
+    let totalKwh = 0;
     Object.keys(grouped).forEach((key) => {
       if (!["n/a", "Lights"].includes(key)) {
         const items = grouped[key];
         let total = 0;
         items.forEach((item: any) => {
-          total += item.total;
+          console.log(item);
+          total +=
+            currentSelectedTab === "count"
+              ? item.total
+              : item.totalKwhAllocation;
         });
+        if (currentSelectedTab !== "count") totalKwh += total;
         piechartD.push({ group: key, value: total });
       }
     });
+
+    if (currentSelectedTab === "percentage") {
+      for (let i = 0; i < piechartD.length; i++) {
+        piechartD[i].value = (
+          (piechartD[i].value / (totalKwh || 1)) *
+          100
+        ).toFixed(2);
+        piechartD[i].value = parseFloat(piechartD[i].value);
+      }
+    }
     for (const pi of piechartD) {
       allSum += pi.value;
     }
@@ -50,7 +66,7 @@ export function SubscriberCategorization(props: SubscriberCategorizationProps) {
 
   useEffect(() => {
     processGrouping();
-  }, [data]);
+  }, [data, currentSelectedTab]);
 
   return (
     <Card>
@@ -68,7 +84,11 @@ export function SubscriberCategorization(props: SubscriberCategorizationProps) {
       <CardContent>
         <div className="flex flex-col md:flex-row gap-3">
           <div className="flex-1 flex items-center">
-            <PieChart data={piechartData as []} />
+            <PieChart
+              data={piechartData as []}
+              showPercentage={currentSelectedTab === "percentage"}
+              dashboardType="project"
+            />
           </div>
           <div className="flex-1">
             <StackedBarChart
