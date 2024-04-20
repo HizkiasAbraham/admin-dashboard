@@ -42,6 +42,31 @@ export function RateTable(props: RateTableProp) {
       : numinator;
   };
 
+  const getBlendedValue = (
+    rowName: string,
+    value: number,
+    residentialTotalKwh: number = 0,
+    largeTotalKwh: number = 0,
+    smallTotalKwh: number = 0
+  ) => {
+    let denominator = 1;
+    switch (rowName) {
+      case "mtc":
+        denominator =
+          residentialTotalKwh * 0.025 +
+          smallTotalKwh * 0.02 +
+          largeTotalKwh * 0.01;
+        break;
+    }
+
+    return (
+      "$" +
+      getComputedValue(value, denominator).toFixed(
+        currentSelectedTab === "usdKwh" ? 5 : 2
+      )
+    );
+  };
+
   return (
     <Card>
       {loading && <IndeterminateProgress />}
@@ -81,7 +106,12 @@ export function RateTable(props: RateTableProp) {
               </div>
             </div>
             {vrdeStackItems.map((row, index) => {
-              const { residential, large_commertial, small_commertial } = data;
+              const {
+                residential,
+                large_commertial,
+                small_commertial,
+                blended_rate,
+              } = data;
 
               const residentialTotalKwh = residential?.kwh_allocation || 1;
               const largeTotalKwh = large_commertial?.kwh_allocation || 1;
@@ -138,10 +168,15 @@ export function RateTable(props: RateTableProp) {
                     <div className="rounded-xl w-full bg-dark-grey flex gap-2 cursor-pointer justify-end">
                       <div className="w-full flex justify-center items-center p-4">
                         <p className="font-bold text-purple text-sm">
-                          -
-                          {/* {row?.blendedRate
-                            ? usd(5).format(row?.blendedRate)
-                            : "-"} */}
+                          {blended_rate?.[row?.field]
+                            ? getBlendedValue(
+                                row.field,
+                                blended_rate?.[row?.field],
+                                residentialTotalKwh,
+                                largeTotalKwh,
+                                smallTotalKwh
+                              )
+                            : "-"}
                         </p>
                       </div>
                     </div>
