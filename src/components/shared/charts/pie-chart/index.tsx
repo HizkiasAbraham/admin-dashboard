@@ -96,7 +96,7 @@ export function PieChart(props: ChartInput) {
     setActiveState(index);
   };
 
-  const { data } = props;
+  const { data, dashboardType, showPercentage } = props;
   return (
     <div className="w-full flex flex-col md:flex-row gap-4">
       <div className="flex-1 h-80" onMouseLeave={() => setActiveState(0)}>
@@ -134,7 +134,9 @@ export function PieChart(props: ChartInput) {
               <div className="p-3 flex gap-1 items-center">
                 <div className={`w-1/4 border-l-2 border-purple`}>
                   <p className="font-bold text-sm text black p-1">
-                    {getPercentage(data, d.value, "value", 2)}
+                    {showPercentage
+                      ? getPercentage(data, d.value, "value", 2)
+                      : d.value}
                   </p>
                 </div>
                 <div className="w-1/2 flex justify-start">
@@ -142,11 +144,15 @@ export function PieChart(props: ChartInput) {
                     {d.group}
                   </p>
                 </div>
-                <div className="w-1/4 flex justify-end">
-                  <div className="bg-white items-center justify-center flex w-8 h-8 rounded">
-                    <p className="font-medium text-sm text-black">{d.value}</p>
+                {dashboardType !== "project" && (
+                  <div className="w-1/4 flex justify-end">
+                    <div className="bg-white items-center justify-center flex w-8 h-8 rounded">
+                      <p className="font-medium text-sm text-black">
+                        {d.value}
+                      </p>
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             </div>
           );

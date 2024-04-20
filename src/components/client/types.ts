@@ -50,6 +50,7 @@ type DiffData = {
 export type SubscriberCategory = {
   category: string;
   total: number;
+  totalKwhAllocation: number;
 };
 
 export type MtcStack = {
