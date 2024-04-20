@@ -13,8 +13,8 @@ import { useProjectDetail } from "@/src/hooks/useProjectDetail";
 import { IndeterminateProgress } from "@/src/components/shared/indeterminate-progress";
 
 const tabItems = [
-  { label: "QTY", id: "qty" },
-  { label: "kWdc", id: "kWdc" },
+  { label: "Count", id: "qty" },
+  { label: "Percentage", id: "kWdc" },
 ];
 
 export function SubscriberCategorization(props: SubscriberCategorizationProps) {
