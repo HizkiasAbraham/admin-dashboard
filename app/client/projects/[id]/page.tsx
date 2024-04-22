@@ -56,7 +56,10 @@ export default function ProjectDetailPage(props: { params: { id: string } }) {
           />
           <div className="flex flex-col md:flex-row gap-3">
             <div className="flex-1">
-              <SubscribedAllocated data={data?.project} />
+              <SubscribedAllocated
+                data={data?.project}
+                dashboardType="project"
+              />
             </div>
             <div className="flex-1">
               <Revenue data={data?.project} dashboardType="project" />
