@@ -113,4 +113,15 @@ export type ProjectDetailsPageData = {
   creditRateData?: MtcCreditRate;
   bankedCreditData?: BankedCredit;
   billingAndAgingData?: BillingAndAging;
+  customersData?: Customer[];
+};
+
+export type Customer = {
+  accountNumber?: number;
+  serviceClass?: string;
+  customerType?: string;
+  allocationOfProject?: number;
+  customerBank?: number;
+  historical12MonthkWh?: number;
+  discount?: number;
 };

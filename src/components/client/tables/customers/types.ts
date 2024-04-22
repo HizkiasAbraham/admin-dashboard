@@ -1,11 +1,9 @@
-import { customers } from "@/src/mockups/customers";
-
-const item = customers[0];
+import { Customer } from "../../types";
 
 export type CustomersInput = {
-  data: [];
+  data?: Customer[];
 };
 
-export type CustomersRow = {
-  row: typeof item;
+export type CustomerRow = {
+  row?: Customer;
 };
