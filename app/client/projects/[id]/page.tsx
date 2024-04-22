@@ -117,7 +117,7 @@ export default function ProjectDetailPage(props: { params: { id: string } }) {
             <VarianceAnalysis />
           </div>
           <div className="mt-3">
-            <CustomersTable data={customers as []} />
+            <CustomersTable data={data?.customersData} />
           </div>
         </>
       )}
