@@ -3,10 +3,12 @@ import { Card, CardContent } from "@/src/components/shared/card";
 import { SearchInput } from "@/src/components/shared/inputs/searchInput";
 import { Paginator } from "@/src/components/shared/paginator";
 import { usd } from "@/src/utils/format-numbers";
-import { CustomersInput, CustomersRow } from "./types";
+import { CustomerRow, CustomersInput } from "./types";
+import { useState } from "react";
 
 export function CustomersTable(props: CustomersInput) {
-  const { data } = props;
+  const { data: initialData } = props;
+  const [data, setData] = useState(initialData);
 
   return (
     <Card>
@@ -22,7 +24,7 @@ export function CustomersTable(props: CustomersInput) {
         </div>
         <div className="mt-4">
           <TableHeading />
-          {[...data, ...data].map((row, index) => (
+          {data?.map((row, index) => (
             <TableRow key={index} row={row} />
           ))}
           <div className="mt-4">
@@ -62,40 +64,42 @@ function TableHeading() {
   );
 }
 
-function TableRow(props: CustomersRow) {
+function TableRow(props: CustomerRow) {
   const { row } = props;
   return (
     <div className="rounded-xl bg-white-smoke flex mt-2 mb-3 gap-2 cursor-pointer">
       <div className="w-full flex p-4 pl-4">
         <div className="w-full flex justify-start items-center border-r-2 border-inactive">
-          <p className="font-bold text-black text-sm">{row.accountNumber}</p>
+          <p className="font-bold text-black text-sm">#{row?.accountNumber}</p>
         </div>
         <div className="w-full flex justify-start items-center border-r-2 border-inactive">
           <p className="font-bold text-black text-sm pl-4">
-            {row.customerType}
+            {row?.customerType}
           </p>
         </div>
         <div className="w-full flex justify-end items-center border-r-2 border-inactive">
           <p className="font-medium text-black text-sm pr-4">
-            {row.serviceClass}
-          </p>
-        </div>
-        <div className="w-full flex justify-end items-center border-r-2 border-inactive">
-          <p className="font-medium text-black text-sm pr-4">{row.discount}%</p>
-        </div>
-        <div className="w-full flex justify-end items-center border-r-2 border-inactive">
-          <p className="font-medium text-black text-sm pr-4">
-            {usd(2).format(row.customerBank)}
+            {row?.serviceClass}
           </p>
         </div>
         <div className="w-full flex justify-end items-center border-r-2 border-inactive">
           <p className="font-medium text-black text-sm pr-4">
-            {row.historic12MonthKwh.toLocaleString("en-US")}
+            {row?.discount}%
+          </p>
+        </div>
+        <div className="w-full flex justify-end items-center border-r-2 border-inactive">
+          <p className="font-medium text-black text-sm pr-4">
+            {usd(2).format(row?.customerBank || 0)}
+          </p>
+        </div>
+        <div className="w-full flex justify-end items-center border-r-2 border-inactive">
+          <p className="font-medium text-black text-sm pr-4">
+            {row?.historical12MonthkWh?.toLocaleString("en-US")}
           </p>
         </div>
         <div className="w-full flex justify-end items-center pr-2">
           <p className="font-bold text-black text-sm">
-            {row.allocationOfProject}
+            {row?.allocationOfProject?.toFixed(2)}%
           </p>
         </div>
       </div>
