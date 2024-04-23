@@ -1,9 +1,9 @@
 import { BankedCredit, BankedCreditItem } from "../../types";
 
 export type BankedCreditsInput = {
-  data?: BankedCredit
+  data?: BankedCredit;
   itemId: string;
-  dashboardType?: string;
+  dashboardType?: "portfolio" | "project";
 };
 
 export type HeaderProp = { label: string };

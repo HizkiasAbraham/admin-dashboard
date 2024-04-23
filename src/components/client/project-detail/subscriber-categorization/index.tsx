@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { SubscriberCategorizationProps } from "./types";
 import { groupBy, orderBy } from "lodash";
 import { SubscriberCategory } from "../../types";
-import { useProjectDetail } from "@/src/hooks/useProjectDetail";
+import { useCalculatedDetails } from "@/src/hooks/useCalculatedDetails";
 import { IndeterminateProgress } from "@/src/components/shared/indeterminate-progress";
 import { getPercentage } from "@/src/utils/calculate-percentage";
 
@@ -19,7 +19,7 @@ const tabItems = [
 ];
 
 export function SubscriberCategorization(props: SubscriberCategorizationProps) {
-  const { loading, data, setBillingPeriod } = useProjectDetail<
+  const { loading, data, setBillingPeriod } = useCalculatedDetails<
     SubscriberCategory[]
   >(props.data, props.projectId, "subscribers", "subscriberCategorization");
 
