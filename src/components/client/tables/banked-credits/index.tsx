@@ -3,7 +3,7 @@ import { LineChart } from "@/src/components/shared/charts/line-chart";
 import { DatePicker } from "@/src/components/shared/inputs/date-picker";
 import { BankedCreditsInput, HeaderProp, RowProp } from "./types";
 import { lineChartData } from "@/src/mockups/chart";
-import { useProjectDetail } from "@/src/hooks/useProjectDetail";
+import { useCalculatedDetails } from "@/src/hooks/useCalculatedDetails";
 import { BankedCredit } from "../../types";
 import { IndeterminateProgress } from "@/src/components/shared/indeterminate-progress";
 
@@ -13,18 +13,20 @@ const itemLabels: { [index: string]: any } = {
   newBankAdditions: "New Bank Additionals",
   newBankRelease: "New Bank Release",
   newAllocableCredits: "New Allocatable Credits",
-  newAppliedCredits: "New Applied Credits"
+  newAppliedCredits: "New Applied Credits",
 };
 
 export function BankedCredits(props: BankedCreditsInput) {
-  const { data: intialData, itemId } = props;
+  const { data: intialData, itemId, dashboardType } = props;
 
-  const { data, loading, setBillingPeriod } = useProjectDetail<BankedCredit>(
-    intialData || {},
-    itemId,
-    "banked-credits",
-    "bankedCreditData"
-  );
+  const { data, loading, setBillingPeriod } =
+    useCalculatedDetails<BankedCredit>(
+      intialData || {},
+      itemId,
+      "banked-credits",
+      "bankedCreditData",
+      dashboardType
+    );
 
   return (
     <Card>

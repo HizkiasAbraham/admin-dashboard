@@ -1,21 +1,27 @@
 "use client";
 import { useEffect, useState } from "react";
-import { getProjectDetail } from "../utils/http-requests/client";
+import { getCalculatedDetail } from "../utils/http-requests/client";
 
-export function useProjectDetail<T>(
+export function useCalculatedDetails<T>(
   initialData: T,
   id: string,
   path: string,
-  objectOnResponse: string
+  objectOnResponse: string,
+  dashboardType: "portfolio" | "project" = "project"
 ) {
   const [data, setData] = useState<T>(initialData);
   const [loading, setLoading] = useState<boolean>(false);
   const [billingPeriod, setBillingPeriod] = useState<string>("");
 
-  const fetchProjectDetail = async () => {
+  const fetchCalculatedDetail = async () => {
     try {
       setLoading(true);
-      const result = await getProjectDetail(id, path, billingPeriod);
+      const result = await getCalculatedDetail(
+        id,
+        dashboardType,
+        path,
+        billingPeriod
+      );
       setData(result?.data?.[objectOnResponse]);
       setLoading(false);
     } catch (error) {}
@@ -23,7 +29,7 @@ export function useProjectDetail<T>(
 
   useEffect(() => {
     if (billingPeriod) {
-      fetchProjectDetail();
+      fetchCalculatedDetail();
     }
   }, [billingPeriod]);
 

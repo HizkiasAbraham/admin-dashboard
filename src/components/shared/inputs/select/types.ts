@@ -5,6 +5,8 @@ type Option = {
 
 export type SelectInput = {
   width?: string;
+  value?: any;
   placeHolder?: string;
-  options: Option[];
+  options: Option[] | number[];
+  onChange?: any;
 };

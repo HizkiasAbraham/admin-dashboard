@@ -3,13 +3,13 @@ import { Card, CardContent, CardHeading } from "@/src/components/shared/card";
 import { DatePicker } from "@/src/components/shared/inputs/date-picker";
 import { usd } from "@/src/utils/format-numbers";
 import { BillingAndAgingInput, BillingRowInput } from "./types";
-import { useProjectDetail } from "@/src/hooks/useProjectDetail";
+import { useCalculatedDetails } from "@/src/hooks/useCalculatedDetails";
 import { IndeterminateProgress } from "@/src/components/shared/indeterminate-progress";
 
 export function BillingAndAging(props: BillingAndAgingInput) {
   const { data: initialData, itemId } = props;
 
-  const { data, loading, setBillingPeriod } = useProjectDetail(
+  const { data, loading, setBillingPeriod } = useCalculatedDetails(
     initialData,
     itemId,
     "billing-and-aging",

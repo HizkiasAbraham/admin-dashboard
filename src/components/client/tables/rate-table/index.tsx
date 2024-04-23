@@ -8,7 +8,7 @@ import { RateTableProp } from "./types";
 import { lineChartData } from "@/src/mockups/chart";
 import { TabSelector } from "@/src/components/shared/tab-selector";
 import { useState } from "react";
-import { useProjectDetail } from "@/src/hooks/useProjectDetail";
+import { useCalculatedDetails } from "@/src/hooks/useCalculatedDetails";
 import { MtcCreditRate } from "../../types";
 import { IndeterminateProgress } from "@/src/components/shared/indeterminate-progress";
 
@@ -29,7 +29,7 @@ const vrdeStackItems = [
 
 export function RateTable(props: RateTableProp) {
   const [currentSelectedTab, setCurrentSelectedTab] = useState(tabItems[0].id);
-  const { data, loading, setBillingPeriod } = useProjectDetail<MtcCreditRate>(
+  const { data, loading, setBillingPeriod } = useCalculatedDetails<MtcCreditRate>(
     props.data,
     props.projectId,
     "credit-rate",

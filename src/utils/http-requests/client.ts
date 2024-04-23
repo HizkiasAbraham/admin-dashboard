@@ -15,9 +15,12 @@ export const getProjects = (billingPeriod: string) => {
 export const getProjectById = (id: string, billingPeriod: string) =>
   fetchClient(`client/projects/${id}?billingPeriod=${billingPeriod}`);
 
-export const getProjectDetail = (
+export const getCalculatedDetail = (
   id: string,
+  dashboard: "portfolio" | "project" = "project",
   path: string,
   billingPeriod: string
 ) =>
-  fetchClient(`client/projects/${id}/${path}?billingPeriod=${billingPeriod}`);
+  fetchClient(
+    `client/${dashboard}s/${id}/${path}?billingPeriod=${billingPeriod}`
+  );
