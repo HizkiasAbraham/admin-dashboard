@@ -1,3 +1,4 @@
+'use client'
 import { Card, CardContent } from "@/src/components/shared/card";
 import { Icon } from "@/src/components/shared/icon";
 import { BreadCrumb } from "@/src/components/subscriber/bread-crumb";
