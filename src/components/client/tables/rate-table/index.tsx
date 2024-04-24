@@ -24,7 +24,7 @@ const vrdeStackItems = [
   { name: "Energy", field: "energy" },
   { name: "DRV", field: "drv" },
   { name: "LSRV", field: "lsrv" },
-  { name: "blendedRate", field: "blendedRate" },
+  { name: "Total", field: "total" },
 ];
 
 export function RateTable(props: RateTableProp) {
@@ -36,35 +36,10 @@ export function RateTable(props: RateTableProp) {
     "creditRateData"
   );
 
-  const getComputedValue = (numinator: number, denominator: number = 1) => {
-    return currentSelectedTab === "usdKwh"
-      ? numinator / denominator
-      : numinator;
-  };
-
-  const getBlendedValue = (
-    rowName: string,
-    value: number,
-    residentialTotalKwh: number = 0,
-    largeTotalKwh: number = 0,
-    smallTotalKwh: number = 0
-  ) => {
-    let denominator = 1;
-    switch (rowName) {
-      case "mtc":
-        denominator =
-          residentialTotalKwh * 0.025 +
-          smallTotalKwh * 0.02 +
-          largeTotalKwh * 0.01;
-        break;
-    }
-
-    return (
-      "$" +
-      getComputedValue(value, denominator).toFixed(
-        currentSelectedTab === "usdKwh" ? 5 : 2
-      )
-    );
+  const getRateValue = (value?: number) => {
+    return currentSelectedTab === "usd"
+      ? usd(2).format(value || 0)
+      : "$" + value?.toFixed(4);
   };
 
   return (
@@ -113,10 +88,6 @@ export function RateTable(props: RateTableProp) {
                 blended_rate,
               } = data;
 
-              const residentialTotalKwh = residential?.kwh_allocation || 1;
-              const largeTotalKwh = large_commertial?.kwh_allocation || 1;
-              const smallTotalKwh = small_commertial?.kwh_allocation || 1;
-
               return (
                 <div key={index} className="flex w-max md:w-full">
                   <div className="w-4/5 flex w-full gap-1 p-2">
@@ -128,36 +99,27 @@ export function RateTable(props: RateTableProp) {
                       </div>
                       <div className="w-full flex justify-center items-center">
                         <p className="font-medium text-black text-sm">
-                          {residential?.[row?.field]
-                            ? usd(5).format(
-                                getComputedValue(
-                                  residential?.[row.field],
-                                  residentialTotalKwh
-                                )
+                          {residential?.[currentSelectedTab]?.[row?.field]
+                            ? getRateValue(
+                                residential?.[currentSelectedTab]?.[row?.field]
                               )
                             : "-"}
                         </p>
                       </div>
                       <div className="w-full flex justify-center items-center">
                         <p className="font-medium text-black text-sm">
-                          {small_commertial?.[row?.field]
-                            ? usd(5).format(
-                                getComputedValue(
-                                  small_commertial?.[row?.field],
-                                  smallTotalKwh
-                                )
+                          {residential?.[currentSelectedTab]?.[row?.field]
+                            ? getRateValue(
+                                residential?.[currentSelectedTab]?.[row?.field]
                               )
                             : "-"}
                         </p>
                       </div>
                       <div className="w-full flex justify-center items-center ">
                         <p className="font-medium text-black text-sm">
-                          {large_commertial?.[row?.field]
-                            ? usd(5).format(
-                                getComputedValue(
-                                  large_commertial?.[row?.field],
-                                  largeTotalKwh
-                                )
+                          {residential?.[currentSelectedTab]?.[row?.field]
+                            ? getRateValue(
+                                residential?.[currentSelectedTab]?.[row?.field]
                               )
                             : "-"}
                         </p>
@@ -168,13 +130,9 @@ export function RateTable(props: RateTableProp) {
                     <div className="rounded-xl w-full bg-dark-grey flex gap-2 cursor-pointer justify-end">
                       <div className="w-full flex justify-center items-center p-4">
                         <p className="font-bold text-purple text-sm">
-                          {blended_rate?.[row?.field]
-                            ? getBlendedValue(
-                                row.field,
-                                blended_rate?.[row?.field],
-                                residentialTotalKwh,
-                                largeTotalKwh,
-                                smallTotalKwh
+                          {blended_rate?.[currentSelectedTab]?.[row?.field]
+                            ? getRateValue(
+                                blended_rate?.[currentSelectedTab]?.[row?.field]
                               )
                             : "-"}
                         </p>
