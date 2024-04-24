@@ -64,11 +64,17 @@ export type MtcStack = {
   [index: string]: any;
 };
 
+type UsdAndKwh = {
+  usd?: MtcStack;
+  usdKwh?: MtcStack;
+  [index: string]: any;
+};
+
 export type MtcCreditRate = {
-  residential?: MtcStack;
-  small_commertial?: MtcStack;
-  large_commertial?: MtcStack;
-  blended_rate?: MtcStack;
+  residential?: UsdAndKwh;
+  small_commertial?: UsdAndKwh;
+  large_commertial?: UsdAndKwh;
+  blended_rate?: UsdAndKwh;
   [index: string]: any;
 };
 
