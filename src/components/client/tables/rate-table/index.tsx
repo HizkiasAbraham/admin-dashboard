@@ -7,10 +7,11 @@ import { usd } from "@/src/utils/format-numbers";
 import { RateTableProp } from "./types";
 import { lineChartData } from "@/src/mockups/chart";
 import { TabSelector } from "@/src/components/shared/tab-selector";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCalculatedDetails } from "@/src/hooks/useCalculatedDetails";
 import { MtcCreditRate } from "../../types";
 import { IndeterminateProgress } from "@/src/components/shared/indeterminate-progress";
+import moment from "moment";
 
 const tabItems = [
   { label: "USD/kWh", id: "usdKwh" },
@@ -27,20 +28,47 @@ const vrdeStackItems = [
   { name: "Total", field: "total" },
 ];
 
+const dataKeys = ["Blended Rate"];
+
 export function RateTable(props: RateTableProp) {
   const [currentSelectedTab, setCurrentSelectedTab] = useState(tabItems[0].id);
-  const { data, loading, setBillingPeriod } = useCalculatedDetails<MtcCreditRate>(
-    props.data,
-    props.projectId,
-    "credit-rate",
-    "creditRateData"
-  );
+  const { data, loading, setBillingPeriod } =
+    useCalculatedDetails<MtcCreditRate>(
+      props.data,
+      props.projectId,
+      "credit-rate",
+      "creditRateData"
+    );
+  const [blendedRateChartData, setBlendedRateChartData] = useState<any[]>([]);
 
   const getRateValue = (value?: number) => {
     return currentSelectedTab === "usd"
       ? usd(2).format(value || 0)
       : "$" + value?.toFixed(4);
   };
+
+  const processGraphData = () => {
+    const blendedRateGraph =
+      props?.graphData?.map((_gd: any) => ({
+        date: _gd.date,
+        blendedRate: _gd.blendedRate || {},
+      })) || [];
+
+    const graphD = [];
+    for (const sg of blendedRateGraph) {
+      const monthD: any = {};
+      monthD["name"] = moment(sg.date).format("MMM");
+      dataKeys.forEach((dk) => {
+        monthD[dk] = (sg?.blendedRate?.usd.total || 0).toFixed(2);
+      });
+      graphD.push(monthD);
+    }
+    setBlendedRateChartData(graphD);
+  };
+
+  useEffect(() => {
+    processGraphData();
+  });
 
   return (
     <Card>
@@ -146,8 +174,8 @@ export function RateTable(props: RateTableProp) {
           <div className="flex-1">
             <LineChart
               height="full"
-              data={lineChartData as []}
-              dataKeys={["pv"]}
+              data={blendedRateChartData as []}
+              dataKeys={dataKeys}
             />
           </div>
         </div>
