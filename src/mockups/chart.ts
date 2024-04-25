@@ -54,7 +54,7 @@ export const lineChartData = [
     name: 'Feb',
     uv: 3000,
     pv: 1398,
-    amt: 2210,
+    amt: 2210,  
   },
   {
     name: 'Mar',
