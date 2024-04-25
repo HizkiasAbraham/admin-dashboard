@@ -21,7 +21,7 @@ const tabItems = [
 export function SubscriberCategorization(props: SubscriberCategorizationProps) {
   const { loading, data, setBillingPeriod } = useCalculatedDetails<
     SubscriberCategory[]
-  >(props.data, props.projectId, "subscribers", "subscriberCategorization");
+  >(props.data, props.itemId, "subscribers", "subscriberCategorization");
 
   const [currentSelectedTab, setCurrentSelectedTab] = useState(tabItems[0].id);
   const [piechartData, setPiechartData] = useState<any[]>([]);

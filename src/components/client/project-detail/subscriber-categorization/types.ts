@@ -2,5 +2,6 @@ import { SubscriberCategory } from "../../types";
 
 export type SubscriberCategorizationProps = {
   data: SubscriberCategory[];
-  projectId: string
+  itemId: string;
+  dashboardType?: "portfolio" | "project";
 };
