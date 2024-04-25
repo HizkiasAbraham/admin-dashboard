@@ -12,11 +12,14 @@ import { SubscriberCategory } from "../../types";
 import { useCalculatedDetails } from "@/src/hooks/useCalculatedDetails";
 import { IndeterminateProgress } from "@/src/components/shared/indeterminate-progress";
 import { getPercentage } from "@/src/utils/calculate-percentage";
+import moment from "moment";
 
 const tabItems = [
   { label: "Percentage", id: "percentage" },
   { label: "Count", id: "count" },
 ];
+
+const dataKeys = ["Residential", "Large Commertial", "Small Commertial"];
 
 export function SubscriberCategorization(props: SubscriberCategorizationProps) {
   const { loading, data, setBillingPeriod } = useCalculatedDetails<
@@ -25,6 +28,7 @@ export function SubscriberCategorization(props: SubscriberCategorizationProps) {
 
   const [currentSelectedTab, setCurrentSelectedTab] = useState(tabItems[0].id);
   const [piechartData, setPiechartData] = useState<any[]>([]);
+  const [stackedChartData, setStackedChartData] = useState<any[]>([]);
   const [totalSubscribers, setTotalSubscribers] = useState(0);
 
   const processGrouping = () => {
@@ -37,7 +41,6 @@ export function SubscriberCategorization(props: SubscriberCategorizationProps) {
         const items = grouped[key];
         let total = 0;
         items.forEach((item: any) => {
-          console.log(item);
           total +=
             currentSelectedTab === "count"
               ? item.total
@@ -64,10 +67,31 @@ export function SubscriberCategorization(props: SubscriberCategorizationProps) {
     setTotalSubscribers(allSum);
   };
 
+  const processGraphData = () => {
+    const subscriberGraphs = props.graphData?.map((_gd: any) => ({
+      date: _gd.date,
+      subscriberCategorization: _gd.subscriberCategorization || {},
+    }));
+
+    const graphD = [];
+    for (const sg of subscriberGraphs) {
+      const monthD: any = {};
+      monthD["name"] = moment(sg.date).format("MMM");
+      dataKeys.forEach((dk) => {
+        monthD[dk] = sg?.subscriberCategorization?.[dk]?.total || 0;
+      });
+      graphD.push(monthD);
+    }
+    setStackedChartData(graphD);
+  };
+
   useEffect(() => {
     processGrouping();
   }, [data, currentSelectedTab]);
 
+  useEffect(() => {
+    processGraphData();
+  }, [data]);
   return (
     <Card>
       {loading && <IndeterminateProgress />}
@@ -92,8 +116,8 @@ export function SubscriberCategorization(props: SubscriberCategorizationProps) {
           </div>
           <div className="flex-1">
             <StackedBarChart
-              data={lineChartData as []}
-              dataKeys={["uv", "pv", "amt"]}
+              data={stackedChartData || []}
+              dataKeys={dataKeys}
             />
           </div>
         </div>
