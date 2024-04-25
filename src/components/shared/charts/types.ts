@@ -1,5 +1,5 @@
 export type ChartInput = {
-  data: [];
+  data: any[];
   dataKeys?: string[];
   height?: string;
   dashboardType?: "portfolio" | "project";

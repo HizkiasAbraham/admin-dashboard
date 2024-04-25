@@ -120,6 +120,7 @@ export type ProjectDetailsPageData = {
   bankedCreditData?: BankedCredit;
   billingAndAgingData?: BillingAndAging;
   customersData?: Customer[];
+  graphsData?: any;
 };
 
 export type Customer = {

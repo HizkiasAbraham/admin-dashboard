@@ -6,6 +6,8 @@ import { lineChartData } from "@/src/mockups/chart";
 import { useCalculatedDetails } from "@/src/hooks/useCalculatedDetails";
 import { BankedCredit } from "../../types";
 import { IndeterminateProgress } from "@/src/components/shared/indeterminate-progress";
+import moment from "moment";
+import { useEffect, useState } from "react";
 
 const itemLabels: { [index: string]: any } = {
   previousBank: "Previous Bank",
@@ -16,8 +18,15 @@ const itemLabels: { [index: string]: any } = {
   newAppliedCredits: "New Applied Credits",
 };
 
+const dataKeys = [
+  { label: "Host Bank", field: "hostBank" },
+  { label: "Customer Bank", field: "customerBank" },
+];
 export function BankedCredits(props: BankedCreditsInput) {
-  const { data: intialData, itemId, dashboardType } = props;
+  const { data: intialData, itemId, dashboardType, graphData } = props;
+  const [bankedCreditsChartData, setBankedCreditsChartData] = useState<any[]>(
+    []
+  );
 
   const { data, loading, setBillingPeriod } =
     useCalculatedDetails<BankedCredit>(
@@ -27,7 +36,26 @@ export function BankedCredits(props: BankedCreditsInput) {
       "bankedCreditData",
       dashboardType
     );
+  const processGraphData = () => {
+    const bankedCreditsGraph = graphData?.map((_gd: any) => ({
+      date: _gd.date,
+      bankedCreditData: _gd.bankedCreditData || {},
+    })) ||[];
 
+    const graphD = [];
+    for (const sg of bankedCreditsGraph) {
+      const monthD: any = {};
+      monthD["name"] = moment(sg.date).format("MMM");
+      dataKeys.forEach((dk) => {
+        monthD[dk.label] = sg?.bankedCreditData?.[dk.field] || 0;
+      });
+      graphD.push(monthD);
+    }
+    setBankedCreditsChartData(graphD);
+  };
+  useEffect(() => {
+    processGraphData();
+  }, []);
   return (
     <Card>
       {loading && <IndeterminateProgress />}
@@ -49,9 +77,9 @@ export function BankedCredits(props: BankedCreditsInput) {
           </div>
           <div className=" md:w-2/3">
             <LineChart
-              data={lineChartData as []}
+              data={bankedCreditsChartData}
               height="full"
-              dataKeys={["pv", "uv"]}
+              dataKeys={dataKeys.map((d) => d.label)}
             />
           </div>
         </div>
