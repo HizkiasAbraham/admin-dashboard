@@ -4,10 +4,23 @@ import { PieChart } from "@/src/components/shared/charts/pie-chart";
 import { SubscriberCategorizationProps } from "../../project-detail/subscriber-categorization/types";
 import { useEffect, useState } from "react";
 import { groupBy, orderBy } from "lodash";
+import { SubscriberCategory } from "../../types";
+import { useCalculatedDetails } from "@/src/hooks/useCalculatedDetails";
+import { DatePicker } from "@/src/components/shared/inputs/date-picker";
+import { IndeterminateProgress } from "@/src/components/shared/indeterminate-progress";
 
 // TODO: Should refactor and reuse with project details subscriber categorization component
 export function SubscriberCategorization(props: SubscriberCategorizationProps) {
-  const { data } = props;
+  const { loading, data, setBillingPeriod } = useCalculatedDetails<
+    SubscriberCategory[]
+  >(
+    props.data,
+    props.itemId,
+    "subscribers",
+    "subscriberCategorization",
+    props.dashboardType || "portfolio"
+  );
+
   const [piechartData, setPiechartData] = useState<any[]>([]);
   const [totalSubscribers, setTotalSubscribers] = useState(0);
 
@@ -41,12 +54,13 @@ export function SubscriberCategorization(props: SubscriberCategorizationProps) {
 
   useEffect(() => {
     processGrouping();
-  }, []);
+  }, [data]);
   return (
     <Card>
-      <div className="mt-4">
-        <CardHeading title="Subscriber Categorization" />
-      </div>
+      {loading && <IndeterminateProgress />}
+      <CardHeading title="Subscriber Categorization">
+        <DatePicker width="w-48" onDatePicked={setBillingPeriod} />
+      </CardHeading>
       <CardContent>
         <div className="flex items-center">
           <PieChart data={piechartData as []} />

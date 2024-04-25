@@ -62,7 +62,8 @@ export default function PortiFolioDetail(props: { params: { id: string } }) {
             <div className="flex-1">
               <SubscriberCategorization
                 data={data?.subscriberCategorization || []}
-                projectId=""
+                itemId={data?.portfolio?._id || ""}
+                dashboardType="portfolio"
               />
             </div>
             <div className="flex-1">
