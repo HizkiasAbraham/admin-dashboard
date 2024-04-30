@@ -248,20 +248,20 @@ function TableRow(props: TableRowInput) {
       <div className="flex-1 flex justify-start items-center">
         <div className="flex flex-col gap-1">
           <p className="font-bold text-black text-sm">
-            {row?.churn_rate_customer?.toFixed(2)} %
+            {kpiData?.churn_rate_customer?.toFixed(2)} %
           </p>
-          {/* {!!row?.churn?.diff && (
+          {!!kpiData?.churnRateKwhDiff?.diff && (
             <div className="flex gap-1 items-center">
-              {row?.churn?.diff > 0 ? (
+              {kpiData?.churnRateKwhDiff?.diff > 0 ? (
                 <Icon.ArrowUpRight />
               ) : (
                 <Icon.ArrowDownLeft />
               )}
               <p className="font-medium text-black text-xs">
-                {row?.churn?.diff}%
+                {kpiData?.churnRateKwhDiff?.diff}%
               </p>
             </div>
-          )} */}
+          )}
         </div>
       </div>
     </div>

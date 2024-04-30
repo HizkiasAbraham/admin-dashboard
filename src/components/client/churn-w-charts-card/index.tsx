@@ -5,8 +5,11 @@ import { BarChart } from "@/src/components/shared/charts/bar-chart";
 import { DatePicker } from "@/src/components/shared/inputs/date-picker";
 import { TabSelector } from "@/src/components/shared/tab-selector";
 import { useState } from "react";
-import { ChurnChartProps, TabContentInput } from "./types";
+import { ChurnChartProps, ChurnReasonsProps } from "./types";
 import { barChartData } from "@/src/mockups/chart";
+import { useCalculatedDetails } from "@/src/hooks/useCalculatedDetails";
+import { IndeterminateProgress } from "../../shared/indeterminate-progress";
+import { getPercentage } from "@/src/utils/calculate-percentage";
 
 const churnGraphTabItems = [
   { id: "customerNumberKWC", label: "Customer # and kWdc" },
@@ -14,16 +17,21 @@ const churnGraphTabItems = [
   { id: "churnReasons", label: "Churn Reasons" },
 ];
 
-const TabItemComponents = {};
-
 export function ChurnWithChartsCard(props: ChurnChartProps) {
-  const { dashboardType } = props;
+  const { dashboardType, churnData, itemId } = props;
+  const { data, loading, setBillingPeriod } = useCalculatedDetails(
+    churnData,
+    itemId || "",
+    "churn-data",
+    "churnData"
+  );
   const [selectedItem, setSelectedItem] = useState(churnGraphTabItems[0].id);
 
   return (
     <Card>
+      {loading && <IndeterminateProgress />}
       <CardHeading title="Churn">
-        <DatePicker width="w-40 md:w-48" />
+        <DatePicker width="w-40 md:w-48" onDatePicked={setBillingPeriod} />
         <OutlinedButton color="green">Export .csv</OutlinedButton>
       </CardHeading>
       <CardContent>
@@ -46,7 +54,18 @@ export function ChurnWithChartsCard(props: ChurnChartProps) {
             onTabItemChanged={setSelectedItem}
           />
           <div>
-            <TabContent tabId={selectedItem} />
+            <div className="mt-2">
+              {selectedItem === "customerNumberKWC" && (
+                <BarChart
+                  data={barChartData as []}
+                  height="80"
+                  dataKeys={["pv", "uv"]}
+                />
+              )}
+              {selectedItem === "churnReasons" && (
+                <ChurnReasonsTab churnData={data} />
+              )}
+            </div>
           </div>
         </div>
       </CardContent>
@@ -54,16 +73,66 @@ export function ChurnWithChartsCard(props: ChurnChartProps) {
   );
 }
 
-function TabContent(props: TabContentInput) {
-  const { tabId } = props;
+function ChurnReasonsTab(props: ChurnReasonsProps) {
+  const { churnData } = props;
+  const reasonNames = [
+    "Move Out",
+    "Going Rooftop",
+    "Cancellation Request",
+    "null",
+  ];
+  let totalKwh = 0;
+  Object.keys(churnData || {}).forEach((k) => {
+    totalKwh += churnData?.[k].kwh || 0;
+  });
+
   return (
-    <div>
-      <div className="mt-2">
-        <BarChart
-          data={barChartData as []}
-          height="80"
-          dataKeys={["pv", "uv"]}
-        />
+    <div className="mt-4">
+      <div className="flex w-full gap-1 pl-4">
+        <div className="w-full flex-justify-start">
+          <p className="text-xs text-grey">Reason</p>
+        </div>
+        <div className="w-full flex-justify-start">
+          <p className="text-xs text-grey">Customer #</p>
+        </div>
+        <div className="w-full flex-justify-start">
+          <p className="text-xs text-grey">Customer kWdc</p>
+        </div>
+        <div className="w-full flex-justify-start">
+          <p className="text-xs text-grey">% of kWdc</p>
+        </div>
+      </div>{" "}
+      <div className="mt-4">
+        {reasonNames.map((reason) => (
+          <div
+            key={reason}
+            className="rounded-xl bg-white-smoke flex mt-2 mb-3 gap-2 cursor-pointer"
+          >
+            <div className="w-full flex p-4">
+              <p className="font-bold text-black text-sm">
+                {reason === "null" ? "Uknown" : reason}
+              </p>
+            </div>
+            <div className="w-full flex p-4">
+              <p className="font-bold text-black text-sm">
+                {churnData?.[reason]?.count || "-"}
+              </p>
+            </div>
+            <div className="w-full flex p-4">
+              <p className="font-bold text-black text-sm">
+                {churnData?.[reason]?.kwh || "-"}
+              </p>
+            </div>
+            <div className="w-full flex p-4">
+              <p className="font-bold text-black text-sm">
+                {((churnData?.[reason]?.kwh / (totalKwh || 1)) * 100).toFixed(
+                  2
+                ) || "-"}
+                %
+              </p>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

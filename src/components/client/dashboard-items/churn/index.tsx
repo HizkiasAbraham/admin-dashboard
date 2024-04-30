@@ -16,12 +16,14 @@ export function Churn(props: DashboardItemProps) {
   const churnActionButtons = [
     {
       label: "Customer #",
-      value: `${data?.churn_rate_customer?.toFixed(2)}%`,
+      value: `${data?.kpiData?.total_canceled_customers || "-"}`,
     },
-    { label: "kWdc", value: `${data?.churn_rate_kwh?.toFixed(2)} kWdc` },
+    {
+      label: "kWdc",
+      value: `${data?.kpiData?.canceled_kwh?.toLocaleString("en-us") || "-"}`,
+    },
     // { label: "Project%" },
   ];
-
   return (
     <Card>
       {loading && <IndeterminateProgress />}
@@ -31,7 +33,7 @@ export function Churn(props: DashboardItemProps) {
       <CardContent>
         <div className="mt-4 mb-4">
           <p className="text-2xl font-bold">
-            {churnActionButtons[currentActive].value}
+            {churnActionButtons?.[currentActive]?.value}
           </p>
         </div>
         <div className="flex gap-2 pb-2">
