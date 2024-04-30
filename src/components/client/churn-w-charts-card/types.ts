@@ -1,7 +1,11 @@
+import { ChurnData } from "../types";
+
 export type ChurnChartProps = {
   dashboardType?: "portfolio" | "project";
+  churnData?: ChurnData;
+  itemId?: string
 };
 
-export type TabContentInput = {
-  tabId: string;
+export type ChurnReasonsProps = {
+  churnData?: ChurnData;
 };

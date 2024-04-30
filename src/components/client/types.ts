@@ -127,6 +127,7 @@ export type ProjectDetailsPageData = {
   billingAndAgingData?: BillingAndAging;
   customersData?: Customer[];
   graphsData?: any;
+  churnData?: ChurnData;
 };
 
 export type Customer = {
@@ -137,4 +138,18 @@ export type Customer = {
   customerBank?: number;
   historical12MonthkWh?: number;
   discount?: number;
+};
+
+type ChurnItem = {
+  count: number;
+  kwh: number;
+};
+
+export type ChurnData = {
+  null?: ChurnItem;
+  "Move Out"?: ChurnItem;
+  "Already Solar"?: ChurnItem;
+  "Cancellation Request"?: ChurnItem;
+  "Going Rooftop"?: ChurnItem;
+  [index: string]: any;
 };

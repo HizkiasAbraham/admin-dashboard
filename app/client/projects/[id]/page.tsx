@@ -84,7 +84,11 @@ export default function ProjectDetailPage(props: { params: { id: string } }) {
           <div className="flex flex-col md:flex-row mt-3 gap-3">
             <div className="flex-1">one</div>
             <div className="flex-1">
-              <ChurnWithChartsCard dashboardType="project" />
+              <ChurnWithChartsCard
+                itemId={data?.project._id}
+                dashboardType="project"
+                churnData={data?.churnData}
+              />
             </div>
           </div>
           <div className="mt-5">
