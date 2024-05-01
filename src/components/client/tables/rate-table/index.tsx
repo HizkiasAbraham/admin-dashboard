@@ -59,7 +59,7 @@ export function RateTable(props: RateTableProp) {
       const monthD: any = {};
       monthD["name"] = moment(sg.date).format("MMM");
       dataKeys.forEach((dk) => {
-        monthD[dk] = (sg?.blendedRate?.usd.total || 0).toFixed(2);
+        monthD[dk] = (sg?.blendedRate?.usd?.total || 0).toFixed(2);
       });
       graphD.push(monthD);
     }
@@ -68,7 +68,7 @@ export function RateTable(props: RateTableProp) {
 
   useEffect(() => {
     processGraphData();
-  });
+  }, [data]);
 
   return (
     <Card>
