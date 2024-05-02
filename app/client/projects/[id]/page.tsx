@@ -6,7 +6,9 @@ import { Churn } from "@/src/components/client/dashboard-items/churn";
 import { CreditRate } from "@/src/components/client/dashboard-items/credit-rate";
 import { Revenue } from "@/src/components/client/dashboard-items/revenue";
 import { SubscribedAllocated } from "@/src/components/client/dashboard-items/subscribed-allocated";
+import { OAndMNotes } from "@/src/components/client/project-detail/o-and-m-notes";
 import { SubscriberCategorization } from "@/src/components/client/project-detail/subscriber-categorization";
+import { UtilityReports } from "@/src/components/client/project-detail/utility-reports";
 import { BankedCredits } from "@/src/components/client/tables/banked-credits";
 import { BillingAndAging } from "@/src/components/client/tables/billing-and-aging";
 import { CustomersTable } from "@/src/components/client/tables/customers";
@@ -82,7 +84,14 @@ export default function ProjectDetailPage(props: { params: { id: string } }) {
             </div>
           </div>
           <div className="flex flex-col md:flex-row mt-3 gap-3">
-            <div className="flex-1">one</div>
+            <div className="flex-1 flex gap-4">
+              <div className="flex flex-1">
+                <OAndMNotes />
+              </div>
+              <div className="flex flex-1">
+                <UtilityReports />
+              </div>
+            </div>
             <div className="flex-1">
               <ChurnWithChartsCard
                 itemId={data?.project._id}

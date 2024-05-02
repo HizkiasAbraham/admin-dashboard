@@ -23,7 +23,11 @@ import ArchiveBox from "@heroicons/react/24/outline/ArchiveBoxIcon";
 import BoltIcon from "@heroicons/react/24/outline/BoltIcon";
 import DocumentText from "@heroicons/react/24/outline/DocumentTextIcon";
 import Plus from "@heroicons/react/24/outline/PlusCircleIcon";
+import PlusIcon from "@heroicons/react/24/outline/PlusIcon";
 import Minus from "@heroicons/react/24/outline/MinusCircleIcon";
+import InfoCircle from "@heroicons/react/24/outline/InformationCircleIcon";
+import Folder from "@heroicons/react/24/outline/FolderIcon";
+
 
 const ArrowUpRight = () => (
   <div className="w-4 h-4 rounded-full inline-flex items-center justify-center bg-green text-white text-xl font-bold">
@@ -64,4 +68,7 @@ export const Icon = {
   DocumentFile: (props: any) => <DocumentText {...props} />,
   CircularPlus: (props: any) => <Plus {...props} />,
   CircularMinus: (props: any) => <Minus {...props} />,
+  InfoCircle: (props: any) => <InfoCircle {...props} />,
+  Folder: (props: any) => <Folder {...props} />,
+  Plus: (props: any) => <PlusIcon {...props} />,
 };
