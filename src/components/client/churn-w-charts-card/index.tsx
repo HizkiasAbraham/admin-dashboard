@@ -4,18 +4,19 @@ import { Card, CardContent, CardHeading } from "@/src/components/shared/card";
 import { BarChart } from "@/src/components/shared/charts/bar-chart";
 import { DatePicker } from "@/src/components/shared/inputs/date-picker";
 import { TabSelector } from "@/src/components/shared/tab-selector";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ChurnChartProps, ChurnReasonsProps } from "./types";
-import { barChartData } from "@/src/mockups/chart";
 import { useCalculatedDetails } from "@/src/hooks/useCalculatedDetails";
 import { IndeterminateProgress } from "../../shared/indeterminate-progress";
-import { getPercentage } from "@/src/utils/calculate-percentage";
+import moment from "moment";
 
 const churnGraphTabItems = [
   { id: "customerNumberKWC", label: "Customer # and kWdc" },
   { id: "projectsComparision", label: "Projects Comparision" },
   { id: "churnReasons", label: "Churn Reasons" },
 ];
+
+const dataKeys = ["kWdc(1000)", "Customers"];
 
 export function ChurnWithChartsCard(props: ChurnChartProps) {
   const { dashboardType, churnData, itemId } = props;
@@ -26,18 +27,37 @@ export function ChurnWithChartsCard(props: ChurnChartProps) {
     "churnData"
   );
   const [selectedItem, setSelectedItem] = useState(churnGraphTabItems[0].id);
+  const [barChartData, setBarchartData] = useState<any[]>([]);
+
+  const processGraphData = () => {
+    const graphD = [];
+    for (const gd of data?.graphData || []) {
+      const monthD: any = {};
+      monthD["name"] = moment(gd.bill_month).format("MMM'YY");
+      dataKeys.forEach((dk) => {
+        monthD[dk] = dk === "kWdc(1000)" ? (gd?.['kWdc'] || 0) / 1000 : gd?.[dk] || 0;
+      });
+      graphD.push(monthD);
+    }
+    setBarchartData(graphD);
+  };
+
+  useEffect(() => {
+    processGraphData();
+  }, [data]);
 
   return (
     <Card>
       {loading && <IndeterminateProgress />}
       <CardHeading title="Churn">
-        <DatePicker width="w-40 md:w-48" onDatePicked={setBillingPeriod} />
+        <DatePicker width="w-40 md:w-48" onDatePicked={setBillingPeriod} optsMode="months"/>
         <OutlinedButton color="green">Export .csv</OutlinedButton>
       </CardHeading>
       <CardContent>
         <div className="mt-4 mb-4 flex items-center">
           <p className="text-2xl font-bold">
-            {(3250).toLocaleString("en-US")} kW <span>.</span>153 <span>.</span>
+            {(data?.totalKwh || 0).toLocaleString("en-US")} kW <span>.</span>
+            {data?.totalCustomers} <span>.</span>
             2%
           </p>
         </div>
@@ -59,11 +79,11 @@ export function ChurnWithChartsCard(props: ChurnChartProps) {
                 <BarChart
                   data={barChartData as []}
                   height="80"
-                  dataKeys={["pv", "uv"]}
+                  dataKeys={dataKeys}
                 />
               )}
               {selectedItem === "churnReasons" && (
-                <ChurnReasonsTab churnData={data} />
+                <ChurnReasonsTab churnData={data?.churnReasons} />
               )}
             </div>
           </div>
@@ -125,10 +145,12 @@ function ChurnReasonsTab(props: ChurnReasonsProps) {
             </div>
             <div className="w-full flex p-4">
               <p className="font-bold text-black text-sm">
-                {((churnData?.[reason]?.kwh / (totalKwh || 1)) * 100).toFixed(
-                  2
-                ) || "-"}
-                %
+                {churnData?.[reason]?.kwh
+                  ? (
+                      ((churnData?.[reason]?.kwh || 0) / (totalKwh || 1)) *
+                      100
+                    ).toFixed(2) + "%"
+                  : "-"}
               </p>
             </div>
           </div>

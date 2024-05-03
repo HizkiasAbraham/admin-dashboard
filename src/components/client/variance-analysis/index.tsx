@@ -4,9 +4,11 @@ import { Card, CardContent, CardHeading } from "@/src/components/shared/card";
 import { LineChart } from "@/src/components/shared/charts/line-chart";
 import { DatePicker } from "@/src/components/shared/inputs/date-picker";
 import { TabSelector } from "@/src/components/shared/tab-selector";
-import { useState } from "react";
-import { TabContentInput } from "./types";
-import { lineChartData } from "@/src/mockups/chart";
+import { useEffect, useState } from "react";
+import { TabContentInput, VarianceTabProps } from "./types";
+import { useCalculatedDetails } from "@/src/hooks/useCalculatedDetails";
+import { IndeterminateProgress } from "../../shared/indeterminate-progress";
+import moment from "moment";
 
 const tabItemsUnitPercent = [
   { id: "unit", label: "Unit" },
@@ -14,17 +16,31 @@ const tabItemsUnitPercent = [
 ];
 
 const tabItemsForChart = [
-  { id: "revenue", label: "Revenue" },
-  { id: "production", label: "Production" },
-  { id: "allocation", label: "Allocation" },
-  { id: "subscription", label: "Subscription" },
-  { id: "hostBank", label: "Host Bank" },
-  { id: "customerBank", label: "Customer Bank" },
-  { id: "customerChurn", label: "Customer Churn #" },
-  { id: "churnKw", label: "Churn kW" },
+  { id: "revenue", label: "Revenue", dataKeys: ["Revenue"] },
+  { id: "production", label: "Production", dataKeys: ["Production"] },
+  { id: "allocation", label: "Allocation", dataKeys: ["Allocation"] },
+  { id: "subscription", label: "Subscription", dataKeys: ["Subscription"] },
+  { id: "hostBank", label: "Host Bank", dataKeys: ["Host Bank"] },
+  { id: "customerBank", label: "Customer Bank", dataKeys: ["Customer Bank"] },
+  {
+    id: "churnCustomerNumber",
+    label: "Customer Churn #",
+    dataKeys: ["Customers Churned"],
+  },
+  { id: "churnKwh", label: "Churn kW", dataKeys: ["Kwh Churned"] },
 ];
 
-export function VarianceAnalysis() {
+export function VarianceAnalysis(props: VarianceTabProps) {
+  const { itemId, data: varianceData, dashboardType } = props;
+
+  const { data, loading, setBillingPeriod } = useCalculatedDetails(
+    varianceData,
+    itemId || "",
+    "variance-analysis",
+    "varianceData",
+    dashboardType || "project"
+  );
+
   const [selectedUnitTab, setSelectedUnitTab] = useState(
     tabItemsUnitPercent[0].id
   );
@@ -36,8 +52,13 @@ export function VarianceAnalysis() {
   return (
     <div className="w-max md:w-full">
       <Card>
+        {loading && <IndeterminateProgress />}
         <CardHeading title="Variance Analysis">
-          <DatePicker />
+          <DatePicker
+            width="w-48"
+            optsMode="months"
+            onDatePicked={setBillingPeriod}
+          />
           <div className="w-64">
             <TabSelector
               items={tabItemsUnitPercent}
@@ -54,10 +75,18 @@ export function VarianceAnalysis() {
               onTabItemChanged={setSelectedItemForChartTab}
             />
           </div>
-          <TabContent
-            tabId={selectedItemForchartTab}
-            parentTabId={selectedItemForchartTab}
-          />
+          {tabItemsForChart.map((tabItem) => (
+            <div key={tabItem.id}>
+              {tabItem.id === selectedItemForchartTab && (
+                <TabContent
+                  tabId={selectedItemForchartTab}
+                  parentTabId={selectedItemForchartTab}
+                  tabMetaData={tabItem}
+                  tabDataItem={data?.[selectedItemForchartTab]}
+                />
+              )}
+            </div>
+          ))}
         </CardContent>
       </Card>
     </div>
@@ -65,10 +94,32 @@ export function VarianceAnalysis() {
 }
 
 function TabContent(props: TabContentInput) {
-  const { tabId, parentTabId } = props;
+  const { tabId, parentTabId, tabMetaData, tabDataItem } = props;
+  const [lineChartData, setLineChartData] = useState<any>([]);
+
+  const { dataKeys } = tabMetaData;
+
+  const processGraphData = () => {
+    const graphD = [];
+    for (const gd of tabDataItem || []) {
+      const monthD: any = {};
+      monthD["name"] = moment(gd.billing_month).format("MMM");
+      dataKeys.forEach((dk: any) => {
+        monthD[dk] = gd[dk];
+      });
+      graphD.push(monthD);
+    }
+
+    setLineChartData(graphD);
+  };
+
+  useEffect(() => {
+    processGraphData();
+  }, [tabDataItem]);
+
   return (
     <div className="mt-2 mb-2">
-      <LineChart data={lineChartData as []} dataKeys={["pv"]} />
+      <LineChart data={lineChartData as []} dataKeys={dataKeys} />
     </div>
   );
 }

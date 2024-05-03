@@ -174,7 +174,7 @@ function TableRow(props: TableRowInput) {
                 <Icon.ArrowDownLeft />
               )}
               <p className="font-medium text-black text-xs">
-                {kpiData?.subscriptionDiff?.diff}%
+                {kpiData?.subscriptionDiff?.diff.toFixed(2)}%
               </p>
             </div>
           )}
@@ -193,7 +193,7 @@ function TableRow(props: TableRowInput) {
                 <Icon.ArrowDownLeft />
               )}
               <p className="font-medium text-black text-xs">
-                {kpiData?.allocationDiff?.diff}%
+                {kpiData?.allocationDiff?.diff.toFixed(2)}%
               </p>
             </div>
           )}
@@ -233,7 +233,7 @@ function TableRow(props: TableRowInput) {
               )}
               <p className="font-medium text-black text-xs">
                 {usd().format(kpiData?.arDiff?.change || 0)}(
-                {kpiData?.arDiff?.diff})%
+                {kpiData?.arDiff?.diff.toFixed(2)})%
               </p>
             </div>
           )}
@@ -248,7 +248,7 @@ function TableRow(props: TableRowInput) {
       <div className="flex-1 flex justify-start items-center">
         <div className="flex flex-col gap-1">
           <p className="font-bold text-black text-sm">
-            {kpiData?.churn_rate_customer?.toFixed(2)} %
+            {kpiData?.churn_rate_kwh?.toFixed(2)} %
           </p>
           {!!kpiData?.churnRateKwhDiff?.diff && (
             <div className="flex gap-1 items-center">
@@ -258,7 +258,7 @@ function TableRow(props: TableRowInput) {
                 <Icon.ArrowDownLeft />
               )}
               <p className="font-medium text-black text-xs">
-                {kpiData?.churnRateKwhDiff?.diff}%
+                {kpiData?.churnRateKwhDiff?.diff.toFixed(2)}%
               </p>
             </div>
           )}
