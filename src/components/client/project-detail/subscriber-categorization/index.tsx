@@ -22,9 +22,16 @@ const tabItems = [
 const dataKeys = ["Residential", "Large Commertial", "Small Commertial"];
 
 export function SubscriberCategorization(props: SubscriberCategorizationProps) {
-  const { loading, data, setBillingPeriod } = useCalculatedDetails<
+  const { loading, data, graphData, setBillingPeriod } = useCalculatedDetails<
     SubscriberCategory[]
-  >(props.data, props.itemId, "subscribers", "subscriberCategorization");
+  >(
+    props.data,
+    props.itemId,
+    "subscribers",
+    "subscriberCategorization",
+    "project",
+    props?.graphData
+  );
 
   const [currentSelectedTab, setCurrentSelectedTab] = useState(tabItems[0].id);
   const [piechartData, setPiechartData] = useState<any[]>([]);
@@ -68,7 +75,7 @@ export function SubscriberCategorization(props: SubscriberCategorizationProps) {
   };
 
   const processGraphData = () => {
-    const subscriberGraphs = props.graphData?.map((_gd: any) => ({
+    const subscriberGraphs = graphData?.map((_gd: any) => ({
       date: _gd.date,
       subscriberCategorization: _gd.subscriberCategorization || {},
     }));

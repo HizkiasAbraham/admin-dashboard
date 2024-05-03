@@ -32,12 +32,14 @@ const dataKeys = ["Blended Rate"];
 
 export function RateTable(props: RateTableProp) {
   const [currentSelectedTab, setCurrentSelectedTab] = useState(tabItems[0].id);
-  const { data, loading, setBillingPeriod } =
+  const { data, graphData, loading, setBillingPeriod } =
     useCalculatedDetails<MtcCreditRate>(
       props.data,
       props.projectId,
       "credit-rate",
-      "creditRateData"
+      "creditRateData",
+      "project",
+      props.graphData
     );
   const [blendedRateChartData, setBlendedRateChartData] = useState<any[]>([]);
 
@@ -49,7 +51,7 @@ export function RateTable(props: RateTableProp) {
 
   const processGraphData = () => {
     const blendedRateGraph =
-      props?.graphData?.map((_gd: any) => ({
+      graphData?.map((_gd: any) => ({
         date: _gd.date,
         blendedRate: _gd.blendedRate || {},
       })) || [];
