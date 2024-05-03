@@ -128,6 +128,7 @@ export type ProjectDetailsPageData = {
   customersData?: Customer[];
   graphsData?: any;
   churnData?: ChurnData;
+  varianceData?: any;
 };
 
 export type Customer = {
