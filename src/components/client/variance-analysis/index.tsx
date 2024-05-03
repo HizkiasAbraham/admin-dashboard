@@ -103,7 +103,7 @@ function TabContent(props: TabContentInput) {
     const graphD = [];
     for (const gd of tabDataItem || []) {
       const monthD: any = {};
-      monthD["name"] = moment(gd.billing_month).format("MMM");
+      monthD["name"] = moment(gd.billing_month).format("MMM'YY");
       dataKeys.forEach((dk: any) => {
         monthD[dk] = gd[dk];
       });
