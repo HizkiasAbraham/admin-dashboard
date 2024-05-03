@@ -146,6 +146,20 @@ type ChurnItem = {
 };
 
 export type ChurnData = {
+  churnReasons?: ChurnReasons;
+  graphData?: ChurnGraphData[];
+  totalCustomers?: number;
+  totalKwh?: number;
+};
+
+type ChurnGraphData = {
+  bill_month?: Date;
+  Customer?: number;
+  kWdc?: number;
+  [index: string]: any;
+};
+
+export type ChurnReasons = {
   null?: ChurnItem;
   "Move Out"?: ChurnItem;
   "Already Solar"?: ChurnItem;

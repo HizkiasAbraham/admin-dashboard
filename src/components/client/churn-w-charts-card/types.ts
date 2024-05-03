@@ -1,4 +1,4 @@
-import { ChurnData } from "../types";
+import { ChurnData, ChurnReasons } from "../types";
 
 export type ChurnChartProps = {
   dashboardType?: "portfolio" | "project";
@@ -7,5 +7,5 @@ export type ChurnChartProps = {
 };
 
 export type ChurnReasonsProps = {
-  churnData?: ChurnData;
+  churnData?: ChurnReasons;
 };
