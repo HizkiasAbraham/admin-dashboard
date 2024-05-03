@@ -2,7 +2,6 @@ import { Card, CardContent, CardHeading } from "@/src/components/shared/card";
 import { LineChart } from "@/src/components/shared/charts/line-chart";
 import { DatePicker } from "@/src/components/shared/inputs/date-picker";
 import { BankedCreditsInput, HeaderProp, RowProp } from "./types";
-import { lineChartData } from "@/src/mockups/chart";
 import { useCalculatedDetails } from "@/src/hooks/useCalculatedDetails";
 import { BankedCredit } from "../../types";
 import { IndeterminateProgress } from "@/src/components/shared/indeterminate-progress";
@@ -23,24 +22,32 @@ const dataKeys = [
   { label: "Customer Bank", field: "customerBank" },
 ];
 export function BankedCredits(props: BankedCreditsInput) {
-  const { data: intialData, itemId, dashboardType, graphData } = props;
+  const {
+    data: intialData,
+    itemId,
+    dashboardType,
+    graphData: intialGraphData,
+  } = props;
   const [bankedCreditsChartData, setBankedCreditsChartData] = useState<any[]>(
     []
   );
 
-  const { data, loading, setBillingPeriod } =
+  const { data, loading, graphData, setBillingPeriod } =
     useCalculatedDetails<BankedCredit>(
       intialData || {},
       itemId,
       "banked-credits",
       "bankedCreditData",
-      dashboardType
+      dashboardType,
+      intialGraphData
     );
+
   const processGraphData = () => {
-    const bankedCreditsGraph = graphData?.map((_gd: any) => ({
-      date: _gd.date,
-      bankedCreditData: _gd.bankedCreditData || {},
-    })) ||[];
+    const bankedCreditsGraph =
+      graphData?.map((_gd: any) => ({
+        date: _gd.date,
+        bankedCreditData: _gd.bankedCreditData || {},
+      })) || [];
 
     const graphD = [];
     for (const sg of bankedCreditsGraph) {
@@ -53,9 +60,11 @@ export function BankedCredits(props: BankedCreditsInput) {
     }
     setBankedCreditsChartData(graphD);
   };
+
   useEffect(() => {
     processGraphData();
-  }, []);
+  }, [graphData]);
+
   return (
     <Card>
       {loading && <IndeterminateProgress />}
