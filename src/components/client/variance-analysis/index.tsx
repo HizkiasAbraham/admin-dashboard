@@ -36,7 +36,7 @@ export function VarianceAnalysis(props: VarianceTabProps) {
   const { data, loading, setBillingPeriod } = useCalculatedDetails(
     varianceData,
     itemId || "",
-    "variance-data",
+    "variance-analysis",
     "varianceData",
     dashboardType || "project"
   );
@@ -115,7 +115,7 @@ function TabContent(props: TabContentInput) {
 
   useEffect(() => {
     processGraphData();
-  }, []);
+  }, [tabDataItem]);
 
   return (
     <div className="mt-2 mb-2">
