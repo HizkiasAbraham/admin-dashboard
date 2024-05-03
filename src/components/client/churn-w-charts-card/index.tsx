@@ -50,7 +50,7 @@ export function ChurnWithChartsCard(props: ChurnChartProps) {
     <Card>
       {loading && <IndeterminateProgress />}
       <CardHeading title="Churn">
-        <DatePicker width="w-40 md:w-48" onDatePicked={setBillingPeriod} />
+        <DatePicker width="w-40 md:w-48" onDatePicked={setBillingPeriod} optsMode="months"/>
         <OutlinedButton color="green">Export .csv</OutlinedButton>
       </CardHeading>
       <CardContent>
