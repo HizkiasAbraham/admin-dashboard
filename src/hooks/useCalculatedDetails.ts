@@ -7,9 +7,11 @@ export function useCalculatedDetails<T>(
   id: string,
   path: string,
   objectOnResponse: string,
-  dashboardType: "portfolio" | "project" = "project"
+  dashboardType: "portfolio" | "project" = "project",
+  initialGraphData?: any
 ) {
   const [data, setData] = useState<T>(initialData);
+  const [graphData, setGraphData] = useState(initialGraphData);
   const [loading, setLoading] = useState<boolean>(false);
   const [billingPeriod, setBillingPeriod] = useState<string>("");
 
@@ -23,6 +25,7 @@ export function useCalculatedDetails<T>(
         billingPeriod
       );
       setData(result?.data?.[objectOnResponse]);
+      setGraphData(result?.data?.graphData);
       setLoading(false);
     } catch (error) {}
   };
@@ -33,5 +36,5 @@ export function useCalculatedDetails<T>(
     }
   }, [billingPeriod]);
 
-  return { data, loading, setBillingPeriod };
+  return { data, loading, graphData, setBillingPeriod };
 }
