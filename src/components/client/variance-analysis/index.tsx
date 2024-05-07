@@ -104,7 +104,7 @@ function TabContent(props: TabContentInput) {
     for (const gd of tabDataItem || []) {
       const monthD: any = {};
       monthD["name"] = moment(gd.billing_month).format("MMM'YY");
-      dataKeys.forEach((dk: any) => {
+      [...dataKeys, "Model Data"].forEach((dk: any) => {
         monthD[dk] = gd[dk];
       });
       graphD.push(monthD);
@@ -119,7 +119,10 @@ function TabContent(props: TabContentInput) {
 
   return (
     <div className="mt-2 mb-2">
-      <LineChart data={lineChartData as []} dataKeys={dataKeys} />
+      <LineChart
+        data={lineChartData as []}
+        dataKeys={[...dataKeys, "Model Data"]}
+      />
     </div>
   );
 }
