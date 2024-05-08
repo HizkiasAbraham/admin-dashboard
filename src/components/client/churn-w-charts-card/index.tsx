@@ -16,7 +16,7 @@ const churnGraphTabItems = [
   { id: "churnReasons", label: "Churn Reasons" },
 ];
 
-const dataKeys = ["kWdc(1000)", "Customers"];
+const dataKeys = ["kWdc", "Customers"];
 
 export function ChurnWithChartsCard(props: ChurnChartProps) {
   const { dashboardType, churnData, itemId } = props;
@@ -31,14 +31,18 @@ export function ChurnWithChartsCard(props: ChurnChartProps) {
 
   const processGraphData = () => {
     const graphD = [];
+    console.log("the grah", data?.graphData);
     for (const gd of data?.graphData || []) {
       const monthD: any = {};
       monthD["name"] = moment(gd.bill_month).format("MMM'YY");
       dataKeys.forEach((dk) => {
-        monthD[dk] = dk === "kWdc(1000)" ? (gd?.['kWdc'] || 0) / 1000 : gd?.[dk] || 0;
+        monthD[dk] =
+          dk === "kWdc" ? gd?.["kwdc"]?.toFixed(2) || 0 : gd?.[dk] || 0;
       });
+
       graphD.push(monthD);
     }
+    console.log("the graph", graphD);
     setBarchartData(graphD);
   };
 
@@ -50,15 +54,20 @@ export function ChurnWithChartsCard(props: ChurnChartProps) {
     <Card>
       {loading && <IndeterminateProgress />}
       <CardHeading title="Churn">
-        <DatePicker width="w-40 md:w-48" onDatePicked={setBillingPeriod} optsMode="months"/>
+        <DatePicker
+          width="w-40 md:w-48"
+          onDatePicked={setBillingPeriod}
+          optsMode="months"
+        />
         <OutlinedButton color="green">Export .csv</OutlinedButton>
       </CardHeading>
       <CardContent>
         <div className="mt-4 mb-4 flex items-center">
           <p className="text-2xl font-bold">
-            {(data?.totalKwh || 0).toLocaleString("en-US")} kW <span>.</span>
-            {data?.totalCustomers} <span>.</span>
-            2%
+            {(Math.round(data?.totalKw || 0) || 0).toLocaleString("en-US")} kW{" "}
+            <span>,</span>
+            {data?.totalCustomers} <span>,</span>
+            {data?.churnRateProject?.toFixed(2)}%
           </p>
         </div>
         <div className="mt-2">
@@ -101,9 +110,9 @@ function ChurnReasonsTab(props: ChurnReasonsProps) {
     "Cancellation Request",
     "null",
   ];
-  let totalKwh = 0;
+  let totalKwdc = 0;
   Object.keys(churnData || {}).forEach((k) => {
-    totalKwh += churnData?.[k].kwh || 0;
+    totalKwdc += churnData?.[k].kwdc || 0;
   });
 
   return (
@@ -140,14 +149,14 @@ function ChurnReasonsTab(props: ChurnReasonsProps) {
             </div>
             <div className="w-full flex p-4">
               <p className="font-bold text-black text-sm">
-                {churnData?.[reason]?.kwh || "-"}
+                {churnData?.[reason]?.kwdc || "-"}
               </p>
             </div>
             <div className="w-full flex p-4">
               <p className="font-bold text-black text-sm">
-                {churnData?.[reason]?.kwh
+                {churnData?.[reason]?.kwdc
                   ? (
-                      ((churnData?.[reason]?.kwh || 0) / (totalKwh || 1)) *
+                      ((churnData?.[reason]?.kwdc || 0) / (totalKwdc || 1)) *
                       100
                     ).toFixed(2) + "%"
                   : "-"}

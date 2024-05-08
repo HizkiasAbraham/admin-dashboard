@@ -146,13 +146,14 @@ export type ChurnData = {
   churnReasons?: ChurnReasons;
   graphData?: ChurnGraphData[];
   totalCustomers?: number;
-  totalKwh?: number;
+  totalKw?: number;
+  churnRateProject?: number;
 };
 
 type ChurnGraphData = {
   bill_month?: Date;
   Customer?: number;
-  kWdc?: number;
+  kwdc?: number;
   [index: string]: any;
 };
 
