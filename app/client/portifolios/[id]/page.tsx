@@ -10,8 +10,6 @@ import { PortfolioDetailsPageData } from "@/src/components/client/types";
 import { VarianceAnalysis } from "@/src/components/client/variance-analysis";
 import { BreadCrumb } from "@/src/components/shared/breadcrumb";
 import { IndeterminateProgress } from "@/src/components/shared/indeterminate-progress";
-import { bankedCredits } from "@/src/mockups/bank-credits";
-import { projects } from "@/src/mockups/projects";
 import { getPortfolioById } from "@/src/utils/http-requests/client";
 import { useEffect, useState } from "react";
 
@@ -81,7 +79,11 @@ export default function PortiFolioDetail(props: { params: { id: string } }) {
             />
           </div>
           <div className="mt-3 w-full overflow-x-scroll md:overflow-x-hidden">
-            <VarianceAnalysis />
+            <VarianceAnalysis
+              itemId={data?.portfolio?._id}
+              data={data?.varianceData}
+              dashboardType="portfolio"
+            />
           </div>
         </>
       )}
