@@ -16,13 +16,13 @@ export function Churn(props: DashboardItemProps) {
   const churnActionButtons = [
     {
       label: "Customer #",
-      value: `${data?.kpiData?.total_canceled_customers || "-"}`,
+      value: `${data?.kpiData?.churn_customer_count || "-"}`,
     },
     {
       label: "kWdc",
-      value: `${data?.kpiData?.canceled_kwh?.toLocaleString("en-us") || "-"}`,
+      value: `${data?.kpiData?.churn_kWdc?.toLocaleString("en-us") || "-"}`,
     },
-    // { label: "Project%" },
+    { label: "Project%", value: `${data?.kpiData?.churn_rate_project?.toFixed(2) || "-"}` },
   ];
   return (
     <Card>

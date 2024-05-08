@@ -46,7 +46,6 @@ type DiffData = {
   prev?: number;
   current?: number;
   diff?: number;
-  change?: number;
 };
 
 export type SubscriberCategory = {

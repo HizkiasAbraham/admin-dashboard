@@ -24,16 +24,21 @@ export function Revenue(props: DashboardItemProps) {
             {usd().format(kpiData?.revenue || 0)}
           </p>
         </div>
-        {!!kpiData?.revenueDiff?.change && (
+        {!!kpiData?.revenueDiff?.diff && (
           <div className="mt-4 flex items-center gap-2">
-            {kpiData?.revenueDiff?.change > 0 ? (
+            {kpiData?.revenueDiff?.diff > 0 ? (
               <Icon.ArrowUpRight />
             ) : (
               <Icon.ArrowDownLeft />
             )}
             <p className="font-bold text-sm text-black">
-              {usd(2).format(kpiData?.revenueDiff?.change)}(
-              {kpiData?.revenueDiff?.diff?.toFixed(2)}%)
+              {usd(2).format(kpiData?.revenueDiff?.diff ?? 0)}(
+              {(
+                (kpiData?.revenueDiff?.diff /
+                  (kpiData?.revenueDiff?.current || 1)) *
+                100
+              )?.toFixed(2)}
+              %)
             </p>
           </div>
         )}
