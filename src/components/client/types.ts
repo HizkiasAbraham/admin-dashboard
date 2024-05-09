@@ -149,6 +149,7 @@ export type ChurnData = {
   totalCustomers?: number;
   totalKw?: number;
   churnRateProject?: number;
+  projectComparisions?: ProjectCompData[];
 };
 
 type ChurnGraphData = {
@@ -156,6 +157,14 @@ type ChurnGraphData = {
   Customer?: number;
   kwdc?: number;
   [index: string]: any;
+};
+
+export type ProjectCompData = {
+  name?: string;
+  state?: string;
+  churn_customer_count?: string;
+  churn_rate_kW?: number;
+  churn_rate_project?: number;
 };
 
 export type ChurnReasons = {

@@ -9,6 +9,7 @@ import { ChurnChartProps, ChurnReasonsProps } from "./types";
 import { useCalculatedDetails } from "@/src/hooks/useCalculatedDetails";
 import { IndeterminateProgress } from "../../shared/indeterminate-progress";
 import moment from "moment";
+import { ProjectComparisionItem } from "./project-comp-item";
 
 const churnGraphTabItems = [
   { id: "customerNumberKWC", label: "Customer # and kWdc" },
@@ -32,7 +33,6 @@ export function ChurnWithChartsCard(props: ChurnChartProps) {
 
   const processGraphData = () => {
     const graphD = [];
-    console.log("the grah", data?.graphData);
     for (const gd of data?.graphData || []) {
       const monthD: any = {};
       monthD["name"] = moment(gd.bill_month).format("MMM'YY");
@@ -43,7 +43,6 @@ export function ChurnWithChartsCard(props: ChurnChartProps) {
 
       graphD.push(monthD);
     }
-    console.log("the graph", graphD);
     setBarchartData(graphD);
   };
 
@@ -91,6 +90,19 @@ export function ChurnWithChartsCard(props: ChurnChartProps) {
                   height="80"
                   dataKeys={dataKeys}
                 />
+              )}
+              {selectedItem === "projectsComparision" ? (
+                <div className="flex flex-col justify-center p-4 mt-8">
+                  {data?.projectComparisions?.map((pc) => (
+                    <ProjectComparisionItem
+                      key={pc.name}
+                      item={pc}
+                      margin={5}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <></>
               )}
               {selectedItem === "churnReasons" && (
                 <ChurnReasonsTab churnData={data?.churnReasons} />
