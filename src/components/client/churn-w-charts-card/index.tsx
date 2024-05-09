@@ -24,7 +24,8 @@ export function ChurnWithChartsCard(props: ChurnChartProps) {
     churnData,
     itemId || "",
     "churn-data",
-    "churnData"
+    "churnData",
+    dashboardType
   );
   const [selectedItem, setSelectedItem] = useState(churnGraphTabItems[0].id);
   const [barChartData, setBarchartData] = useState<any[]>([]);

@@ -65,7 +65,11 @@ export default function PortiFolioDetail(props: { params: { id: string } }) {
               />
             </div>
             <div className="flex-1">
-              <ChurnWithChartsCard />
+              <ChurnWithChartsCard
+                churnData={data?.churnData}
+                itemId={data?.portfolio?._id}
+                dashboardType="portfolio"
+              />
             </div>
           </div>
           <div className="mt-3 w-full overflow-x-scroll md:overflow-x-hidden">
