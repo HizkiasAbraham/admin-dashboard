@@ -204,16 +204,21 @@ function TableRow(props: TableRowInput) {
           <p className="font-bold text-black text-sm">
             {usd(2).format(kpiData?.revenue || 0)}
           </p>
-          {!!kpiData?.revenueDiff?.change && (
+          {!!kpiData?.revenueDiff?.diff && (
             <div className="flex gap-1 items-center">
-              {kpiData?.revenueDiff?.change > 0 ? (
+              {kpiData?.revenueDiff?.diff > 0 ? (
                 <Icon.ArrowUpRight />
               ) : (
                 <Icon.ArrowDownLeft />
               )}
               <p className="font-medium text-black text-xs">
-                {usd().format(kpiData?.revenueDiff?.change)}(
-                {kpiData?.revenueDiff?.diff?.toFixed(2)})%
+                {usd().format(kpiData?.revenueDiff?.diff)}(
+                {(
+                  (kpiData?.revenueDiff?.diff /
+                    (kpiData?.revenueDiff?.current || 1)) *
+                  100
+                )?.toFixed(2)}
+                )%
               </p>
             </div>
           )}
@@ -222,7 +227,7 @@ function TableRow(props: TableRowInput) {
       <div className="flex-1 flex justify-center items-center">
         <div className="flex flex-col gap-1">
           <p className="font-bold text-black text-sm">
-            {kpiData?.ar ? usd().format(kpiData?.arDiff?.change || 0) : "-"}
+            {kpiData?.ar ? usd().format(kpiData?.arDiff?.diff || 0) : "-"}
           </p>
           {!!kpiData?.arDiff?.diff && (
             <div className="flex gap-1 items-center">
@@ -232,7 +237,7 @@ function TableRow(props: TableRowInput) {
                 <Icon.ArrowDownLeft />
               )}
               <p className="font-medium text-black text-xs">
-                {usd().format(kpiData?.arDiff?.change || 0)}(
+                {usd().format(kpiData?.arDiff?.diff || 0)}(
                 {kpiData?.arDiff?.diff.toFixed(2)})%
               </p>
             </div>
@@ -248,17 +253,17 @@ function TableRow(props: TableRowInput) {
       <div className="flex-1 flex justify-start items-center">
         <div className="flex flex-col gap-1">
           <p className="font-bold text-black text-sm">
-            {kpiData?.churn_rate_kwh?.toFixed(2)} %
+            {kpiData?.churn_rate_project?.toFixed(2)} %
           </p>
-          {!!kpiData?.churnRateKwhDiff?.diff && (
+          {!!kpiData?.churn_rate_projectDiff?.diff && (
             <div className="flex gap-1 items-center">
-              {kpiData?.churnRateKwhDiff?.diff > 0 ? (
+              {kpiData?.churn_rate_projectDiff?.diff > 0 ? (
                 <Icon.ArrowUpRight />
               ) : (
                 <Icon.ArrowDownLeft />
               )}
               <p className="font-medium text-black text-xs">
-                {kpiData?.churnRateKwhDiff?.diff.toFixed(2)}%
+                {kpiData?.churn_rate_projectDiff?.diff.toFixed(2)}%
               </p>
             </div>
           )}

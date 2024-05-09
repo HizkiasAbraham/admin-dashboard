@@ -9,6 +9,7 @@ import { ChurnChartProps, ChurnReasonsProps } from "./types";
 import { useCalculatedDetails } from "@/src/hooks/useCalculatedDetails";
 import { IndeterminateProgress } from "../../shared/indeterminate-progress";
 import moment from "moment";
+import { ProjectComparisionItem } from "./project-comp-item";
 
 const churnGraphTabItems = [
   { id: "customerNumberKWC", label: "Customer # and kWdc" },
@@ -16,7 +17,7 @@ const churnGraphTabItems = [
   { id: "churnReasons", label: "Churn Reasons" },
 ];
 
-const dataKeys = ["kWdc(1000)", "Customers"];
+const dataKeys = ["kWdc", "Customers"];
 
 export function ChurnWithChartsCard(props: ChurnChartProps) {
   const { dashboardType, churnData, itemId } = props;
@@ -24,7 +25,8 @@ export function ChurnWithChartsCard(props: ChurnChartProps) {
     churnData,
     itemId || "",
     "churn-data",
-    "churnData"
+    "churnData",
+    dashboardType
   );
   const [selectedItem, setSelectedItem] = useState(churnGraphTabItems[0].id);
   const [barChartData, setBarchartData] = useState<any[]>([]);
@@ -35,8 +37,10 @@ export function ChurnWithChartsCard(props: ChurnChartProps) {
       const monthD: any = {};
       monthD["name"] = moment(gd.bill_month).format("MMM'YY");
       dataKeys.forEach((dk) => {
-        monthD[dk] = dk === "kWdc(1000)" ? (gd?.['kWdc'] || 0) / 1000 : gd?.[dk] || 0;
+        monthD[dk] =
+          dk === "kWdc" ? gd?.["kwdc"]?.toFixed(2) || 0 : gd?.[dk] || 0;
       });
+
       graphD.push(monthD);
     }
     setBarchartData(graphD);
@@ -50,15 +54,20 @@ export function ChurnWithChartsCard(props: ChurnChartProps) {
     <Card>
       {loading && <IndeterminateProgress />}
       <CardHeading title="Churn">
-        <DatePicker width="w-40 md:w-48" onDatePicked={setBillingPeriod} optsMode="months"/>
+        <DatePicker
+          width="w-40 md:w-48"
+          onDatePicked={setBillingPeriod}
+          optsMode="months"
+        />
         <OutlinedButton color="green">Export .csv</OutlinedButton>
       </CardHeading>
       <CardContent>
         <div className="mt-4 mb-4 flex items-center">
           <p className="text-2xl font-bold">
-            {(data?.totalKwh || 0).toLocaleString("en-US")} kW <span>.</span>
-            {data?.totalCustomers} <span>.</span>
-            2%
+            {(Math.round(data?.totalKw || 0) || 0).toLocaleString("en-US")} kW{" "}
+            <span>,</span>
+            {data?.totalCustomers} <span>,</span>
+            {data?.churnRateProject?.toFixed(2)}%
           </p>
         </div>
         <div className="mt-2">
@@ -82,6 +91,19 @@ export function ChurnWithChartsCard(props: ChurnChartProps) {
                   dataKeys={dataKeys}
                 />
               )}
+              {selectedItem === "projectsComparision" ? (
+                <div className="flex flex-col justify-center p-4 mt-8">
+                  {data?.projectComparisions?.map((pc) => (
+                    <ProjectComparisionItem
+                      key={pc.name}
+                      item={pc}
+                      margin={5}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <></>
+              )}
               {selectedItem === "churnReasons" && (
                 <ChurnReasonsTab churnData={data?.churnReasons} />
               )}
@@ -101,9 +123,9 @@ function ChurnReasonsTab(props: ChurnReasonsProps) {
     "Cancellation Request",
     "null",
   ];
-  let totalKwh = 0;
+  let totalKwdc = 0;
   Object.keys(churnData || {}).forEach((k) => {
-    totalKwh += churnData?.[k].kwh || 0;
+    totalKwdc += churnData?.[k].kwdc || 0;
   });
 
   return (
@@ -140,14 +162,14 @@ function ChurnReasonsTab(props: ChurnReasonsProps) {
             </div>
             <div className="w-full flex p-4">
               <p className="font-bold text-black text-sm">
-                {churnData?.[reason]?.kwh || "-"}
+                {churnData?.[reason]?.kwdc || "-"}
               </p>
             </div>
             <div className="w-full flex p-4">
               <p className="font-bold text-black text-sm">
-                {churnData?.[reason]?.kwh
+                {churnData?.[reason]?.kwdc
                   ? (
-                      ((churnData?.[reason]?.kwh || 0) / (totalKwh || 1)) *
+                      ((churnData?.[reason]?.kwdc || 0) / (totalKwdc || 1)) *
                       100
                     ).toFixed(2) + "%"
                   : "-"}

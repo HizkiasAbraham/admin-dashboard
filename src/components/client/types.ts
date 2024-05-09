@@ -19,8 +19,6 @@ export type Project = {
   state?: string;
   utility?: string;
   creditType?: string;
-  churn_rate_customer?: number;
-  churn_rate_kwh?: number;
   kpiData?: KpiData;
 };
 
@@ -29,18 +27,16 @@ type KpiData = {
   revenue?: number;
   allocation?: number;
   creditRate?: number;
-  churn_rate_kwh?: number;
-  churn_rate_customer?: number;
-  total_canceled_customers?: number;
-  canceled_kwh?: number;
+  churn_kWdc: number;
+  churn_customer_count: number;
+  churn_rate_project: number;
   ar?: number;
   totalKwhAllocation?: number;
   subscriptionDiff?: DiffData;
   allocationDiff?: DiffData;
   revenueDiff?: DiffData;
   arDiff?: DiffData;
-  churnRateKwhDiff?: DiffData;
-  churnRateCustomerDiff?: DiffData;
+  churn_rate_projectDiff?: DiffData;
   billingPeriod?: string;
   totalP50kWh?: number;
   numberOfProjects?: number;
@@ -50,7 +46,6 @@ type DiffData = {
   prev?: number;
   current?: number;
   diff?: number;
-  change?: number;
 };
 
 export type SubscriberCategory = {
@@ -117,6 +112,8 @@ export type PortfolioDetailsPageData = {
   projects?: Project[];
   subscriberCategorization?: SubscriberCategory[];
   bankedCreditData?: BankedCredit;
+  churnData?: ChurnData;
+  varianceData?: any;
 };
 
 export type ProjectDetailsPageData = {
@@ -150,14 +147,24 @@ export type ChurnData = {
   churnReasons?: ChurnReasons;
   graphData?: ChurnGraphData[];
   totalCustomers?: number;
-  totalKwh?: number;
+  totalKw?: number;
+  churnRateProject?: number;
+  projectComparisions?: ProjectCompData[];
 };
 
 type ChurnGraphData = {
   bill_month?: Date;
   Customer?: number;
-  kWdc?: number;
+  kwdc?: number;
   [index: string]: any;
+};
+
+export type ProjectCompData = {
+  name?: string;
+  state?: string;
+  churn_customer_count?: string;
+  churn_rate_kW?: number;
+  churn_rate_project?: number;
 };
 
 export type ChurnReasons = {
