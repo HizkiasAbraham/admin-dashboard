@@ -9,4 +9,5 @@ export type TabContentInput = {
   tabId: string;
   tabMetaData?: any; // TODO: convert all any to typed
   tabDataItem?: any;
+  hasModelData?: boolean;
 };

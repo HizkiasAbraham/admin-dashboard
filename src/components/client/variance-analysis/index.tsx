@@ -83,6 +83,7 @@ export function VarianceAnalysis(props: VarianceTabProps) {
                   parentTabId={selectedItemForchartTab}
                   tabMetaData={tabItem}
                   tabDataItem={data?.[selectedItemForchartTab]}
+                  hasModelData={data?.hasModelData}
                 />
               )}
             </div>
@@ -94,7 +95,7 @@ export function VarianceAnalysis(props: VarianceTabProps) {
 }
 
 function TabContent(props: TabContentInput) {
-  const { tabId, parentTabId, tabMetaData, tabDataItem } = props;
+  const { tabId, parentTabId, hasModelData, tabMetaData, tabDataItem } = props;
   const [lineChartData, setLineChartData] = useState<any>([]);
 
   const { dataKeys } = tabMetaData;
@@ -104,9 +105,11 @@ function TabContent(props: TabContentInput) {
     for (const gd of tabDataItem || []) {
       const monthD: any = {};
       monthD["name"] = moment(gd.billing_month).format("MMM'YY");
-      [...dataKeys, "Model Data"].forEach((dk: any) => {
-        monthD[dk] = gd[dk];
-      });
+      (hasModelData ? [...dataKeys, "Model Data"] : dataKeys).forEach(
+        (dk: any) => {
+          monthD[dk] = gd[dk];
+        }
+      );
       graphD.push(monthD);
     }
 
