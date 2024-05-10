@@ -6,6 +6,8 @@ import { Churn } from "@/src/components/client/dashboard-items/churn";
 import { CreditRate } from "@/src/components/client/dashboard-items/credit-rate";
 import { Revenue } from "@/src/components/client/dashboard-items/revenue";
 import { SubscribedAllocated } from "@/src/components/client/dashboard-items/subscribed-allocated";
+import { WeatherConditions } from "@/src/components/client/dashboard-items/weather-condition";
+import { WeatherCondition } from "@/src/components/client/dashboard-items/weather-conditions";
 import { OAndMNotes } from "@/src/components/client/project-detail/o-and-m-notes";
 import { SubscriberCategorization } from "@/src/components/client/project-detail/subscriber-categorization";
 import { UtilityReports } from "@/src/components/client/project-detail/utility-reports";
@@ -67,15 +69,18 @@ export default function ProjectDetailPage(props: { params: { id: string } }) {
               <Revenue data={data?.project} dashboardType="project" />
             </div>
             <div className="flex-1">
-              <Churn data={data?.project} dashboardType="project" />
+              <ARDashboardItem />
             </div>
           </div>
           <div className="flex flex-col md:flex-row mt-3 gap-3">
             <div className="flex-1">
+              <Churn data={data?.project} dashboardType="project" />
+            </div>
+            <div className="flex-1">
               <CreditRate data={data?.project} />
             </div>
             <div className="flex-1">
-              <ARDashboardItem />
+              <WeatherConditions />
             </div>
           </div>
           <div className="flex flex-col md:flex-row mt-3 gap-3">
