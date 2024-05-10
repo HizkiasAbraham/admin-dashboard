@@ -64,7 +64,7 @@ export function ChurnWithChartsCard(props: ChurnChartProps) {
       <CardContent>
         <div className="mt-4 mb-4 flex items-center">
           <p className="text-2xl font-bold">
-            {(Math.round(data?.totalKw || 0) || 0).toLocaleString("en-US")} kW{" "}
+            {(Math.round(data?.totalKw || 0) || 0).toFixed(2)} kW{" "}
             <span>,</span>
             {data?.totalCustomers} <span>,</span>
             {data?.churnRateProject?.toFixed(2)}%
@@ -162,7 +162,9 @@ function ChurnReasonsTab(props: ChurnReasonsProps) {
             </div>
             <div className="w-full flex p-4">
               <p className="font-bold text-black text-sm">
-                {churnData?.[reason]?.kwdc || "-"}
+                {churnData?.[reason]?.kwdc
+                  ? churnData?.[reason]?.kwdc?.toFixed(2)
+                  : "-"}
               </p>
             </div>
             <div className="w-full flex p-4">

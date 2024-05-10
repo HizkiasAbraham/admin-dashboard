@@ -22,12 +22,10 @@ export function SubscriberCategorization(props: SubscriberCategorizationProps) {
   );
 
   const [piechartData, setPiechartData] = useState<any[]>([]);
-  const [totalSubscribers, setTotalSubscribers] = useState(0);
 
   const processGrouping = () => {
     const grouped = groupBy(data, "category");
     const piechartD: any[] = [];
-    let allSum = 0;
 
     Object.keys(grouped).forEach((key) => {
       if (!["n/a", "Lights"].includes(key)) {
@@ -39,9 +37,7 @@ export function SubscriberCategorization(props: SubscriberCategorizationProps) {
         piechartD.push({ group: key, value: total });
       }
     });
-    for (const pi of piechartD) {
-      allSum += pi.value;
-    }
+
     setPiechartData(
       orderBy(
         piechartD.filter((p) => !["n/a", "Lights"].includes(p.group)),
@@ -49,7 +45,6 @@ export function SubscriberCategorization(props: SubscriberCategorizationProps) {
         ["desc"]
       )
     );
-    setTotalSubscribers(allSum);
   };
 
   useEffect(() => {
@@ -64,9 +59,6 @@ export function SubscriberCategorization(props: SubscriberCategorizationProps) {
       <CardContent>
         <div className="flex items-center">
           <PieChart data={piechartData as []} />
-        </div>
-        <div>
-          <p className="text-center">Total: {totalSubscribers}</p>
         </div>
       </CardContent>
     </Card>

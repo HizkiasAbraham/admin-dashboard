@@ -138,18 +138,18 @@ export function RateTable(props: RateTableProp) {
                       </div>
                       <div className="w-full flex justify-center items-center">
                         <p className="font-medium text-black text-sm">
-                          {residential?.[currentSelectedTab]?.[row?.field]
+                          {small_commertial?.[currentSelectedTab]?.[row?.field]
                             ? getRateValue(
-                                residential?.[currentSelectedTab]?.[row?.field]
+                              small_commertial?.[currentSelectedTab]?.[row?.field]
                               )
                             : "-"}
                         </p>
                       </div>
                       <div className="w-full flex justify-center items-center ">
                         <p className="font-medium text-black text-sm">
-                          {residential?.[currentSelectedTab]?.[row?.field]
+                          {large_commertial?.[currentSelectedTab]?.[row?.field]
                             ? getRateValue(
-                                residential?.[currentSelectedTab]?.[row?.field]
+                              large_commertial?.[currentSelectedTab]?.[row?.field]
                               )
                             : "-"}
                         </p>

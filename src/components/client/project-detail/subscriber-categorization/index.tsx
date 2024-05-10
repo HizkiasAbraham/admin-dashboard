@@ -36,12 +36,10 @@ export function SubscriberCategorization(props: SubscriberCategorizationProps) {
   const [currentSelectedTab, setCurrentSelectedTab] = useState(tabItems[0].id);
   const [piechartData, setPiechartData] = useState<any[]>([]);
   const [stackedChartData, setStackedChartData] = useState<any[]>([]);
-  const [totalSubscribers, setTotalSubscribers] = useState(0);
 
   const processGrouping = () => {
     const grouped = groupBy(data, "category");
     const piechartD: any[] = [];
-    let allSum = 0;
     let totalKwh = 0;
     Object.keys(grouped).forEach((key) => {
       if (!["n/a", "Lights"].includes(key)) {
@@ -67,11 +65,8 @@ export function SubscriberCategorization(props: SubscriberCategorizationProps) {
         piechartD[i].value = parseFloat(piechartD[i].value);
       }
     }
-    for (const pi of piechartD) {
-      allSum += pi.value;
-    }
+
     setPiechartData(orderBy(piechartD, ["value"], ["desc"]));
-    setTotalSubscribers(allSum);
   };
 
   const processGraphData = () => {
@@ -127,9 +122,6 @@ export function SubscriberCategorization(props: SubscriberCategorizationProps) {
               dataKeys={dataKeys}
             />
           </div>
-        </div>
-        <div>
-          <p className="text-center">Total: {totalSubscribers}</p>
         </div>
       </CardContent>
     </Card>
