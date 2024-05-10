@@ -27,7 +27,10 @@ import PlusIcon from "@heroicons/react/24/outline/PlusIcon";
 import Minus from "@heroicons/react/24/outline/MinusCircleIcon";
 import InfoCircle from "@heroicons/react/24/outline/InformationCircleIcon";
 import Folder from "@heroicons/react/24/outline/FolderIcon";
-
+import Sun from "@heroicons/react/24/outline/SunIcon";
+import Cloud from "@heroicons/react/24/outline/CloudIcon";
+import Globe from "@heroicons/react/24/outline/GlobeAltIcon";
+import Fire from "@heroicons/react/24/outline/FireIcon";
 
 const ArrowUpRight = () => (
   <div className="w-4 h-4 rounded-full inline-flex items-center justify-center bg-green text-white text-xl font-bold">
@@ -71,4 +74,8 @@ export const Icon = {
   InfoCircle: (props: any) => <InfoCircle {...props} />,
   Folder: (props: any) => <Folder {...props} />,
   Plus: (props: any) => <PlusIcon {...props} />,
+  Sun: (props: any) => <Sun {...props} />,
+  Cloud: (props: any) => <Cloud {...props} />,
+  Globe: (props: any) => <Globe {...props} />,
+  Fire: (props: any) => <Fire {...props} />,
 };
