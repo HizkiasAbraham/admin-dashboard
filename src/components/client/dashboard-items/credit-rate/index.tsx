@@ -19,13 +19,21 @@ export function CreditRate(props: DashboardItemProps) {
       <CardContent>
         <div className="mt-4 mb-4">
           <p className="text-2xl font-bold">
-            {kpiData?.creditRate?.toFixed(4)} $/Kwh
+            {kpiData?.creditRate
+              ? kpiData?.creditRate?.toFixed(4) + "$/Kwh"
+              : "-"}
           </p>
         </div>
-        <div className="mt-6 mb-4 flex items-center gap-2">
-          <Icon.ArrowUpRight />
-          <p className="font-bold text-sm text-black">0.0451 %/kWh</p>
-        </div>
+        {kpiData?.creditRateDiff?.diff ? (
+          <div className="mt-6 mb-4 flex items-center gap-2">
+            <Icon.ArrowUpRight />
+            <p className="font-bold text-sm text-black">
+              {kpiData?.creditRateDiff?.diff.toFixed(4)} %
+            </p>
+          </div>
+        ) : (
+          <></>
+        )}
       </CardContent>
     </Card>
   );

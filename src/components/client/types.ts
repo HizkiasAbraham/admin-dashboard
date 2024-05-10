@@ -36,6 +36,7 @@ type KpiData = {
   allocationDiff?: DiffData;
   revenueDiff?: DiffData;
   arDiff?: DiffData;
+  creditRateDiff?: DiffData;
   churn_rate_projectDiff?: DiffData;
   billingPeriod?: string;
   totalP50kWh?: number;
