@@ -44,7 +44,7 @@ export default function ProjectDetailPage(props: { params: { id: string } }) {
   return (
     <div>
       {loading && <IndeterminateProgress />}
-      {!loading && !!data.project && (
+      {!loading && !!data?.project && (
         <>
           <BreadCrumb
             classes="mb-2"
@@ -123,8 +123,8 @@ export default function ProjectDetailPage(props: { params: { id: string } }) {
           <div className="mt-3">
             <RateTable
               data={data?.creditRateData || {}}
-              projectId={data.project?._id || ""}
-              creditType={data.project?.creditType || ""}
+              projectId={data?.project?._id || ""}
+              creditType={data?.project?.creditType || ""}
               graphData={data?.graphsData}
             />
           </div>
