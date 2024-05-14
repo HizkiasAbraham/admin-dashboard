@@ -178,6 +178,12 @@ export function RateTable(props: RateTableProp) {
               height="full"
               data={blendedRateChartData as []}
               dataKeys={dataKeys}
+              yAxisFormatter={(value: number) =>
+                usd().format(value / 1000) + "k"
+              }
+              dataItemFormatter={(value: number | bigint) =>
+                usd().format(value)
+              }
             />
           </div>
         </div>
