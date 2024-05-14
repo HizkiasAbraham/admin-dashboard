@@ -46,8 +46,10 @@ export default function ClientLayout({
     <Loading />
   ) : (
     <>
-      <Header />
-      <div className="m-5">{children}</div>
+      <div className="fixed w-full bg-white-opaque z-20 top-0">
+        <Header />
+      </div>
+      <div className="m-5 top-16 pb-2 relative">{children}</div>
     </>
   );
 }
