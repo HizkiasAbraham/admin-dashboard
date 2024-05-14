@@ -4,6 +4,8 @@ export type ChartInput = {
   height?: string;
   dashboardType?: "portfolio" | "project";
   showPercentage?: boolean;
+  yAxisFormatter?: any;
+  dataItemFormatter?: any;
 };
 
 export const chartColorVariants = [

@@ -11,7 +11,7 @@ import {
 import { chartColorVariants, ChartInput } from "../types";
 
 export function LineChart(props: ChartInput) {
-  const { data, dataKeys, height } = props;
+  const { data, dataKeys, height, yAxisFormatter, dataItemFormatter } = props;
   return (
     <div className={`w-full h-${height || "80"}`}>
       <ResponsiveContainer width="100%" height="100%">
@@ -35,9 +35,12 @@ export function LineChart(props: ChartInput) {
           />
           <YAxis
             axisLine={false}
-            tickFormatter={(value) => usd().format(value / 100) + "k"}
+            domain={[0, "auto"]}
+            tickFormatter={yAxisFormatter}
           />
-          <Tooltip />
+
+          <Tooltip formatter={dataItemFormatter} />
+
           {dataKeys?.map((dataKey, index) => (
             <Line
               type={"natural"}
