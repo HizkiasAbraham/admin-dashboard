@@ -7,6 +7,7 @@ import { BankedCredit } from "../../types";
 import { IndeterminateProgress } from "@/src/components/shared/indeterminate-progress";
 import moment from "moment";
 import { useEffect, useState } from "react";
+import { usd } from "@/src/utils/format-numbers";
 
 const itemLabels: { [index: string]: any } = {
   previousBank: "Previous Bank",
@@ -89,6 +90,12 @@ export function BankedCredits(props: BankedCreditsInput) {
               data={bankedCreditsChartData}
               height="full"
               dataKeys={dataKeys.map((d) => d.label)}
+              yAxisFormatter={(value: number) =>
+                usd().format(value / 1000) + "k"
+              }
+              dataItemFormatter={(value: number | bigint) =>
+                usd().format(value)
+              }
             />
           </div>
         </div>

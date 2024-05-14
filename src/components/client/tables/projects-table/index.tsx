@@ -247,7 +247,7 @@ function TableRow(props: TableRowInput) {
       <div className="flex-1 flex justify-start items-center">
         <p className="font-bold text-black text-sm">
           {/* @ts-ignore */}
-          {kpiData.creditRate?.toFixed(4)}
+          {kpiData?.creditRate?.toFixed(4)}
         </p>
       </div>
       <div className="flex-1 flex justify-start items-center">

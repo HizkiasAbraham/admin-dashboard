@@ -9,6 +9,7 @@ import { TabContentInput, VarianceTabProps } from "./types";
 import { useCalculatedDetails } from "@/src/hooks/useCalculatedDetails";
 import { IndeterminateProgress } from "../../shared/indeterminate-progress";
 import moment from "moment";
+import { usd } from "@/src/utils/format-numbers";
 
 const tabItemsUnitPercent = [
   { id: "unit", label: "Unit" },
@@ -16,18 +17,63 @@ const tabItemsUnitPercent = [
 ];
 
 const tabItemsForChart = [
-  { id: "revenue", label: "Revenue", dataKeys: ["Revenue"] },
-  { id: "production", label: "Production", dataKeys: ["Production"] },
-  { id: "allocation", label: "Allocation", dataKeys: ["Allocation"] },
-  { id: "subscription", label: "Subscription", dataKeys: ["Subscription"] },
-  { id: "hostBank", label: "Host Bank", dataKeys: ["Host Bank"] },
-  { id: "customerBank", label: "Customer Bank", dataKeys: ["Customer Bank"] },
+  {
+    id: "revenue",
+    label: "Revenue",
+    dataKeys: ["Revenue"],
+    yAxisFormatter: (value: number) => usd().format(value / 1000) + "k",
+    dataItemFormatter: (value: number | bigint) => usd().format(value),
+  },
+
+  {
+    id: "production",
+    label: "Production",
+    dataKeys: ["Production"],
+    yAxisFormatter: (value: number) =>
+      (value / 1000000).toLocaleString("en-US") + "M kWh",
+    dataItemFormatter: (value: number | bigint) =>
+      value.toLocaleString("en-US") + "kWh",
+  },
+  {
+    id: "allocation",
+    label: "Allocation",
+    dataKeys: ["Allocation"],
+    yAxisFormatter: (value: number) => value + "%",
+    dataItemFormatter: (value: number) => value.toFixed(1) + "%",
+  },
+  {
+    id: "subscription",
+    label: "Subscription",
+    dataKeys: ["Subscription"],
+    yAxisFormatter: (value: number) => value + "%",
+    dataItemFormatter: (value: number) => value.toFixed(2) + "%",
+  },
+  {
+    id: "hostBank",
+    label: "Host Bank",
+    dataKeys: ["Host Bank"],
+    yAxisFormatter: (value: number) => usd().format(value / 1000) + "k",
+    dataItemFormatter: (value: number | bigint) => usd().format(value),
+  },
+  {
+    id: "customerBank",
+    label: "Customer Bank",
+    dataKeys: ["Customer Bank"],
+    yAxisFormatter: (value: number) => usd().format(value / 1000) + "k",
+    dataItemFormatter: (value: number | bigint) => usd().format(value),
+  },
   {
     id: "churnCustomerNumber",
     label: "Customer Churn #",
     dataKeys: ["Customers Churned"],
   },
-  { id: "churnKwh", label: "Churn kW", dataKeys: ["Kwh Churned"] },
+  {
+    id: "churnKwh",
+    label: "Churn kW",
+    dataKeys: ["Kwh Churned"],
+    yAxisFormatter: (value: number) => value + "kW",
+    dataItemFormatter: (value: number) => value.toFixed(2),
+  },
 ];
 
 export function VarianceAnalysis(props: VarianceTabProps) {
@@ -98,7 +144,7 @@ function TabContent(props: TabContentInput) {
   const { tabId, parentTabId, hasModelData, tabMetaData, tabDataItem } = props;
   const [lineChartData, setLineChartData] = useState<any>([]);
 
-  const { dataKeys } = tabMetaData;
+  const { dataKeys, yAxisFormatter, dataItemFormatter } = tabMetaData;
 
   const processGraphData = () => {
     const graphD = [];
@@ -125,6 +171,8 @@ function TabContent(props: TabContentInput) {
       <LineChart
         data={lineChartData as []}
         dataKeys={[...dataKeys, "Model Data"]}
+        yAxisFormatter={yAxisFormatter}
+        dataItemFormatter={dataItemFormatter}
       />
     </div>
   );
