@@ -8,7 +8,7 @@ import { Select } from "@/src/components/shared/inputs/select";
 import { usd } from "@/src/utils/format-numbers";
 import { useRouter } from "next/navigation";
 import { ProjectsTableInput, TableRowInput } from "./types";
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import { IndeterminateProgress } from "@/src/components/shared/indeterminate-progress";
 import { getProjects } from "@/src/utils/http-requests/client";
 import { Project } from "../../types";
@@ -17,23 +17,41 @@ export function ProjectsTable(props: ProjectsTableInput) {
   const [data, setData] = useState<Project[]>(props?.data || []);
   const [loading, setLoading] = useState<boolean>(false);
   const [billingPeriod, setBillingPeriod] = useState<string>("");
+  const [selectedPortfolio, setSelectedPortfolio] = useState("");
+  const [selectedState, setSelectedState] = useState("");
+  const [selectedCreditType, setSelectedCreditType] = useState("");
+  const [selectedUtility, setSelectedUtility] = useState("");
+  const [searchKeyword, setSearchKeyword] = useState("");
+
   const router = useRouter();
 
+  let { projectFilters, dashboardType, portfolioId } = props;
+  dashboardType = dashboardType || "home";
   const fetchProjectsData = async () => {
     try {
       setLoading(true);
-      const result = await getProjects(billingPeriod);
+      const result = await getProjects(
+        billingPeriod,
+        dashboardType === "home" ? selectedPortfolio : portfolioId,
+        selectedState,
+        selectedCreditType,
+        selectedUtility
+      );
       setData(result.data?.projects);
       setLoading(false);
     } catch (error) {}
   };
 
-  // Todo, add portfolio, state, utility and crdit type filters
   useEffect(() => {
-    if (billingPeriod) {
-      fetchProjectsData();
-    }
-  }, [billingPeriod]);
+    fetchProjectsData();
+  }, [
+    billingPeriod,
+    selectedPortfolio,
+    selectedState,
+    selectedCreditType,
+    selectedPortfolio,
+    selectedUtility,
+  ]);
 
   const navigate = (projectId: string) =>
     router.push("/client/projects/" + projectId);
@@ -41,33 +59,76 @@ export function ProjectsTable(props: ProjectsTableInput) {
   return (
     <div className="w-max md:w-full">
       <Card>
+        {loading && <IndeterminateProgress />}
         <CardHeading title="Projects">
           <DatePicker width="w-48" onDatePicked={setBillingPeriod} />
         </CardHeading>
         <CardContent>
           <div className="flex pt-2 pb-2">
             <div className="flex-auto flex">
-              <SearchInput placeHolder="Search..." />
+              <SearchInput
+                placeHolder="Search..."
+                value={searchKeyword}
+                onInput={setSearchKeyword}
+              />{" "}
             </div>
             <div className="flex-auto flex justify-end gap-2">
+              {(dashboardType || "home") === "home" && (
+                <Select
+                  value={selectedPortfolio}
+                  options={[
+                    { label: "Portfolio", value: "" },
+                    ...(projectFilters?.portfolios || []),
+                  ]}
+                  onChange={(val: SetStateAction<string>) =>
+                    setSelectedPortfolio(val)
+                  }
+                />
+              )}
               <Select
+                value={selectedState}
                 options={[
-                  { label: "Portiffolio 1", value: "er" },
-                  { label: "Portiffolio 2", value: "er" },
+                  { label: "State", value: "" },
+                  ...(projectFilters?.state || []),
                 ]}
-                placeHolder="Portifolio"
+                onChange={setSelectedState}
               />
-              <Select options={[]} placeHolder="State" />
-              <Select options={[]} placeHolder="Type" />
-              <Select options={[]} placeHolder="Utility" />
+              <Select
+                value={selectedCreditType}
+                options={[
+                  { label: "Credit Type", value: "" },
+                  ...(projectFilters?.creditType || []),
+                ]}
+                onChange={setSelectedCreditType}
+              />
+              <Select
+                value={selectedUtility}
+                options={[
+                  { label: "Utility", value: "" },
+                  ...(projectFilters?.utility || []),
+                ]}
+                onChange={setSelectedUtility}
+              />
             </div>
           </div>
-          {loading && <IndeterminateProgress />}
           <div className="mt-2 mb-2">
             <TableHeader />
-            {data.map((row, index) => (
-              <TableRow key={index} row={row} navigate={navigate} />
-            ))}
+            {data.length ? (
+              data
+                .filter((d) => {
+                  if (!searchKeyword) return true;
+                  return d.name
+                    ?.toLowerCase()
+                    ?.includes(searchKeyword.toLowerCase());
+                })
+                .map((row, index) => (
+                  <TableRow key={index} row={row} navigate={navigate} />
+                ))
+            ) : (
+              <p className="text-center">
+                No data for the selected filter combinations
+              </p>
+            )}
           </div>
         </CardContent>
       </Card>

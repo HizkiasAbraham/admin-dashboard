@@ -41,15 +41,16 @@ export default function Dashboard() {
           <ProjectMap />
         </div>
         <div className="flex-1">
-          {data && (
-            <PortifoliosTable
-              data={data?.portfolios}
-            />
-          )}
+          {data && <PortifoliosTable data={data?.portfolios} />}
         </div>
       </div>
       <div className="mt-3 w-full overflow-x-scroll md:overflow-x-hidden">
-        {data && <ProjectsTable data={data.projects} />}
+        {data && (
+          <ProjectsTable
+            data={data.projects}
+            projectFilters={data?.projectFilters}
+          />
+        )}
       </div>
     </>
   );

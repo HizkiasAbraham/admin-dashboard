@@ -73,7 +73,12 @@ export default function PortiFolioDetail(props: { params: { id: string } }) {
             </div>
           </div>
           <div className="mt-3 w-full overflow-x-scroll md:overflow-x-hidden">
-            <ProjectsTable data={data?.projects} />
+            <ProjectsTable
+              portfolioId={data?.portfolio?._id}
+              data={data?.projects}
+              dashboardType="portfolio"
+              projectFilters={data?.projectFilters}
+            />
           </div>
           <div>
             <BankedCredits

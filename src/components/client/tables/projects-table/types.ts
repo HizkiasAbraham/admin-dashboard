@@ -1,8 +1,10 @@
-import { projects } from "@/src/mockups/projects";
 import { Project } from "../../types";
 
 export type ProjectsTableInput = {
   data?: Project[];
+  projectFilters?: any;
+  dashboardType?: "home" | "portfolio";
+  portfolioId?: string;
 };
 
 export type TableRowInput = {
