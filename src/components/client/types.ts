@@ -115,6 +115,7 @@ export type PortfolioDetailsPageData = {
   bankedCreditData?: BankedCredit;
   churnData?: ChurnData;
   varianceData?: any;
+  projectFilters?: any;
 };
 
 export type ProjectDetailsPageData = {
