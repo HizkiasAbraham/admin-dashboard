@@ -1,3 +1,4 @@
+"use client"
 import { Accordion } from "@/src/components/shared/accordion/indext";
 import { Card, CardContent } from "@/src/components/shared/card";
 import { BreadCrumb } from "@/src/components/subscriber/bread-crumb";
