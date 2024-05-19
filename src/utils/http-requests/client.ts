@@ -8,8 +8,16 @@ export const getPortfolios = (billingPeriod: string) =>
 export const getPortfolioById = (id: string, billingPeriod: string) =>
   fetchClient(`client/portfolios/${id}?billingPeriod=${billingPeriod}`);
 
-export const getProjects = (billingPeriod: string) => {
-  return fetchClient(`client/projects?billingPeriod=${billingPeriod}`);
+export const getProjects = (
+  billingPeriod: string,
+  portfolio?: string,
+  state?: string,
+  creditType?: string,
+  utility?: string
+) => {
+  return fetchClient(
+    `client/projects?billingPeriod=${billingPeriod}&portfolio=${portfolio}&state=${state}&creditType=${creditType}&utiltiy=${utility}`
+  );
 };
 
 export const getProjectById = (id: string, billingPeriod: string) =>
